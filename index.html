@@ -39,13 +39,19 @@
             font-style: italic;
         }
 
-        /* Card background style with dark overlay for readability */
+        /* Standard dark card for overview/subscribe sections */
+        .card-dark {
+            background-color: #12141c;
+            border: 1px solid rgba(208, 174, 107, 0.2);
+        }
+
+        /* Character-specific background cards with cinematic dark overlay */
         .character-card {
             position: relative;
             background-size: cover;
             background-position: center;
             border: 1px solid rgba(208, 174, 107, 0.25);
-            border-radius: 0.5Rrem;
+            border-radius: 0.5rem;
             overflow: hidden;
         }
 
@@ -53,7 +59,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(13, 14, 18, 0.82); /* Dark cinematic tint so text is super readable */
+            background: rgba(13, 14, 18, 0.84); /* Dark cinematic tint so text is super readable over art */
             z-index: 1;
         }
 
@@ -137,21 +143,19 @@
     <!-- MAIN CONTENT BELOW HERO -->
     <main class="max-w-6xl mx-auto px-6 space-y-24 py-24">
 
-        <!-- SECTION 2: Overview -->
+        <!-- SECTION 2: Overview (Clean Solid Dark Card) -->
         <section id="one-port" class="space-y-8 text-center sm:text-left max-w-4xl mx-auto">
             <div class="space-y-3">
                 <span class="font-sans-custom text-xs tracking-[0.2em] uppercase" style="color: var(--gold);">OVERVIEW</span>
                 <h2 class="text-3xl sm:text-4xl text-slate-100 font-normal">One Port. Many Lives.</h2>
             </div>
-            <div class="character-card p-8 rounded-lg space-y-6 text-slate-300 text-lg leading-relaxed" style="background-image: url('hero-bg.jpg');">
-                <div class="relative z-10 space-y-4">
-                    <p>Nestled along the rugged cliffs of the southern coast, Breakwater Port stands as a sprawling gateway between sea and land. Here, sailors, merchants, noble bloodlines, and wandering strangers walk the same cobblestone alleys.</p>
-                    <p>Rather than following a single isolated hero, the universe explores the interconnected webs of those who call the port home—where a choice made in the high district ripples through the lower docks.</p>
-                </div>
+            <div class="card-dark p-8 rounded-lg space-y-6 text-slate-300 text-lg leading-relaxed">
+                <p>Nestled along the rugged cliffs of the southern coast, Breakwater Port stands as a sprawling gateway between sea and land. Here, sailors, merchants, noble bloodlines, and wandering strangers walk the same cobblestone alleys.</p>
+                <p>Rather than following a single isolated hero, the universe explores the interconnected webs of those who call the port home—where a choice made in the high district ripples through the lower docks.</p>
             </div>
         </section>
 
-        <!-- SECTION 3: Characters (Background Artwork Layout) -->
+        <!-- SECTION 3: Characters (Background Artwork Layout for Sebastian & Ensemble Only) -->
         <section id="where-stories-cross" class="space-y-12">
             <div class="text-center space-y-3 max-w-3xl mx-auto">
                 <span class="font-sans-custom text-xs tracking-[0.2em] uppercase" style="color: var(--gold);">COMIC BOOK 1 · THE FIRST LIFE WE FOLLOW</span>
@@ -159,11 +163,11 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Card 1: Sebastian Valecourt -->
-                <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('sebastian.jpg');">
+                <!-- Card 1: Sebastian Valecourt (sebastian_.jpg background) -->
+                <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('sebastian_.jpg');">
                     <div class="relative z-10 space-y-6 my-auto">
                         <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">THE FIRST PROTAGONIST</span>
-                        <h3 class="text-2xl sm:text-3xl text-slate-100 font-normal">The eldest Valecourt son — Sebastian</h3>
+                        <h3 class="text-2xl sm:text-3xl text-slate-100 font-normal">Sebastian Valecourt</h3>
                         <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
                             He has wealth, charm and every reason to believe the world will make room for him. Is he simply a spoiled young man—or is there more beneath the confidence?
                         </p>
@@ -176,8 +180,8 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Ensemble -->
-                <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('ensemble.jpeg');">
+                <!-- Card 2: Ensemble (ensemble.png background) -->
+                <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('ensemble.png');">
                     <div class="relative z-10 space-y-6 my-auto">
                         <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">LIVES AROUND HIM</span>
                         <h3 class="text-2xl sm:text-3xl text-slate-100 font-normal">Other characters</h3>
@@ -192,17 +196,15 @@
             </div>
         </section>
 
-        <!-- SECTION 4: Substack Subscription -->
-        <section id="collect" class="character-card p-8 sm:p-12 rounded-lg text-center space-y-6 max-w-2xl mx-auto" style="background-image: url('hero-bg.jpg'); border-color: rgba(208, 174, 107, 0.4);">
-            <div class="relative z-10 space-y-6">
-                <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">READ & COLLECT THE COMICS</span>
-                <h2 class="text-3xl sm:text-4xl text-slate-100 font-normal">Be there when the first tale leaves port.</h2>
-                <p class="text-slate-300 text-base">Official comic-book release dates, formats and trusted stores will appear here as soon as they are confirmed.</p>
-                <div class="pt-2">
-                    <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 text-slate-950 font-sans-custom font-bold text-xs tracking-widest uppercase transition shadow-lg" style="background-color: var(--gold);">
-                        JOIN THE LAUNCH LIST
-                    </a>
-                </div>
+        <!-- SECTION 4: Substack Subscription (Clean Solid Dark Card) -->
+        <section id="collect" class="card-dark p-8 sm:p-12 rounded-lg text-center space-y-6 max-w-2xl mx-auto" style="border-color: rgba(208, 174, 107, 0.4);">
+            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">READ & COLLECT THE COMICS</span>
+            <h2 class="text-3xl sm:text-4xl text-slate-100 font-normal">Be there when the first tale leaves port.</h2>
+            <p class="text-slate-300 text-base">Official comic-book release dates, formats and trusted stores will appear here as soon as they are confirmed.</p>
+            <div class="pt-2">
+                <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 text-slate-950 font-sans-custom font-bold text-xs tracking-widest uppercase transition shadow-lg" style="background-color: var(--gold);">
+                    JOIN THE LAUNCH LIST
+                </a>
             </div>
         </section>
 
