@@ -25,7 +25,7 @@
             font-family: 'Cormorant Garamond', serif;
         }
 
-        h2, h3, h4, .font-cinzel {
+        .font-cinzel {
             font-family: 'Cinzel', serif;
         }
 
@@ -68,15 +68,16 @@
             z-index: 1;
         }
 
+        /* Hero section dark gradient for text readability while keeping artwork vibrant */
         .hero-vignette {
             background: linear-gradient(to right, 
                 rgba(13, 14, 18, 0.95) 0%, 
-                rgba(13, 14, 18, 0.85) 40%, 
-                rgba(13, 14, 18, 0.3) 75%, 
-                transparent 100%),
+                rgba(13, 14, 18, 0.85) 38%, 
+                rgba(13, 14, 18, 0.4) 65%, 
+                rgba(13, 14, 18, 0.1) 100%),
                 linear-gradient(to top, 
                 rgba(13, 14, 18, 0.95) 0%, 
-                transparent 30%);
+                transparent 25%);
         }
 
         /* Faded dark background container for subscription section */
@@ -98,14 +99,14 @@
 </head>
 <body class="antialiased">
 
-    <!-- FULL HERO CONTAINER -->
-    <div class="relative min-h-screen w-full flex flex-col justify-between bg-cover bg-center" style="background-image: url('hero-bg.jpg');">
+    <!-- GRAND HERO CONTAINER -->
+    <div class="relative min-h-[92vh] lg:min-h-screen w-full flex flex-col justify-between bg-cover bg-center" style="background-image: url('hero-bg.jpg');">
         
         <!-- Dark Vignette Overlay -->
         <div class="absolute inset-0 hero-vignette pointer-events-none"></div>
 
         <!-- Header Navigation -->
-        <header class="relative z-20 w-full px-8 sm:px-16 py-6 flex items-center justify-between">
+        <header class="relative z-20 w-full px-8 sm:px-16 py-6 flex items-center justify-between border-b border-slate-700/40">
             <a href="#" class="flex items-center space-x-3">
                 <svg class="w-8 h-8" style="color: var(--gold);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" stroke-linejoin="round"/>
@@ -117,7 +118,7 @@
                 </div>
             </a>
 
-            <nav class="hidden md:flex items-center space-x-8 font-sans-custom text-xs tracking-wider text-slate-300">
+            <nav class="hidden md:flex items-center space-x-10 font-sans-custom text-xs tracking-wider text-slate-300">
                 <a href="#one-port" class="hover:text-slate-100 transition">The series</a>
                 <a href="#stories-cross" class="hover:text-slate-100 transition">The world</a>
                 <a href="#where-stories-cross" class="hover:text-slate-100 transition">First character</a>
@@ -127,26 +128,26 @@
         </header>
 
         <!-- HERO CONTENT -->
-        <div class="relative z-10 w-full max-w-7xl mx-auto px-8 sm:px-16 my-auto py-12">
-            <div class="max-w-xl space-y-6">
-                <span class="block font-sans-custom text-[11px] font-semibold tracking-[0.25em] uppercase" style="color: var(--gold);">
+        <div class="relative z-10 w-full max-w-7xl mx-auto px-8 sm:px-16 my-auto py-16 sm:py-24">
+            <div class="max-w-2xl space-y-8">
+                <span class="block font-sans-custom text-[11px] font-semibold tracking-[0.3em] uppercase" style="color: var(--gold);">
                     AN ORIGINAL FANTASY UNIVERSE TOLD IN COMICS
                 </span>
 
-                <h1 class="text-5xl sm:text-7xl font-cormorant font-light tracking-tight text-slate-100 leading-[1.05]">
+                <h1 class="text-6xl sm:text-8xl lg:text-9xl font-cormorant font-light tracking-tight text-slate-100 leading-[0.95]">
                     Welcome to <br>
-                    <span class="text-breakwater-gold font-normal">Breakwater Port</span>
+                    <span class="text-breakwater-gold font-normal italic block pt-2">Breakwater Port</span>
                 </h1>
 
-                <p class="text-lg sm:text-xl text-slate-300/90 leading-relaxed font-light pt-2 max-w-md">
+                <p class="text-lg sm:text-2xl text-slate-300/90 leading-relaxed font-light pt-2 max-w-xl">
                     Ships bring fortunes, strangers and stories to Breakwater Port—a city where old families and unexpected encounters shape the lives within it.
                 </p>
 
-                <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 font-sans-custom">
-                    <a href="#one-port" class="px-7 py-3.5 text-slate-950 font-bold text-xs tracking-widest uppercase transition text-center shadow-lg" style="background-color: var(--gold);">
+                <div class="pt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-5 font-sans-custom">
+                    <a href="#one-port" class="px-8 py-4 text-slate-950 font-bold text-xs tracking-widest uppercase transition text-center shadow-xl hover:opacity-90" style="background-color: var(--gold);">
                         ENTER BREAKWATER PORT
                     </a>
-                    <a href="#where-stories-cross" class="px-7 py-3.5 bg-transparent hover:bg-slate-900/40 text-slate-200 font-bold text-xs tracking-widest uppercase transition text-center" style="border: 1px solid var(--gold);">
+                    <a href="#where-stories-cross" class="px-8 py-4 bg-slate-950/60 hover:bg-slate-900/80 text-slate-200 font-bold text-xs tracking-widest uppercase transition text-center" style="border: 1px solid var(--gold);">
                         MEET THE FIRST CHARACTER
                     </a>
                 </div>
@@ -274,7 +275,7 @@
         <section id="where-stories-cross" class="space-y-12">
             <div class="text-center space-y-3 max-w-3xl mx-auto">
                 <span class="font-sans-custom text-xs tracking-[0.2em] uppercase" style="color: var(--gold);">COMIC BOOK 1 · THE FIRST LIFE WE FOLLOW</span>
-                <h2 class="text-3xl sm:text-5xl text-slate-100 font-normal">The eldest son of House Valecourt</h2>
+                <h2 class="text-3xl sm:text-5xl font-cormorant text-slate-100 font-normal">The eldest son of House Valecourt</h2>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
@@ -282,7 +283,7 @@
                 <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('sebastian_.jpg');">
                     <div class="relative z-10 space-y-6 my-auto">
                         <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">THE FIRST PROTAGONIST</span>
-                        <h3 class="text-2xl sm:text-3xl text-slate-100 font-normal">Sebastian Valecourt</h3>
+                        <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">Sebastian Valecourt</h3>
                         <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
                             He has wealth, charm and every reason to believe the world will make room for him. Is he simply a spoiled young man—or is there more beneath the confidence?
                         </p>
@@ -299,7 +300,7 @@
                 <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('ensemble.jpeg');">
                     <div class="relative z-10 space-y-6 my-auto">
                         <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">LIVES AROUND HIM</span>
-                        <h3 class="text-2xl sm:text-3xl text-slate-100 font-normal">Other characters</h3>
+                        <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">Other characters</h3>
                         <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
                             Family, allies, rivals and strangers all have a place in the unfolding story. Who will matter most—and why—is not for this page to reveal.
                         </p>
@@ -315,14 +316,14 @@
         <section id="journal" class="space-y-8 pt-4">
             <div class="space-y-2 border-b border-slate-800/80 pb-6">
                 <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">FROM THE CREATOR'S DESK</span>
-                <h2 class="text-4xl sm:text-6xl text-slate-100 font-normal tracking-tight">Latest from the journal</h2>
+                <h2 class="text-4xl sm:text-6xl font-cormorant text-slate-100 font-normal tracking-tight">Latest from the journal</h2>
             </div>
 
             <div class="grid lg:grid-cols-12 gap-8 pt-2">
                 <!-- Main Feature Story -->
                 <div class="lg:col-span-7 space-y-6 pr-0 lg:pr-8">
                     <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">PRODUCTION NOTES · CURRENT</span>
-                    <h3 class="text-3xl sm:text-4xl text-slate-100 font-normal leading-tight">One city, a lifetime of stories</h3>
+                    <h3 class="text-3xl sm:text-4xl font-cormorant text-slate-100 font-normal leading-tight">One city, a lifetime of stories</h3>
                     <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
                         The first comic follows the eldest son of House Valecourt. Future comics will remain in Breakwater Port, turning toward other lives and other corners of the city. Together, their stories will build a place larger than any single hero.
                     </p>
@@ -336,7 +337,7 @@
                     <!-- Item 1 -->
                     <div class="space-y-3 pb-8 border-b border-slate-800/80">
                         <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">VISUAL DEVELOPMENT</span>
-                        <h4 class="text-xl sm:text-2xl text-slate-100 font-normal">Finding the look of Breakwater Port</h4>
+                        <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">Finding the look of Breakwater Port</h4>
                         <p class="text-slate-400 text-sm leading-relaxed font-light">
                             Harbors, heraldry and the contrast between public grandeur and private tension.
                         </p>
@@ -345,7 +346,7 @@
                     <!-- Item 2 -->
                     <div class="space-y-3">
                         <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">CHARACTER DESIGN</span>
-                        <h4 class="text-xl sm:text-2xl text-slate-100 font-normal">Drawing a man without giving him away</h4>
+                        <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">Drawing a man without giving him away</h4>
                         <p class="text-slate-400 text-sm leading-relaxed font-light">
                             The smile, the confidence and the unanswered question beneath both.
                         </p>
@@ -360,7 +361,7 @@
                 <!-- Left Main Block -->
                 <div class="lg:col-span-6 space-y-6">
                     <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">THE LONG VIEW</span>
-                    <h2 class="text-4xl sm:text-6xl text-slate-100 font-normal leading-tight">
+                    <h2 class="text-4xl sm:text-6xl font-cormorant text-slate-100 font-normal leading-tight">
                         The Journey<br>
                         Continues
                     </h2>
@@ -375,7 +376,7 @@
                     <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
                         <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-amber-200/70 w-24 pt-1">NOW</span>
                         <div class="flex-1 space-y-1">
-                            <h4 class="text-xl text-slate-100 font-normal">Comic Book 1 in development</h4>
+                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">Comic Book 1 in development</h4>
                             <p class="text-slate-400 text-xs sm:text-sm font-light">Story, artwork and visual world-building</p>
                         </div>
                     </div>
@@ -384,7 +385,7 @@
                     <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
                         <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-slate-500 w-24 pt-1">NEXT</span>
                         <div class="flex-1 space-y-1">
-                            <h4 class="text-xl text-slate-100 font-normal">More comics from the port</h4>
+                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">More comics from the port</h4>
                             <p class="text-slate-400 text-xs sm:text-sm font-light">New central characters, one shared city</p>
                         </div>
                     </div>
@@ -393,7 +394,7 @@
                     <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
                         <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-slate-500 w-24 pt-1">FUTURE</span>
                         <div class="flex-1 space-y-1">
-                            <h4 class="text-xl text-slate-100 font-normal">The universe may expand into prose</h4>
+                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">The universe may expand into prose</h4>
                             <p class="text-slate-400 text-xs sm:text-sm font-light">Books exploring more of Breakwater Port</p>
                         </div>
                     </div>
