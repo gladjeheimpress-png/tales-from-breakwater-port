@@ -11,32 +11,49 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
+        :root {
+            --gold: #d0ae6b;
+            --gold-muted: rgba(208, 174, 107, 0.8);
+        }
+
         body {
             background-color: #0d0e12;
             color: #e2e8f0;
             font-family: 'Cormorant Garamond', serif;
         }
+
         h1, h2, h3, .font-cinzel {
             font-family: 'Cinzel', serif;
         }
+
         .font-sans-custom {
             font-family: 'Inter', sans-serif;
         }
+
+        /* Specific Cormorant Garamond Light/Medium Italic styling for Breakwater Port */
+        .text-breakwater-gold {
+            color: var(--gold);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500; /* Medium weight */
+            font-style: italic;
+        }
+
         .card-dark {
             background-color: #12141c;
-            border: 1px solid rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(208, 174, 107, 0.2);
         }
+
         .hero-vignette {
             background: linear-gradient(to right, 
                 rgba(13, 14, 18, 0.95) 0%, 
-                rgba(13, 14, 18, 0.8) 40%, 
-                rgba(13, 14, 18, 0.2) 70%, 
+                rgba(13, 14, 18, 0.85) 40%, 
+                rgba(13, 14, 18, 0.3) 75%, 
                 transparent 100%),
                 linear-gradient(to top, 
-                rgba(13, 14, 18, 0.9) 0%, 
+                rgba(13, 14, 18, 0.95) 0%, 
                 transparent 30%);
         }
     </style>
@@ -52,46 +69,46 @@
         <!-- Header Navigation -->
         <header class="relative z-20 w-full px-8 sm:px-16 py-6 flex items-center justify-between">
             <a href="#" class="flex items-center space-x-3">
-                <svg class="w-8 h-8 text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                <svg class="w-8 h-8" style="color: var(--gold);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" stroke-linejoin="round"/>
                     <circle cx="12" cy="12" r="3"/>
                 </svg>
                 <div class="flex flex-col">
-                    <span class="font-cinzel text-[10px] tracking-[0.25em] text-amber-200/70 uppercase">TALES FROM</span>
-                    <span class="font-cinzel text-xs font-bold tracking-[0.2em] text-amber-100 uppercase">BREAKWATER PORT</span>
+                    <span class="font-cinzel text-[10px] tracking-[0.25em] text-slate-300 uppercase">TALES FROM</span>
+                    <span class="font-cinzel text-xs font-bold tracking-[0.2em] text-slate-100 uppercase">BREAKWATER PORT</span>
                 </div>
             </a>
 
             <nav class="hidden md:flex items-center space-x-8 font-sans-custom text-xs tracking-wider text-slate-300">
-                <a href="#one-port" class="hover:text-amber-300 transition">The series</a>
-                <a href="#one-port" class="hover:text-amber-300 transition">The world</a>
-                <a href="#where-stories-cross" class="hover:text-amber-300 transition">First character</a>
-                <a href="#journal" class="hover:text-amber-300 transition">News</a>
-                <a href="#collect" class="hover:text-amber-300 transition">Read & buy</a>
+                <a href="#one-port" class="hover:text-slate-100 transition">The series</a>
+                <a href="#one-port" class="hover:text-slate-100 transition">The world</a>
+                <a href="#where-stories-cross" class="hover:text-slate-100 transition">First character</a>
+                <a href="#journal" class="hover:text-slate-100 transition">News</a>
+                <a href="#collect" class="hover:text-slate-100 transition">Read & buy</a>
             </nav>
         </header>
 
-        <!-- HERO CONTENT (Left Aligned) -->
+        <!-- HERO CONTENT (Left Aligned Desktop) -->
         <div class="relative z-10 w-full max-w-7xl mx-auto px-8 sm:px-16 my-auto py-12">
             <div class="max-w-xl space-y-6">
-                <span class="block font-sans-custom text-[11px] font-semibold tracking-[0.25em] text-amber-400 uppercase">
+                <span class="block font-sans-custom text-[11px] font-semibold tracking-[0.25em] uppercase" style="color: var(--gold);">
                     AN ORIGINAL FANTASY UNIVERSE TOLD IN COMICS
                 </span>
 
                 <h1 class="text-5xl sm:text-7xl font-normal tracking-tight text-slate-100 leading-[1.05]">
                     Welcome to <br>
-                    <span class="font-serif italic text-amber-300 font-semibold">Breakwater Port</span>
+                    <span class="text-breakwater-gold font-normal">Breakwater Port</span>
                 </h1>
 
-                <p class="text-lg sm:text-xl text-slate-300 leading-relaxed font-light">
+                <p class="text-lg sm:text-xl text-slate-300/90 leading-relaxed font-light pt-2 max-w-md">
                     Ships bring fortunes, strangers and stories to Breakwater Port—a city where old families and unexpected encounters shape the lives within it.
                 </p>
 
                 <div class="pt-4 flex flex-col sm:flex-row items-stretch sm:items-center gap-4 font-sans-custom">
-                    <a href="#one-port" class="px-7 py-3.5 bg-[#d4af37] hover:bg-amber-400 text-slate-950 font-bold text-xs tracking-widest uppercase transition text-center shadow-lg">
+                    <a href="#one-port" class="px-7 py-3.5 text-slate-950 font-bold text-xs tracking-widest uppercase transition text-center shadow-lg" style="background-color: var(--gold);">
                         ENTER BREAKWATER PORT
                     </a>
-                    <a href="#where-stories-cross" class="px-7 py-3.5 bg-transparent hover:bg-amber-950/40 text-amber-200 font-bold text-xs tracking-widest uppercase transition border border-amber-500/40 text-center">
+                    <a href="#where-stories-cross" class="px-7 py-3.5 bg-transparent hover:bg-slate-900/40 text-slate-200 font-bold text-xs tracking-widest uppercase transition text-center" style="border: 1px solid var(--gold);">
                         MEET THE FIRST CHARACTER
                     </a>
                 </div>
@@ -100,19 +117,20 @@
 
         <!-- HERO BOTTOM LOCATION TAG -->
         <div class="relative z-10 w-full px-8 sm:px-16 py-6 flex justify-end">
-            <span class="font-sans-custom text-[10px] tracking-[0.25em] text-amber-200/60 uppercase">
+            <span class="font-sans-custom text-[10px] tracking-[0.25em] text-slate-400 uppercase">
                 BREAKWATER PORT · THE SOUTHERN COAST
             </span>
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
+    <!-- MAIN CONTENT BELOW HERO -->
     <main class="max-w-5xl mx-auto px-6 space-y-24 py-24">
 
+        <!-- SECTION 2: Overview -->
         <section id="one-port" class="space-y-8 text-center sm:text-left">
             <div class="space-y-3">
-                <span class="font-sans-custom text-xs tracking-[0.2em] text-amber-400 uppercase">OVERVIEW</span>
-                <h2 class="text-3xl sm:text-4xl text-amber-100 font-normal">One Port. Many Lives.</h2>
+                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase" style="color: var(--gold);">OVERVIEW</span>
+                <h2 class="text-3xl sm:text-4xl text-slate-100 font-normal">One Port. Many Lives.</h2>
             </div>
             <div class="card-dark p-8 rounded-lg space-y-6 text-slate-300 text-lg leading-relaxed">
                 <p>Nestled along the rugged cliffs of the southern coast, Breakwater Port stands as a sprawling gateway between sea and land. Here, sailors, merchants, noble bloodlines, and wandering strangers walk the same cobblestone alleys.</p>
@@ -120,17 +138,19 @@
             </div>
         </section>
 
+        <!-- SECTION 3: Characters -->
         <section id="where-stories-cross" class="space-y-12">
             <div class="text-center space-y-3">
-                <span class="font-sans-custom text-xs tracking-[0.2em] text-amber-400 uppercase">CHARACTERS</span>
-                <h2 class="text-3xl sm:text-4xl text-amber-100 font-normal">Where Stories Cross</h2>
+                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase" style="color: var(--gold);">CHARACTERS</span>
+                <h2 class="text-3xl sm:text-4xl text-slate-100 font-normal">Where Stories Cross</h2>
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
+                <!-- Card 1: Sebastian Valecourt -->
                 <div class="card-dark rounded-lg p-8 flex flex-col justify-between text-center group">
                     <div class="space-y-4">
-                        <span class="font-sans-custom text-xs text-amber-400 tracking-widest uppercase">THE FIRST TALE</span>
-                        <h3 class="text-2xl text-amber-100 font-normal">Sebastian Valecourt</h3>
+                        <span class="font-sans-custom text-xs tracking-widest uppercase" style="color: var(--gold);">THE FIRST TALE</span>
+                        <h3 class="text-2xl text-slate-100 font-normal">Sebastian Valecourt</h3>
                         <p class="text-slate-300 text-base leading-relaxed">
                             Eldest son of House Valecourt, Sebastian moves through the city’s high society with quiet poise. Caught between family duty and the unpredictable tides of the harbor, who will he choose to become?
                         </p>
@@ -140,10 +160,11 @@
                     </div>
                 </div>
 
+                <!-- Card 2: Ensemble -->
                 <div class="card-dark rounded-lg p-8 flex flex-col justify-between text-center">
                     <div class="space-y-4">
-                        <span class="font-sans-custom text-xs text-amber-400 tracking-widest uppercase">THE ENSEMBLE</span>
-                        <h3 class="text-2xl text-amber-100 font-normal">Lives Around Him</h3>
+                        <span class="font-sans-custom text-xs tracking-widest uppercase" style="color: var(--gold);">THE ENSEMBLE</span>
+                        <h3 class="text-2xl text-slate-100 font-normal">Lives Around Him</h3>
                         <p class="text-slate-300 text-base leading-relaxed">
                             Every shadow in Breakwater Port harbors a story. From bustling dockyards to quiet courtyards, the figures surrounding House Valecourt carry their own ambitions, rivalries, and paths waiting to unfold.
                         </p>
@@ -155,12 +176,13 @@
             </div>
         </section>
 
-        <section id="collect" class="card-dark border-amber-500/30 p-8 sm:p-12 rounded-lg text-center space-y-6 max-w-2xl mx-auto">
-            <span class="font-sans-custom text-xs tracking-[0.25em] text-amber-400 uppercase">READ & COLLECT THE COMICS</span>
-            <h2 class="text-3xl sm:text-4xl text-amber-100 font-normal">Be there when the first tale leaves port.</h2>
+        <!-- SECTION 4: Substack Subscription -->
+        <section id="collect" class="card-dark p-8 sm:p-12 rounded-lg text-center space-y-6 max-w-2xl mx-auto" style="border-color: var(--gold);">
+            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">READ & COLLECT THE COMICS</span>
+            <h2 class="text-3xl sm:text-4xl text-slate-100 font-normal">Be there when the first tale leaves port.</h2>
             <p class="text-slate-300 text-base">Official comic-book release dates, formats and trusted stores will appear here as soon as they are confirmed.</p>
             <div class="pt-2">
-                <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 bg-[#d4af37] hover:bg-amber-400 text-slate-950 font-sans-custom font-bold text-xs tracking-widest uppercase transition shadow-lg">
+                <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 text-slate-950 font-sans-custom font-bold text-xs tracking-widest uppercase transition shadow-lg" style="background-color: var(--gold);">
                     JOIN THE LAUNCH LIST
                 </a>
             </div>
@@ -168,7 +190,7 @@
 
     </main>
 
-    <footer class="border-t border-amber-900/20 py-8 text-center font-sans-custom text-xs text-slate-500">
+    <footer class="border-t border-slate-800/60 py-8 text-center font-sans-custom text-xs text-slate-500">
         <p>Tales from Breakwater Port © All rights reserved.</p>
     </footer>
 
