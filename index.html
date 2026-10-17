@@ -16,6 +16,7 @@
     <style>
         :root {
             --gold: #d0ae6b;
+            --border-subtle: rgba(208, 174, 107, 0.2);
         }
 
         body {
@@ -39,10 +40,10 @@
             font-style: italic;
         }
 
-        /* Standard dark card for overview/subscribe sections */
+        /* Standard dark card */
         .card-dark {
             background-color: #12141c;
-            border: 1px solid rgba(208, 174, 107, 0.2);
+            border: 1px solid var(--border-subtle);
         }
 
         /* Character-specific background cards with cinematic dark overlay */
@@ -59,7 +60,7 @@
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(13, 14, 18, 0.84); /* Dark cinematic tint so text is super readable over art */
+            background: rgba(13, 14, 18, 0.84);
             z-index: 1;
         }
 
@@ -141,9 +142,9 @@
     </div>
 
     <!-- MAIN CONTENT BELOW HERO -->
-    <main class="max-w-6xl mx-auto px-6 space-y-24 py-24">
+    <main class="max-w-6xl mx-auto px-6 space-y-28 py-24">
 
-        <!-- SECTION 2: Overview (Clean Solid Dark Card) -->
+        <!-- SECTION 2: Overview -->
         <section id="one-port" class="space-y-8 text-center sm:text-left max-w-4xl mx-auto">
             <div class="space-y-3">
                 <span class="font-sans-custom text-xs tracking-[0.2em] uppercase" style="color: var(--gold);">OVERVIEW</span>
@@ -155,7 +156,7 @@
             </div>
         </section>
 
-        <!-- SECTION 3: Characters (Background Artwork Layout for Sebastian & Ensemble Only) -->
+        <!-- SECTION 3: Characters -->
         <section id="where-stories-cross" class="space-y-12">
             <div class="text-center space-y-3 max-w-3xl mx-auto">
                 <span class="font-sans-custom text-xs tracking-[0.2em] uppercase" style="color: var(--gold);">COMIC BOOK 1 · THE FIRST LIFE WE FOLLOW</span>
@@ -163,7 +164,7 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Card 1: Sebastian Valecourt (sebastian_.jpg background) -->
+                <!-- Card 1: Sebastian Valecourt (sebastian_.jpg) -->
                 <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('sebastian_.jpg');">
                     <div class="relative z-10 space-y-6 my-auto">
                         <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">THE FIRST PROTAGONIST</span>
@@ -180,7 +181,7 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Ensemble (ensemble.png background) -->
+                <!-- Card 2: Ensemble (ensemble.jpeg) -->
                 <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('ensemble.jpeg');">
                     <div class="relative z-10 space-y-6 my-auto">
                         <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">LIVES AROUND HIM</span>
@@ -196,7 +197,97 @@
             </div>
         </section>
 
-        <!-- SECTION 4: Substack Subscription (Clean Solid Dark Card) -->
+        <!-- SECTION: LATEST FROM THE JOURNAL -->
+        <section id="journal" class="space-y-8 pt-4">
+            <div class="space-y-2 border-b border-slate-800/80 pb-6">
+                <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">FROM THE CREATOR'S DESK</span>
+                <h2 class="text-4xl sm:text-6xl text-slate-100 font-normal tracking-tight">Latest from the journal</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 pt-2">
+                <!-- Main Feature Story -->
+                <div class="lg:col-span-7 space-y-6 pr-0 lg:pr-8">
+                    <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">PRODUCTION NOTES · CURRENT</span>
+                    <h3 class="text-3xl sm:text-4xl text-slate-100 font-normal leading-tight">One city, a lifetime of stories</h3>
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                        The first comic follows the eldest son of House Valecourt. Future comics will remain in Breakwater Port, turning toward other lives and other corners of the city. Together, their stories will build a place larger than any single hero.
+                    </p>
+                    <a href="https://talesfrombreakwaterport.substack.com" target="_blank" class="inline-block font-sans-custom text-xs tracking-[0.2em] font-medium uppercase hover:underline pt-2" style="color: var(--gold);">
+                        SEE THE SERIES ROADMAP &rarr;
+                    </a>
+                </div>
+
+                <!-- Right Side Journal Cards -->
+                <div class="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-8 lg:pt-0 lg:pl-8 space-y-8">
+                    <!-- Item 1 -->
+                    <div class="space-y-3 pb-8 border-b border-slate-800/80">
+                        <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">VISUAL DEVELOPMENT</span>
+                        <h4 class="text-xl sm:text-2xl text-slate-100 font-normal">Finding the look of Breakwater Port</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed font-light">
+                            Harbors, heraldry and the contrast between public grandeur and private tension.
+                        </p>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="space-y-3">
+                        <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">CHARACTER DESIGN</span>
+                        <h4 class="text-xl sm:text-2xl text-slate-100 font-normal">Drawing a man without giving him away</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed font-light">
+                            The smile, the confidence and the unanswered question beneath both.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: THE JOURNEY CONTINUES -->
+        <section id="journey" class="space-y-8 pt-4 border-t border-slate-800/80">
+            <div class="grid lg:grid-cols-12 gap-12 pt-8">
+                <!-- Left Main Block -->
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">THE LONG VIEW</span>
+                    <h2 class="text-4xl sm:text-6xl text-slate-100 font-normal leading-tight">
+                        The Journey<br>
+                        Continues
+                    </h2>
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light max-w-lg pt-2">
+                        The series begins with comic books set throughout Breakwater Port. As the universe grows, prose books may one day explore even more of its people, history and hidden corners.
+                    </p>
+                </div>
+
+                <!-- Right Timeline Items -->
+                <div class="lg:col-span-6 space-y-6 my-auto">
+                    <!-- Timeline Item 1 -->
+                    <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
+                        <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-amber-200/70 w-24 pt-1">NOW</span>
+                        <div class="flex-1 space-y-1">
+                            <h4 class="text-xl text-slate-100 font-normal">Comic Book 1 in development</h4>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">Story, artwork and visual world-building</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 2 -->
+                    <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
+                        <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-slate-500 w-24 pt-1">NEXT</span>
+                        <div class="flex-1 space-y-1">
+                            <h4 class="text-xl text-slate-100 font-normal">More comics from the port</h4>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">New central characters, one shared city</p>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Item 3 -->
+                    <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
+                        <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-slate-500 w-24 pt-1">FUTURE</span>
+                        <div class="flex-1 space-y-1">
+                            <h4 class="text-xl text-slate-100 font-normal">The universe may expand into prose</h4>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">Books exploring more of Breakwater Port</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Substack Subscription -->
         <section id="collect" class="card-dark p-8 sm:p-12 rounded-lg text-center space-y-6 max-w-2xl mx-auto" style="border-color: rgba(208, 174, 107, 0.4);">
             <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">READ & COLLECT THE COMICS</span>
             <h2 class="text-3xl sm:text-4xl text-slate-100 font-normal">Be there when the first tale leaves port.</h2>
