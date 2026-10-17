@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tales from Breakwater Port</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #0b0d12;
+            color: #e2e8f0;
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        h1, h2, h3, .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        .font-sans-custom {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Subtle dark card aesthetic */
+        .card-dark {
+            background-color: #11141c;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        /* Custom gold highlight text */
+        .text-gold {
+            color: #d4af37;
+        }
+
+        .border-gold {
+            border-color: rgba(212, 175, 55, 0.4);
+        }
+
+        .bg-gold {
+            background-color: #c59b27;
+        }
+
+        /* Soft gradient overlays */
+        .hero-overlay {
+            background: linear-gradient(to bottom, rgba(11, 13, 18, 0.6) 0%, rgba(11, 13, 18, 0.85) 70%, #0b0d12 100%);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-amber-900 selection:text-amber-100">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 bg-[#0b0d12]/90 backdrop-blur-md border-b border-amber-900/20 px-6 py-4">
+        <div class="max-w-4xl mx-auto flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <!-- Compass / Ship Emblem -->
+                <svg class="w-8 h-8 text-amber-500 transition-transform group-hover:scale-105" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <div class="flex flex-col">
+                    <span class="font-cinzel text-xs tracking-widest text-amber-200/70">TALES FROM</span>
+                    <span class="font-cinzel text-sm font-bold tracking-wider text-amber-100">BREAKWATER PORT</span>
+                </div>
+            </a>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="text-amber-200/80 hover:text-amber-100 p-1 focus:outline-none" aria-label="Toggle Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 8h16M4 16h16"/>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 space-y-24 pb-20">
+
+        <!-- SECTION 1: Welcome to Breakwater Port (Hero) -->
+        <section class="relative min-h-[85vh] flex flex-col justify-center items-center text-center pt-12 pb-8 rounded-b-3xl overflow-hidden">
+            <!-- Background Artwork Container -->
+            <div class="absolute inset-0 -z-10 bg-cover bg-center opacity-40" style="background-image: url('hero-bg.jpg');"></div>
+            <div class="absolute inset-0 -z-10 hero-overlay"></div>
+
+            <div class="space-y-6 max-w-2xl mx-auto px-4">
+                <span class="inline-block font-sans-custom text-xs font-medium tracking-[0.25em] text-amber-400 uppercase">
+                    AN ORIGINAL FANTASY UNIVERSE TOLD IN COMICS
+                </span>
+
+                <h1 class="text-4xl sm:text-6xl font-normal tracking-tight text-slate-100 leading-tight">
+                    Welcome to <br>
+                    <span class="font-serif italic text-amber-300 font-semibold">Breakwater Port</span>
+                </h1>
+
+                <div class="font-sans-custom text-xs tracking-widest text-amber-200/60 uppercase py-1">
+                    Breakwater Port · The southern coast
+                </div>
+
+                <p class="text-lg sm:text-xl text-slate-300 leading-relaxed font-normal pt-2">
+                    Ships bring fortunes, strangers and stories to Breakwater Port—a city where old families and unexpected encounters shape the lives within it.
+                </p>
+
+                <!-- Status Badge -->
+                <div class="pt-2">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-sans-custom font-medium bg-amber-950/60 text-amber-300 border border-amber-500/30">
+                        Comic Book 1 · Coming Soon
+                    </span>
+                </div>
+
+                <!-- Call To Action Buttons -->
+                <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4 font-sans-custom">
+                    <a href="#one-port" class="w-full sm:w-auto px-8 py-3.5 bg-amber-600 hover:bg-amber-500 text-slate-950 font-semibold text-xs tracking-widest uppercase transition rounded-sm shadow-lg shadow-amber-950/40">
+                        ENTER BREAKWATER PORT
+                    </a>
+                    <a href="#where-stories-cross" class="w-full sm:w-auto px-8 py-3.5 bg-transparent hover:bg-amber-950/30 text-amber-200 font-semibold text-xs tracking-widest uppercase transition border border-amber-500/40 rounded-sm">
+                        MEET THE FIRST CHARACTER
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: One Port. Many Lives. -->
+        <section id="one-port" class="scroll-mt-24 space-y-8 border-t border-amber-900/20 pt-16">
+            <div class="text-center space-y-3">
+                <span class="font-sans-custom text-xs tracking-[0.2em] text-amber-400/80 uppercase">OVERVIEW</span>
+                <h2 class="text-3xl sm:text-4xl text-amber-100 font-normal">One Port. Many Lives.</h2>
+            </div>
+            
+            <div class="card-dark p-8 rounded-lg max-w-3xl mx-auto space-y-6 text-slate-300 text-lg leading-relaxed text-center sm:text-left">
+                <p>
+                    Nestled along the rugged cliffs of the southern coast, Breakwater Port stands as a sprawling gateway between sea and land. Here, sailors, merchants, noble bloodlines, and wandering strangers walk the same cobblestone alleys.
+                </p>
+                <p>
+                    Rather than following a single isolated hero, the universe explores the interconnected webs of those who call the port home—where a choice made in the high district ripples through the lower docks.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 3: Where Stories Cross (Character Section) -->
+        <section id="where-stories-cross" class="scroll-mt-24 space-y-12 border-t border-amber-900/20 pt-16">
+            <div class="text-center space-y-3">
+                <span class="font-sans-custom text-xs tracking-[0.2em] text-amber-400/80 uppercase">CHARACTERS</span>
+                <h2 class="text-3xl sm:text-4xl text-amber-100 font-normal">Where Stories Cross</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-stretch">
+                <!-- Card 1: Sebastian Valecourt -->
+                <div class="card-dark rounded-lg p-8 flex flex-col justify-between text-center relative overflow-hidden group">
+                    <div class="space-y-4 relative z-10">
+                        <span class="font-sans-custom text-xs text-amber-400/70 tracking-widest uppercase">THE FIRST TALE</span>
+                        <h3 class="text-2xl text-amber-100 font-normal">Sebastian Valecourt</h3>
+                        <p class="text-slate-300 text-base leading-relaxed">
+                            Eldest son of House Valecourt, Sebastian moves through the city’s high society with quiet poise. Caught between family duty and the unpredictable tides of the harbor, who will he choose to become?
+                        </p>
+                    </div>
+
+                    <!-- Sebastian Portrait Container -->
+                    <div class="mt-8 relative h-64 w-full flex items-center justify-center overflow-hidden rounded">
+                        <img src="sebastian.png" alt="Sebastian Valecourt" class="max-h-full max-w-full object-contain opacity-90 group-hover:scale-105 transition duration-500">
+                    </div>
+                </div>
+
+                <!-- Card 2: Lives Around Him -->
+                <div class="card-dark rounded-lg p-8 flex flex-col justify-between text-center relative overflow-hidden">
+                    <div class="space-y-4 relative z-10">
+                        <span class="font-sans-custom text-xs text-amber-400/70 tracking-widest uppercase">THE ENSEMBLE</span>
+                        <h3 class="text-2xl text-amber-100 font-normal">Lives Around Him</h3>
+                        <p class="text-slate-300 text-base leading-relaxed">
+                            Every shadow in Breakwater Port harbors a story. From bustling dockyards to quiet courtyards, the figures surrounding House Valecourt carry their own ambitions, rivalries, and paths waiting to unfold.
+                        </p>
+                    </div>
+
+                    <!-- Ensemble Dark Transparent Image Container -->
+                    <div class="mt-8 relative h-64 w-full flex items-center justify-center overflow-hidden rounded">
+                        <img src="ensemble.png" alt="Lives Around Him Ensemble" class="max-h-full max-w-full object-contain opacity-70">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subtle Tagline Banner -->
+            <div class="text-center pt-4">
+                <p class="font-serif italic text-amber-200/60 text-sm">
+                    More will be revealed when the time is right. No sooner.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: Latest from the Journal / Creator Notes -->
+        <section class="space-y-8 border-t border-amber-900/20 pt-16">
+            <div class="space-y-2">
+                <span class="font-sans-custom text-xs tracking-[0.2em] text-amber-400/80 uppercase">FROM THE CREATOR'S DESK</span>
+                <h2 class="text-3xl sm:text-4xl text-amber-100 font-normal">Latest from the journal</h2>
+            </div>
+
+            <div class="space-y-8 divide-y divide-amber-900/20">
+                <!-- Journal Entry 1 -->
+                <div class="pt-6 space-y-3">
+                    <span class="font-sans-custom text-xs text-amber-400/70 tracking-widest uppercase">PRODUCTION NOTES · CURRENT</span>
+                    <h3 class="text-2xl text-amber-100">One city, a lifetime of stories</h3>
+                    <p class="text-slate-300 text-base leading-relaxed max-w-2xl">
+                        The first comic follows the eldest son of House Valecourt. Future comics will remain in Breakwater Port, turning toward other lives and other corners of the city. Together, their stories will build a place larger than any single hero.
+                    </p>
+                    <a href="#roadmap" class="inline-block font-sans-custom text-xs text-amber-400 hover:text-amber-300 tracking-wider uppercase pt-2">
+                        SEE THE SERIES ROADMAP →
+                    </a>
+                </div>
+
+                <!-- Journal Entry 2 -->
+                <div class="pt-6 space-y-3">
+                    <span class="font-sans-custom text-xs text-amber-400/70 tracking-widest uppercase">VISUAL DEVELOPMENT</span>
+                    <h3 class="text-2xl text-amber-100">Finding the look of Breakwater Port</h3>
+                    <p class="text-slate-300 text-base leading-relaxed max-w-2xl">
+                        Harbors, heraldry and the contrast between public grandeur and private tension.
+                    </p>
+                </div>
+
+                <!-- Journal Entry 3 -->
+                <div class="pt-6 space-y-3">
+                    <span class="font-sans-custom text-xs text-amber-400/70 tracking-widest uppercase">CHARACTER DESIGN</span>
+                    <h3 class="text-2xl text-amber-100">Drawing a man without giving him away</h3>
+                    <p class="text-slate-300 text-base leading-relaxed max-w-2xl">
+                        The smile, the confidence and the unanswered question beneath both.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: The Journey Continues (Roadmap Timeline) -->
+        <section id="roadmap" class="scroll-mt-24 space-y-8 border-t border-amber-900/20 pt-16">
+            <div class="space-y-2">
+                <span class="font-sans-custom text-xs tracking-[0.2em] text-amber-400/80 uppercase">THE LONG VIEW</span>
+                <h2 class="text-3xl sm:text-4xl text-amber-100 font-normal">The Journey Continues</h2>
+                <p class="text-slate-300 text-base leading-relaxed max-w-2xl">
+                    The series begins with comic books set throughout Breakwater Port. As the universe grows, prose books may one day explore even more of its people, history and hidden corners.
+                </p>
+            </div>
+
+            <!-- Timeline -->
+            <div class="space-y-6 pt-4 font-sans-custom">
+                <div class="flex items-start space-x-6 border-b border-amber-900/20 pb-6">
+                    <span class="text-xs font-semibold text-amber-400 tracking-widest uppercase w-16 pt-1">NOW</span>
+                    <div>
+                        <h4 class="font-serif text-xl text-amber-100">Comic Book 1 in development</h4>
+                        <p class="text-xs text-slate-400 pt-1">Story, artwork and visual world-building</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-6 border-b border-amber-900/20 pb-6">
+                    <span class="text-xs font-semibold text-amber-400/60 tracking-widest uppercase w-16 pt-1">NEXT</span>
+                    <div>
+                        <h4 class="font-serif text-xl text-slate-300">More comics from the port</h4>
+                        <p class="text-xs text-slate-400 pt-1">New central characters, one shared city</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-6 pb-2">
+                    <span class="text-xs font-semibold text-amber-400/40 tracking-widest uppercase w-16 pt-1">FUTURE</span>
+                    <div>
+                        <h4 class="font-serif text-xl text-slate-400">The universe may expand into prose</h4>
+                        <p class="text-xs text-slate-400 pt-1">Books exploring more of Breakwater Port</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: Substack Launch Callout Box -->
+        <section class="border-t border-amber-900/20 pt-16">
+            <div class="card-dark border-amber-500/30 p-8 sm:p-12 rounded-lg text-center space-y-6 max-w-2xl mx-auto shadow-2xl">
+                <span class="font-sans-custom text-xs tracking-[0.25em] text-amber-400 uppercase">READ & COLLECT THE COMICS</span>
+                
+                <h2 class="text-3xl sm:text-4xl text-amber-100 font-normal leading-tight">
+                    Be there when the first tale leaves port.
+                </h2>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+                    Official comic-book release dates, formats and trusted stores will appear here as soon as they are confirmed.
+                </p>
+
+                <ul class="font-sans-custom text-xs tracking-wider text-amber-200/80 space-y-2 py-2">
+                    <li class="flex items-center justify-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        <span>PRINT COMIC · TO BE ANNOUNCED</span>
+                    </li>
+                    <li class="flex items-center justify-center space-x-2">
+                        <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                        <span>DIGITAL COMIC · TO BE ANNOUNCED</span>
+                    </li>
+                </ul>
+
+                <div class="pt-4">
+                    <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" rel="noopener noreferrer" class="inline-block px-8 py-4 bg-amber-600 hover:bg-amber-500 text-slate-950 font-sans-custom font-semibold text-xs tracking-widest uppercase transition rounded-sm shadow-lg shadow-amber-950/50">
+                        JOIN THE LAUNCH LIST
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-amber-900/20 py-8 text-center font-sans-custom text-xs text-slate-500">
+        <p>Tales from Breakwater Port © All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
