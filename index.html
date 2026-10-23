@@ -171,7 +171,7 @@
         <section id="one-port" class="space-y-8">
             <div class="space-y-3">
                 <span class="font-sans-custom text-[11px] font-semibold tracking-[0.25em] uppercase" style="color: var(--gold);">
-                    WELCOME TO THE UNIVERSE
+                    WELCOME TO THE CITY OF BREAKWATER PORT
                 </span>
                 <h2 class="text-4xl sm:text-6xl font-cormorant font-normal text-slate-100 tracking-tight">
                     One Port. Many Lives.
@@ -219,64 +219,225 @@
             </div>
         </section>
 
+
         <!-- SECTION: WHERE STORIES CROSS -->
         <section id="stories-cross" class="space-y-8 pt-4">
+
             <div class="grid lg:grid-cols-12 gap-12 items-start">
+
+                <!-- Introduction -->
                 <div class="lg:col-span-5 space-y-6">
-                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">ONE PORT. MANY LIVES.</span>
+                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase"
+                        style="color: var(--gold);">
+                        ONE PORT. MANY LIVES.
+                    </span>
+
                     <h2 class="text-4xl sm:text-6xl font-cormorant font-normal text-slate-100 leading-tight">
                         Where Stories<br>Cross
                     </h2>
+
                     <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light pt-2">
                         Every story unfolds along a different path, yet each remains bound to the fate of Breakwater Port. From noble halls to forgotten streets, from ancient foundations to distant frontiers, their paths may cross, their consequences may linger, and their echoes may reach further than anyone imagined.
                     </p>
                 </div>
 
+                <!-- Expandable sections -->
                 <div class="lg:col-span-7 space-y-0">
-                    <div class="flex items-start space-x-6 border-t border-b border-slate-800/80 py-6">
-                        <span class="font-cormorant text-base italic text-amber-200/70 pt-1">01</span>
-                        <div class="space-y-1">
-                            <h3 class="text-2xl font-cormorant text-slate-100 font-normal">Breakwater Port</h3>
-                            <p class="text-slate-400 text-sm font-light leading-relaxed">
-                                A city of merchants, old stone and restless tides. Wealth arrives daily. So do secrets.<br>
-                                Behind its prosperous harbors, the streets tell another story. From crowded marketplaces to impoverished slums, fortunes are made, lives are lost, and survival often comes at a price.<br>
-                                The Church of the Everburning Flame stands among the city’s most influential institutions, its presence woven into the lives of those who call Breakwater Port home.
-                            </p>
+
+                    <!-- 01: Breakwater Port -->
+                    <div class="border-t border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle group flex w-full items-start gap-6 text-left"
+                            aria-expanded="false"
+                            aria-controls="story-content-01">
+
+                            <span class="font-cormorant text-base italic text-amber-200/70 pt-1 shrink-0">
+                                01
+                            </span>
+
+                            <span class="flex-1 flex items-center justify-between gap-4">
+                                <span class="text-2xl font-cormorant text-slate-100 font-normal">
+                                    Breakwater Port
+                                </span>
+
+                                <svg
+                                    class="story-arrow w-4 h-4 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </span>
+
+                        </button>
+
+                        <div id="story-content-01"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true">
+
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-400 text-sm font-light leading-relaxed pt-3">
+                                    A city of merchants, old stone and restless tides. Wealth arrives daily. So do secrets.<br>
+                                    Behind its prosperous harbors, the streets tell another story. From crowded marketplaces to impoverished slums, fortunes are made, lives are lost, and survival often comes at a price.<br>
+                                    The Church of the Everburning Flame stands among the city’s most influential institutions, its presence woven into the lives of those who call Breakwater Port home.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-6 border-b border-slate-800/80 py-6">
-                        <span class="font-cormorant text-base italic text-amber-200/70 pt-1">02</span>
-                        <div class="space-y-1">
-                            <h3 class="text-2xl font-cormorant text-slate-100 font-normal">The Family Houses</h3>
-                            <p class="text-slate-400 text-sm font-light leading-relaxed">
-                                Power is inherited, contested and defended.<br>
-                                The great houses of Breakwater Port shape the city’s fortunes through alliances, rivalries and carefully guarded secrets. Their influence stretches far beyond their mansions, reaching into commerce, politics and the lives of ordinary citizens.
-                            </p>
+                    <!-- 02: The Family Houses -->
+                    <div class="border-t border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle group flex w-full items-start gap-6 text-left"
+                            aria-expanded="false"
+                            aria-controls="story-content-02">
+
+                            <span class="font-cormorant text-base italic text-amber-200/70 pt-1 shrink-0">
+                                02
+                            </span>
+
+                            <span class="flex-1 flex items-center justify-between gap-4">
+                                <span class="text-2xl font-cormorant text-slate-100 font-normal">
+                                    The Family Houses
+                                </span>
+
+                                <svg
+                                    class="story-arrow w-4 h-4 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </span>
+
+                        </button>
+
+                        <div id="story-content-02"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true">
+
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-400 text-sm font-light leading-relaxed pt-3">
+                                    Power is inherited, contested and defended.<br>
+                                    The great houses of Breakwater Port shape the city’s fortunes through alliances, rivalries and carefully guarded secrets. Their influence stretches far beyond their mansions, reaching into commerce, politics and the lives of ordinary citizens.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-6 border-b border-slate-800/80 py-6">
-                        <span class="font-cormorant text-base italic text-amber-200/70 pt-1">03</span>
-                        <div class="space-y-1">
-                            <h3 class="text-2xl font-cormorant text-slate-100 font-normal">The Ancient Ruins</h3>
-                            <p class="text-slate-400 text-sm font-light leading-relaxed">
-                                Breakwater Port stands upon the remains of its own forgotten past. Beneath its streets lie the foundations of cities that came before.<br>
-                                Beyond the city, remnants of earlier ages lie scattered across the wilderness. Abandoned settlements, forgotten villages, ancient tombs and ruined temples stand as silent witnesses to histories long since lost.
-                            </p>
+                    <!-- 03: The Ancient Ruins -->
+                    <div class="border-t border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle group flex w-full items-start gap-6 text-left"
+                            aria-expanded="false"
+                            aria-controls="story-content-03">
+
+                            <span class="font-cormorant text-base italic text-amber-200/70 pt-1 shrink-0">
+                                03
+                            </span>
+
+                            <span class="flex-1 flex items-center justify-between gap-4">
+                                <span class="text-2xl font-cormorant text-slate-100 font-normal">
+                                    The Ancient Ruins
+                                </span>
+
+                                <svg
+                                    class="story-arrow w-4 h-4 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </span>
+
+                        </button>
+
+                        <div id="story-content-03"
+                         class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true">
+
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-400 text-sm font-light leading-relaxed pt-3">
+                                    Breakwater Port stands upon the remains of its own forgotten past. Beneath its streets lie the foundations of cities that came before.<br>
+                                    Beyond the city, remnants of earlier ages lie scattered across the wilderness. Abandoned settlements, forgotten villages, ancient tombs and ruined temples stand as silent witnesses to histories long since lost.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="flex items-start space-x-6 border-b border-slate-800/80 py-6">
-                        <span class="font-cormorant text-base italic text-amber-200/70 pt-1">04</span>
-                        <div class="space-y-1">
-                            <h3 class="text-2xl font-cormorant text-slate-100 font-normal">The Frontiers</h3>
-                            <p class="text-slate-400 text-sm font-light leading-relaxed">
-                                Beyond the familiar streets and sheltered harbors lies a world less easily governed.<br>
-                                Untamed wilderness, distant settlements and forgotten places await those willing to venture beyond the known.<br>
-                                Some seek fortune. Others seek answers. Not all return with what they came to find.
-                            </p>
+
+                    <!-- 04: The Frontiers -->
+                    <div class="border-t border-b border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle group flex w-full items-start gap-6 text-left"
+                            aria-expanded="false"
+                            aria-controls="story-content-04">
+
+                            <span class="font-cormorant text-base italic text-amber-200/70 pt-1 shrink-0">
+                                04
+                            </span>
+
+                            <span class="flex-1 flex items-center justify-between gap-4">
+                                <span class="text-2xl font-cormorant text-slate-100 font-normal">
+                                    The Frontiers
+                                </span>
+
+                                <svg
+                                    class="story-arrow w-4 h-4 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </span>
+
+                        </button>
+
+                        <div id="story-content-04"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true">
+
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-400 text-sm font-light leading-relaxed pt-3">
+                                    Beyond the familiar streets and sheltered harbors lies a world less easily governed.<br>
+                                    Untamed wilderness, distant settlements and forgotten places await those willing to venture beyond the known.<br>
+                                    Some seek fortune. Others seek answers. Not all return with what they came to find.
+                                </p>
+                            </div>
+
                         </div>
                     </div>
+
                 </div>
             </div>
         </section>
@@ -284,134 +445,439 @@
         <!-- SECTION: PRISON ISLAND -->
         <section id="stories-cross" class="space-y-8 pt-4">
             <div class="grid lg:grid-cols-12 gap-12 items-start">
+
+                <!-- PRISON ISLAND INTRODUCTION -->
                 <div class="lg:col-span-5 space-y-6">
-                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">A PORT WHERE EVERYTHING HAS A PRICE.</span>
+                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">
+                        A PORT WHERE EVERYTHING HAS A PRICE.
+                    </span>
+
                     <h2 class="text-4xl sm:text-6xl font-cormorant font-normal text-slate-100 leading-tight">
                         Prison Island
                     </h2>
+
                     <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light pt-2">
-                        Some secrets are buried. Some are hidden behind thick walls. Others are surrounded by water. 
-                        Beyond the familiar shores of Breakwater Port lies an island shrouded in secrecy. 
-                        Its existence is known. Its purpose is not. 
+                        Some secrets are buried. Some are hidden behind thick walls. Others are surrounded by water.
+                        Beyond the familiar shores of Breakwater Port lies an island shrouded in secrecy.
+                        Its existence is known. Its purpose is not.
                         Yet the lives of those who find themselves drawn toward it will never be the same.
                     </p>
                 </div>
 
                 <div class="lg:col-span-7 space-y-0">
-                    <div class="flex items-start space-x-6 border-t border-b border-slate-800/80 py-6">
-                        <span class="font-cormorant text-base italic text-amber-200/70 pt-1">01</span>
-                        <div class="space-y-1">
-                            <h3 class="text-2xl font-cormorant text-slate-100 font-normal">Season 1 Origins</h3>
-                            <p class="text-slate-400 text-sm font-light leading-relaxed"></p>
-                                Book 1 in Progress
-                            </p>
-                            <p class="text-slate-400 text-sm font-light leading-relaxed">
-                                Four Lives. Four Stories. One Destination.<br>
-                                Four individuals. Four different paths through the streets of Breakwater Port.<br>
-                                Each has a past. Each has a choice. Each is heading toward an unforeseen destination.
-                            </p>
+
+                    <!-- 01: SEASON 1 ORIGINS -->
+                    <div class="border-t border-b border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-6"
+                            aria-expanded="false"
+                            aria-controls="prison-season-content-01"
+                        >
+                            <div class="flex items-start space-x-6">
+                                <span class="font-cormorant text-base italic text-amber-200/70 pt-1">01</span>
+                                <div class="space-y-1">
+                                    <h3 class="text-2xl font-cormorant text-slate-100 font-normal">
+                                        Season 1 Origins
+                                    </h3>
+                                    <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                        Book 1 in Progress
+                                    </p>
+                                </div>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-2 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="prison-season-content-01"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-300 text-sm font-light leading-relaxed pt-4">
+                                    Four Lives. Four Stories. One Destination.<br>
+                                    Four individuals. Four different paths through the streets of Breakwater Port.<br>
+                                    Each has a past. Each has a choice. Each is heading toward an unforeseen destination.
+                                </p>
+                            </div>
                         </div>
+
                     </div>
 
-                    <div class="flex items-start space-x-6 border-b border-slate-800/80 py-6">
-                        <span class="font-cormorant text-base italic text-amber-200/70 pt-1">02</span>
-                        <div class="space-y-1">
-                            <h3 class="text-2xl font-cormorant text-slate-100 font-normal">Season 2</h3>
-                            <p class="text-slate-400 text-sm font-light leading-relaxed">
-                                To be announced.
-                             </p>
+                    <!-- 02: SEASON 2 -->
+                    <div class="border-b border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-6"
+                            aria-expanded="false"
+                            aria-controls="prison-season-content-02"
+                        >
+                            <div class="flex items-start space-x-6">
+                                <span class="font-cormorant text-base italic text-amber-200/70 pt-1">02</span>
+                                <div class="space-y-1">
+                                    <h3 class="text-2xl font-cormorant text-slate-100 font-normal">
+                                        Season 2
+                                    </h3>
+                                    <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                        To be announced.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-2 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="prison-season-content-02"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-300 text-sm font-light leading-relaxed pt-4">
+                                    Whats next?
+                                </p>
+                            </div>
                         </div>
+
                     </div>
 
-                    <div class="flex items-start space-x-6 border-b border-slate-800/80 py-6">
-                        <span class="font-cormorant text-base italic text-amber-200/70 pt-1">03</span>
-                        <div class="space-y-1">
-                            <h3 class="text-2xl font-cormorant text-slate-100 font-normal">Season 3</h3>
-                            <p class="text-slate-400 text-sm font-light leading-relaxed">
-                                To be announced.
-                             </p>
+                    <!-- 03: SEASON 3 -->
+                    <div class="border-b border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-6"
+                            aria-expanded="false"
+                            aria-controls="prison-season-content-03"
+                        >
+                            <div class="flex items-start space-x-6">
+                                <span class="font-cormorant text-base italic text-amber-200/70 pt-1">03</span>
+                                <div class="space-y-1">
+                                    <h3 class="text-2xl font-cormorant text-slate-100 font-normal">
+                                        Season 3
+                                    </h3>
+                                    <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                        To be announced.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-2 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="prison-season-content-03"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-300 text-sm font-light leading-relaxed pt-4">
+                                    The future holds many secrets.
+                                </p>
+                            </div>
                         </div>
+
                     </div>
+
                 </div>
+
             </div>
         </section>
 
         <!-- SECTION 3: Characters -->
         <section id="where-stories-cross" class="space-y-12">
+
+            <!-- Section heading -->
             <div class="text-center space-y-3 max-w-3xl mx-auto">
-                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase" style="color: var(--gold);">SEASON 1, BOOK 1 · THE FIRST LIFE WE FOLLOW</span>
-                <h2 class="text-3xl sm:text-5xl font-cormorant text-slate-100 font-normal">The eldest son of House Valecourt</h2>
+                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase"
+                    style="color: var(--gold);">
+                    TALES FROM BREAKWATER PORT · PRISON ISLAND
+                </span>
+
+                <h2 class="text-3xl sm:text-5xl font-cormorant text-slate-100 font-normal">
+                    The Cast
+                </h2>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('sebastian_.jpg');">
-                    <div class="relative z-10 space-y-6 my-auto">
-                        <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">THE FIRST PROTAGONIST</span>
-                        <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">Sebastian Valecourt</h3>
-                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
-                            He has wealth, charm and every reason to believe the world will make room for him. Is he simply a spoiled young man—or is there more beneath the confidence?
-                        </p>
-                        <p class="text-slate-300/90 text-base sm:text-lg leading-relaxed font-light">
-                            Will someone unexpected change his life? Or will he be the one who changes theirs?
-                        </p>
-                        <p class="text-breakwater-gold pt-4 text-base italic font-medium">
-                            Who will he choose to become?
-                        </p>
-                    </div>
+            <!-- Carousel container -->
+            <div class="relative">
+
+                <!-- Previous button -->
+                <button
+                    type="button"
+                    id="cast-prev"
+                    aria-label="Previous characters"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 z-20
+                        flex items-center justify-center
+                        w-10 h-10 sm:w-12 sm:h-12
+                        rounded-full border border-amber-400
+                        bg-slate-950/90 text-amber-400
+                        hover:bg-amber-400 hover:text-slate-950
+                        transition-colors duration-300
+                        disabled:opacity-30 disabled:cursor-not-allowed">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-5 h-5"
+                        aria-hidden="true">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15.75 19.5 8.25 12l7.5-7.5"/>
+                    </svg>
+                </button>
+
+                <!-- Scrollable character cards -->
+                <div
+                    id="cast-carousel"
+                    class="flex gap-6 overflow-x-auto snap-x snap-mandatory
+                        scroll-smooth px-12 pb-6
+                        [scrollbar-width:none]
+                        [&::-webkit-scrollbar]:hidden"
+                    tabindex="0"
+                    role="region"
+                    aria-label="The Cast character gallery">
+
+                    <!-- Sebastian Valecourt -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase"
+                                style="color: var(--gold);">
+                                THE FIRST PROTAGONIST
+                            </span>
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Sebastian Valecourt
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                He has wealth, charm and the looks to go with it.
+                                Raised with privilege, family expectations and influence,
+                                is he simply a spoiled young man or is there more beneath the confidence?
+                            </p>
+
+                            <p class="text-slate-300/90 text-base sm:text-lg leading-relaxed font-light">
+                                Will his encounters change his fate? Or will he change that of other people?
+                            </p>
+
+                            <p class="text-breakwater-gold pt-4 text-base italic font-medium">
+                                What does his future hold?
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Brennus Valecourt -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Brennus Valecourt
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Sebastian’s younger brother, and another son of House Valecourt.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Aurelia Valecourt -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Aurelia Valecourt
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Mother of Sebastian and Brennus, and a central figure in the Valecourt family.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Gregor Valecourt -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Gregor Valecourt
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Father of Sebastian and Brennus, and head of House Valecourt.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Judge Hadrian Corvinus -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Judge Hadrian Corvinus
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Head of House Corvinus and a prominent judge in Breakwater Port.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Lavinia Corvinus -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Lavinia Corvinus
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Daughter of Judge Hadrian Corvinus, whose life moves within the powerful circles of Breakwater Port.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Other characters -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('ensemble.jpeg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase"
+                                style="color: var(--gold);">
+                                INHABITANTS OF BREAKWATER PORT
+                            </span>
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Other Characters
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Family, allies, rivals and strangers will all be revealed in the unfolding story.
+                                Who will matter most, and why? It is not for this page to reveal yet.
+                            </p>
+
+                            <p class="text-breakwater-gold pt-4 text-base italic font-medium">
+                                Some mysteries should remain mysteries.
+                            </p>
+
+                        </div>
+                    </article>
+
                 </div>
 
-                <div class="character-card p-10 sm:p-14 flex flex-col justify-between text-center min-h-[500px]" style="background-image: url('ensemble.jpeg');">
-                    <div class="relative z-10 space-y-6 my-auto">
-                        <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">LIVES AROUND HIM</span>
-                        <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">Other characters</h3>
-                        <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
-                            Family, allies, rivals and strangers all have a place in the unfolding story. Who will matter most—and why—is not for this page to reveal.
-                        </p>
-                        <p class="text-breakwater-gold pt-4 text-base italic font-medium">
-                            Some mysteries should remain mysteries.
-                        </p>
-                    </div>
-                </div>
+                <!-- Next button -->
+                <button
+                    type="button"
+                    id="cast-next"
+                    aria-label="Next characters"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 z-20
+                        flex items-center justify-center
+                        w-10 h-10 sm:w-12 sm:h-12
+                        rounded-full border border-amber-400
+                        bg-slate-950/90 text-amber-400
+                        hover:bg-amber-400 hover:text-slate-950
+                        transition-colors duration-300
+                        disabled:opacity-30 disabled:cursor-not-allowed">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-5 h-5"
+                        aria-hidden="true">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
+                    </svg>
+                </button>
+
             </div>
-        </section>
 
-        <!-- SECTION: JOURNAL -->
-        <section id="journal" class="space-y-8 pt-4">
-            <div class="space-y-2 border-b border-slate-800/80 pb-6">
-                <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">FROM THE CREATOR'S DESK</span>
-                <h2 class="text-4xl sm:text-6xl font-cormorant text-slate-100 font-normal tracking-tight">Latest from the journal</h2>
+            <!-- Navigation indicators -->
+            <div id="cast-dots"
+                class="flex justify-center items-center gap-3 pt-2"
+                aria-label="Choose a character">
             </div>
 
-            <div class="grid lg:grid-cols-12 gap-8 pt-2">
-                <div class="lg:col-span-7 space-y-6 pr-0 lg:pr-8">
-                    <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">PRODUCTION NOTES · CURRENT</span>
-                    <h3 class="text-3xl sm:text-4xl font-cormorant text-slate-100 font-normal leading-tight">One city, a lifetime of stories</h3>
-                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
-                        The first comic follows the eldest son of House Valecourt. Future comics will remain in Breakwater Port, turning toward other lives and other corners of the city. Together, their stories will build a place larger than any single hero.
-                    </p>
-                    <a href="https://talesfrombreakwaterport.substack.com" target="_blank" class="inline-block font-sans-custom text-xs tracking-[0.2em] font-medium uppercase hover:underline pt-2" style="color: var(--gold);">
-                        SEE THE SERIES ROADMAP &rarr;
-                    </a>
-                </div>
-
-                <div class="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-8 lg:pt-0 lg:pl-8 space-y-8">
-                    <div class="space-y-3 pb-8 border-b border-slate-800/80">
-                        <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">VISUAL DEVELOPMENT</span>
-                        <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">Finding the look of Breakwater Port</h4>
-                        <p class="text-slate-400 text-sm leading-relaxed font-light">
-                            Harbors, heraldry and the contrast between public grandeur and private tension.
-                        </p>
-                    </div>
-
-                    <div class="space-y-3">
-                        <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">CHARACTER DESIGN</span>
-                        <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">Drawing a man without giving him away</h4>
-                        <p class="text-slate-400 text-sm leading-relaxed font-light">
-                            The smile, the confidence and the unanswered question beneath both.
-                        </p>
-                    </div>
-                </div>
-            </div>
         </section>
 
         <!-- SECTION: JOURNEY CONTINUES -->
@@ -424,7 +890,8 @@
                         Continues
                     </h2>
                     <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light max-w-lg pt-2">
-                        The series begins with comic books set throughout Breakwater Port. As the universe grows, prose books may one day explore even more of its people, history and hidden corners.
+                        Every story begins somewhere. Ours begins with Prison Island.<br> 
+                        The first season of the Prison Island saga follows the story of four individuals whose lives are destined to intertwine. Four different journies that are heading for one destination. 
                     </p>
                 </div>
 
@@ -432,8 +899,8 @@
                     <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
                         <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-amber-200/70 w-24 pt-1">NOW</span>
                         <div class="flex-1 space-y-1">
-                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">Prison Island: Season 1, Book 1 in development</h4>
-                            <p class="text-slate-400 text-xs sm:text-sm font-light">Story, artwork and visual world-building</p>
+                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">In development</h4>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">Prison Island: Season 1, Book 1. </p>
                         </div>
                     </div>
 
@@ -441,17 +908,203 @@
                         <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-slate-500 w-24 pt-1">NEXT</span>
                         <div class="flex-1 space-y-1">
                             <h4 class="text-xl font-cormorant text-slate-100 font-normal">More comics from the port</h4>
-                            <p class="text-slate-400 text-xs sm:text-sm font-light">New central characters, one shared city</p>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">More stories from Prison Island: season 1 will be revealed as their journeys begin.</p>
                         </div>
                     </div>
 
                     <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
                         <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-slate-500 w-24 pt-1">FUTURE</span>
                         <div class="flex-1 space-y-1">
-                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">The universe may expand into prose</h4>
-                            <p class="text-slate-400 text-xs sm:text-sm font-light">Books exploring more of Breakwater Port</p>
+                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">The universe expands</h4>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">More books exploring Breakwater Port?</p>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: JOURNAL -->
+        <section id="journal" class="space-y-8 pt-4">
+
+            <div class="space-y-2 border-b border-slate-800/80 pb-6">
+                <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">
+                    FROM THE CREATOR'S DESK
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-cormorant text-slate-100 font-normal tracking-tight">
+                    Latest from the journal
+                </h2>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 pt-2">
+
+                <!-- FEATURED JOURNAL ENTRY -->
+                <div class="lg:col-span-7 space-y-6 pr-0 lg:pr-8">
+                    <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">
+                        PRODUCTION NOTES · CURRENT
+                    </span>
+
+                    <h3 class="text-3xl sm:text-4xl font-cormorant text-slate-100 font-normal leading-tight">
+                        One city, a lifetime of stories
+                    </h3>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                        The first tale follows Sebastian Valecourt, his story marks the beginning of a larger narrative. One that set unsuspecting souls fate in motion throughout the streets of Breakwater Port and beyond.
+                    </p>
+
+                    <a
+                        href="https://talesfrombreakwaterport.substack.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block font-sans-custom text-xs tracking-[0.2em] font-medium uppercase hover:underline pt-2"
+                        style="color: var(--gold);"
+                    >
+                        NEWSLETTER AND UPDATES &rarr;
+                    </a>
+                </div>
+
+                <!-- COLLAPSIBLE JOURNAL ENTRIES -->
+                <div class="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-8 lg:pt-0 lg:pl-8 space-y-0">
+
+                    <!-- 01: VISUAL DEVELOPMENT -->
+                    <div class="pb-6 border-b border-slate-800/80">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-4"
+                            aria-expanded="false"
+                            aria-controls="journal-content-01"
+                        >
+                            <div class="space-y-3">
+                                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400 block">
+                                    VISUAL DEVELOPMENT
+                                </span>
+                                <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">
+                                    Finding the look of Breakwater Port
+                                </h4>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-1 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="journal-content-01"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden">
+                                <p class="text-slate-400 text-sm leading-relaxed font-light pt-4">
+                                    From bustling harbors and ancient stonework to the heraldry of powerful houses, the visual identity of Breakwater Port reflects a world of contrasts.
+                                    Public grandeur conceals private tensions, while every street and forgotten corner offers another glimpse into the lives of its inhabitants.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 02: CHARACTER DESIGN -->
+                    <div class="py-6 border-b border-slate-800/80">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-4"
+                            aria-expanded="false"
+                            aria-controls="journal-content-02"
+                        >
+                            <div class="space-y-3">
+                                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400 block">
+                                    CHARACTER DESIGN
+                                </span>
+                                <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">
+                                    Drawing a man without giving him away
+                                </h4>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-1 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="journal-content-02"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden">
+                                <p class="text-slate-400 text-sm leading-relaxed font-light pt-4">
+                                    Sebastian Valecourt appearance reflects his upbringing: confidence, refinement and a certain ease in the world around him.
+                                    But a character is more than what the world sees. Every expression, gesture and detail offers a glimpse of the person beneath the surface.
+                                    Some things are better left for the story itself to reveal.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 03: WORLDBUILDING -->
+                    <div class="py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-4"
+                            aria-expanded="false"
+                            aria-controls="journal-content-03"
+                        >
+                            <div class="space-y-3">
+                                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400 block">
+                                    WORLDBUILDING
+                                </span>
+                                <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">
+                                    No two lives experience Breakwater Port in quite the same way.
+                                </h4>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-1 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="journal-content-03"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden">
+                                <p class="text-slate-400 text-sm leading-relaxed font-light pt-4">
+                                    For some, it is a city of opportunity and influence. For others, a place of hardship, uncertainty and survival.
+                                    Though their journeys may lead far beyond its shores, the choices they make and the lives they touch remain connected to Breakwater Port.
+                                    Every perspective reveals another piece of a much larger story.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
                 </div>
             </div>
         </section>
@@ -484,7 +1137,7 @@
 
             <div class="pt-2">
                 <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" rel="noopener noreferrer" class="inline-block px-10 py-4 text-slate-950 font-sans-custom font-bold text-xs tracking-widest uppercase transition shadow-xl hover:opacity-90" style="background-color: var(--gold);">
-                    JOIN THE LAUNCH LIST
+                    JOIN OUR NEWSLETTER
                 </a>
             </div>
         </div>
@@ -712,6 +1365,147 @@
             updateReader();
         });
     </script>
+
+    <!-- Carousel functionality -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.getElementById("cast-carousel");
+    const prevButton = document.getElementById("cast-prev");
+    const nextButton = document.getElementById("cast-next");
+    const dotsContainer = document.getElementById("cast-dots");
+
+    if (!carousel || !prevButton || !nextButton || !dotsContainer) {
+        return;
+    }
+
+    const slides = Array.from(
+        carousel.querySelectorAll(".cast-slide, article.character-card")
+    );
+
+    let activeIndex = 0;
+    const dots = [];
+
+    // Create one navigation dot per character
+    slides.forEach((slide, index) => {
+        const dot = document.createElement("button");
+
+        dot.type = "button";
+        dot.className =
+            "w-2.5 h-2.5 rounded-full border border-amber-400 " +
+            "transition-all duration-300 hover:scale-125";
+
+        dot.setAttribute(
+            "aria-label",
+            `Go to character ${index + 1}`
+        );
+
+        dot.addEventListener("click", () => {
+            scrollToSlide(index);
+        });
+
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+    });
+
+    function scrollToSlide(index) {
+        const slide = slides[index];
+
+        if (!slide) return;
+
+        carousel.scrollTo({
+            left: slide.offsetLeft - slides[0].offsetLeft,
+            behavior: "smooth"
+        });
+    }
+
+    function updateCarousel() {
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        slides.forEach((slide, index) => {
+            const distance = Math.abs(
+                slide.getBoundingClientRect().left -
+                carousel.getBoundingClientRect().left
+            );
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        activeIndex = closestIndex;
+
+        dots.forEach((dot, index) => {
+            const isActive = index === activeIndex;
+
+            dot.classList.toggle("bg-amber-400", isActive);
+            dot.classList.toggle("scale-125", isActive);
+            dot.classList.toggle("bg-transparent", !isActive);
+
+            if (isActive) {
+                dot.setAttribute("aria-current", "true");
+            } else {
+                dot.removeAttribute("aria-current");
+            }
+        });
+
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+        prevButton.disabled = carousel.scrollLeft <= 2;
+        nextButton.disabled = carousel.scrollLeft >= maxScroll - 2;
+    }
+
+    prevButton.addEventListener("click", () => {
+        scrollToSlide(Math.max(0, activeIndex - 1));
+    });
+
+    nextButton.addEventListener("click", () => {
+        scrollToSlide(Math.min(slides.length - 1, activeIndex + 1));
+    });
+
+    carousel.addEventListener("scroll", updateCarousel, {
+        passive: true
+    });
+
+    window.addEventListener("resize", updateCarousel);
+
+    updateCarousel();
+});
+</script>
+
+<!-- Expand/collapse functionality -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const toggles = document.querySelectorAll(".story-toggle");
+
+    toggles.forEach((button) => {
+        const contentId = button.getAttribute("aria-controls");
+        const content = document.getElementById(contentId);
+        const arrow = button.querySelector(".story-arrow");
+
+        if (!content || !arrow) return;
+
+        button.addEventListener("click", () => {
+            const isExpanded =
+                button.getAttribute("aria-expanded") === "true";
+
+            button.setAttribute("aria-expanded", String(!isExpanded));
+            content.setAttribute("aria-hidden", String(isExpanded));
+
+            if (isExpanded) {
+                content.classList.remove("grid-rows-[1fr]");
+                content.classList.add("grid-rows-[0fr]", "opacity-0");
+                arrow.classList.remove("rotate-180");
+            } else {
+                content.classList.remove("grid-rows-[0fr]", "opacity-0");
+                content.classList.add("grid-rows-[1fr]");
+                arrow.classList.add("rotate-180");
+            }
+        });
+    });
+});
+</script>
 
 </body>
 </html>
