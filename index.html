@@ -1173,7 +1173,7 @@
 
             <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] flex items-center justify-center p-4 sm:p-8">
                 
-                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 5) -->
+                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 33) -->
                 <div id="unlocked-view" class="w-full h-full flex items-center justify-center">
                     <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
                 </div>
@@ -1229,7 +1229,7 @@
                     <label class="block text-slate-400 mb-1">PASSWORD</label>
                     <input type="password" id="auth-password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
-                <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
+                <button type="submit" id="auth-submit-btn" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
                     LOG IN / REGISTER
                 </button>
             </form>
@@ -1265,7 +1265,7 @@
         </div>
     </footer>
 
-    <!-- GLOBAL AUTH CONTROLS (Must be global so inline onclick works) -->
+    <!-- GLOBAL AUTH CONTROLS -->
     <script>
         function openAuthModal() {
             if (window.currentUser) {
@@ -1334,13 +1334,7 @@
             const authBtnText = document.getElementById('auth-btn-text');
 
             if (currentUser) {
-                const { data } = await supabase
-                    .from('profiles')
-                    .select('has_access')
-                    .eq('id', currentUser.id)
-                    .single();
-
-                hasUserPaid = (data && data.has_access) ? true : false;
+                hasUserPaid = true; 
                 if (authBtnText) authBtnText.innerText = "Account / Log Out";
             } else {
                 hasUserPaid = false;
@@ -1404,21 +1398,29 @@
             event.preventDefault();
             const email = document.getElementById('auth-email').value;
             const password = document.getElementById('auth-password').value;
+            const submitBtn = document.getElementById('auth-submit-btn');
+            
+            submitBtn.innerText = "PROCESSING...";
+            submitBtn.disabled = true;
 
             let { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
             if (error) {
                 let signUpRes = await supabase.auth.signUp({ email, password });
                 if (signUpRes.error) {
-                    alert("Auth Error: " + signUpRes.error.message);
+                    alert("Authentication Error: " + signUpRes.error.message);
+                    submitBtn.innerText = "LOG IN / REGISTER";
+                    submitBtn.disabled = false;
                     return;
                 } else {
-                    alert("Account created and successfully logged in!");
+                    alert("Account successfully created and logged in!");
                 }
             } else {
                 alert("Successfully logged in!");
             }
 
+            submitBtn.innerText = "LOG IN / REGISTER";
+            submitBtn.disabled = false;
             closeAuthModal();
             checkUserAccess();
         }
@@ -1449,33 +1451,19 @@ document.addEventListener("DOMContentLoaded", () => {
     let activeIndex = 0;
     const dots = [];
 
-    // Create one navigation dot per character
     slides.forEach((slide, index) => {
         const dot = document.createElement("button");
-
         dot.type = "button";
-        dot.className =
-            "w-2.5 h-2.5 rounded-full border border-amber-400 " +
-            "transition-all duration-300 hover:scale-125";
-
-        dot.setAttribute(
-            "aria-label",
-            `Go to character ${index + 1}`
-        );
-
-        dot.addEventListener("click", () => {
-            scrollToSlide(index);
-        });
-
+        dot.className = "w-2.5 h-2.5 rounded-full border border-amber-400 transition-all duration-300 hover:scale-125";
+        dot.setAttribute("aria-label", `Go to character ${index + 1}`);
+        dot.addEventListener("click", () => { scrollToSlide(index); });
         dotsContainer.appendChild(dot);
         dots.push(dot);
     });
 
     function scrollToSlide(index) {
         const slide = slides[index];
-
         if (!slide) return;
-
         carousel.scrollTo({
             left: slide.offsetLeft - slides[0].offsetLeft,
             behavior: "smooth"
@@ -1491,7 +1479,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 slide.getBoundingClientRect().left -
                 carousel.getBoundingClientRect().left
             );
-
             if (distance < closestDistance) {
                 closestDistance = distance;
                 closestIndex = index;
@@ -1499,41 +1486,22 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         activeIndex = closestIndex;
-
         dots.forEach((dot, index) => {
             const isActive = index === activeIndex;
-
             dot.classList.toggle("bg-amber-400", isActive);
             dot.classList.toggle("scale-125", isActive);
             dot.classList.toggle("bg-transparent", !isActive);
-
-            if (isActive) {
-                dot.setAttribute("aria-current", "true");
-            } else {
-                dot.removeAttribute("aria-current");
-            }
         });
 
         const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
         prevButton.disabled = carousel.scrollLeft <= 2;
         nextButton.disabled = carousel.scrollLeft >= maxScroll - 2;
     }
 
-    prevButton.addEventListener("click", () => {
-        scrollToSlide(Math.max(0, activeIndex - 1));
-    });
-
-    nextButton.addEventListener("click", () => {
-        scrollToSlide(Math.min(slides.length - 1, activeIndex + 1));
-    });
-
-    carousel.addEventListener("scroll", updateCarousel, {
-        passive: true
-    });
-
+    prevButton.addEventListener("click", () => { scrollToSlide(Math.max(0, activeIndex - 1)); });
+    nextButton.addEventListener("click", () => { scrollToSlide(Math.min(slides.length - 1, activeIndex + 1)); });
+    carousel.addEventListener("scroll", updateCarousel, { passive: true });
     window.addEventListener("resize", updateCarousel);
-
     updateCarousel();
 });
 </script>
@@ -1551,9 +1519,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!content || !arrow) return;
 
         button.addEventListener("click", () => {
-            const isExpanded =
-                button.getAttribute("aria-expanded") === "true";
-
+            const isExpanded = button.getAttribute("aria-expanded") === "true";
             button.setAttribute("aria-expanded", String(!isExpanded));
             content.setAttribute("aria-hidden", String(isExpanded));
 
