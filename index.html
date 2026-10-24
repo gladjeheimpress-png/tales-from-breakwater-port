@@ -1363,16 +1363,21 @@
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            const isFreePage = currentPage <= freeLimit;
-            const isAuthorized = isFreePage || Boolean(currentUserSession);
-
-            if (isAuthorized) {
-                unlockedView.style.display = 'flex';
-                lockedPaywall.style.display = 'none';
+            // 1. Pages 1 to 5 are ALWAYS free and visible
+            if (currentPage <= freeLimit) {
+                unlockedView.classList.remove('hidden');
+                lockedPaywall.classList.add('hidden');
                 imgElement.src = getPageFilename(currentPage);
             } else {
-                unlockedView.style.display = 'none';
-                lockedPaywall.style.display = 'flex';
+                // 2. Pages 6+ check if user is logged in via Supabase
+                if (currentUserSession) {
+                    unlockedView.classList.remove('hidden');
+                    lockedPaywall.classList.add('hidden');
+                    imgElement.src = getPageFilename(currentPage);
+                } else {
+                    unlockedView.classList.add('hidden');
+                    lockedPaywall.classList.remove('hidden');
+                }
             }
 
             // Update active thumbnail state
