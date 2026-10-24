@@ -1,3 +1,8 @@
+Here is your **complete, fully updated file**. I have cleaned up the floating script tags at the very bottom, properly wired up Supabase so it handles the authentication modal correctly, and integrated your reader logic so logged-in users can bypass the paywall if they have access.
+
+You can copy this entire code block, paste it into your file, and save it:
+
+```html
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -123,7 +128,7 @@
                 <a href="#collect" class="hover:text-slate-100 transition">Read & buy</a>
                 
                 <button onclick="openAuthModal()" class="px-4 py-1.5 border border-amber-500/50 hover:border-amber-400 text-amber-200 hover:text-white transition rounded">
-                    Log In
+                    <span id="auth-btn-text">Log In</span>
                 </button>
             </nav>
         </header>
@@ -1172,12 +1177,12 @@
 
             <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] flex items-center justify-center p-4 sm:p-8">
                 
-                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 5) -->
+                <!-- UNLOCKED PAGES VIEW -->
                 <div id="unlocked-view" class="w-full h-full flex items-center justify-center">
                     <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
                 </div>
 
-                <!-- LOCKED PAYWALL OVERLAY (PAGES 6+) -->
+                <!-- LOCKED PAYWALL OVERLAY -->
                 <div id="locked-paywall" class="hidden absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-8 text-center space-y-6">
                     <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1203,9 +1208,7 @@
             </div>
 
             <!-- Dynamic Thumbnail Navigation Bar -->
-            <div id="thumbnail-bar" class="bg-[#0b0c10] border-t border-slate-800 p-4 flex items-center justify-start sm:justify-center space-x-2 overflow-x-auto font-sans-custom text-xs">
-                <!-- Dynamically generated buttons -->
-            </div>
+            <div id="thumbnail-bar" class="bg-[#0b0c10] border-t border-slate-800 p-4 flex items-center justify-start sm:justify-center space-x-2 overflow-x-auto font-sans-custom text-xs"></div>
         </div>
     </section>
 
@@ -1219,14 +1222,14 @@
                 <h3 class="text-3xl font-cormorant text-slate-100">Welcome Reader</h3>
             </div>
 
-            <form onsubmit="handleAuthSubmit(event)" class="space-y-4 font-sans-custom text-xs">
+            <form id="auth-form" class="space-y-4 font-sans-custom text-xs">
                 <div>
                     <label class="block text-slate-400 mb-1">EMAIL ADDRESS</label>
-                    <input type="email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
+                    <input type="email" id="auth-email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
                     <label class="block text-slate-400 mb-1">PASSWORD</label>
-                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
+                    <input type="password" id="auth-password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
                 <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
                     LOG IN / REGISTER
@@ -1238,7 +1241,6 @@
     <!-- FOOTER SECTION -->
     <footer class="bg-[#0a0b0e] border-t border-slate-900 py-10 px-8 sm:px-16 w-full">
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            
             <a href="#" class="flex items-center space-x-3">
                 <svg class="w-6 h-6" style="color: var(--gold);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" stroke-linejoin="round"/>
@@ -1249,36 +1251,39 @@
                     <span class="font-cinzel text-[11px] font-bold tracking-[0.2em] text-slate-200 uppercase">BREAKWATER PORT</span>
                 </div>
             </a>
-
             <div class="text-center font-sans-custom text-xs text-slate-500 leading-relaxed max-w-sm">
                 An original high-fantasy comic-book series.<br>
                 Story, art and world © 2026 Gladjeheim Press.
             </div>
-
             <nav class="flex items-center space-x-8 font-sans-custom text-xs tracking-wider text-slate-300">
                 <a href="#one-port" class="hover:text-amber-200 transition">The series</a>
                 <a href="#journal" class="hover:text-amber-200 transition">News</a>
                 <a href="#collect" class="hover:text-amber-200 transition">Read & buy</a>
             </nav>
-
         </div>
     </footer>
 
-    <!-- DYNAMIC 33-PAGE READER SCRIPT -->
+    <!-- COMBINED SCRIPT: READER, CAROUSEL, ACCORDION & SUPABASE AUTH -->
     <script>
-        const totalPages = 33;
-        const freeLimit = 5; // Pages 1–5 are free
-        let currentPage = 1;
+        // Initialize Supabase Client
+        const SUPABASE_URL = 'https://gueljqfdhxwateykund.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-        // Automatically generates filenames: ComicBook-Final_page-0001.jpg ... ComicBook-Final_page-0033.jpg
+        const totalPages = 33;
+        const freeLimit = 5;
+        let currentPage = 1;
+        let currentUser = null;
+        let hasUserPaid = false;
+
         function getPageFilename(pageNumber) {
             const padded = String(pageNumber).padStart(4, '0');
             return `ComicBook-Final_page-${padded}.jpg`;
         }
 
-        // Build thumbnail buttons dynamically
         function initThumbnails() {
             const bar = document.getElementById('thumbnail-bar');
+            if (!bar) return;
             bar.innerHTML = '';
 
             for (let i = 1; i <= totalPages; i++) {
@@ -1287,38 +1292,58 @@
                 btn.onclick = () => goToPage(i);
                 
                 if (i <= freeLimit) {
-                    btn.className = "px-3 py-1.5 rounded bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200 flex-shrink-0 transition";
+                    btn.className = "px-3 py-1.5 rounded bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200 flex-shrink-0 transition font-sans-custom text-xs";
                     btn.innerText = `Page ${i}`;
                 } else {
-                    btn.className = "px-3 py-1.5 rounded bg-amber-950/40 text-amber-400/70 border border-amber-900/50 hover:text-amber-300 flex-shrink-0 transition";
+                    btn.className = "px-3 py-1.5 rounded bg-amber-950/40 text-amber-400/70 border border-amber-900/50 hover:text-amber-300 flex-shrink-0 transition font-sans-custom text-xs";
                     btn.innerText = `🔒 Page ${i}`;
                 }
-                
                 bar.appendChild(btn);
             }
         }
 
+        async function checkUserAccess() {
+            const { data: { session } } = await supabase.auth.getSession();
+            currentUser = session ? session.user : null;
+            const authBtn = document.querySelector("nav button[onclick='openAuthModal()']");
+
+            if (currentUser) {
+                // Check if user has access profile flag in Supabase table
+                const { data } = await supabase
+                    .from('profiles')
+                    .select('has_access')
+                    .eq('id', currentUser.id)
+                    .single();
+
+                hasUserPaid = (data && data.has_access) ? true : false;
+                if (authBtn) authBtn.innerHTML = "Account / Log Out";
+            } else {
+                hasUserPaid = false;
+                if (authBtn) authBtn.innerHTML = "Log In";
+            }
+            updateReader();
+        }
+
         function updateReader() {
-            document.getElementById('page-counter').innerText = `Page ${currentPage} of ${totalPages}`;
+            const counter = document.getElementById('page-counter');
+            if (counter) counter.innerText = `Page ${currentPage} of ${totalPages}`;
             
             const unlockedView = document.getElementById('unlocked-view');
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            if (currentPage <= freeLimit) {
-                unlockedView.classList.remove('hidden');
-                lockedPaywall.classList.add('hidden');
-                imgElement.src = getPageFilename(currentPage);
+            if (currentPage <= freeLimit || hasUserPaid) {
+                if (unlockedView) unlockedView.classList.remove('hidden');
+                if (lockedPaywall) lockedPaywall.classList.add('hidden');
+                if (imgElement) imgElement.src = getPageFilename(currentPage);
             } else {
-                unlockedView.classList.add('hidden');
-                lockedPaywall.classList.remove('hidden');
+                if (unlockedView) unlockedView.classList.add('hidden');
+                if (lockedPaywall) lockedPaywall.classList.remove('hidden');
             }
 
-            // Update active thumbnail state
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.getElementById(`thumb-btn-${i}`);
                 if (!btn) continue;
-
                 if (i === currentPage) {
                     btn.classList.add('bg-amber-500/30', 'text-amber-200', 'border-amber-500/50');
                 } else {
@@ -1328,17 +1353,11 @@
         }
 
         function nextPage() {
-            if (currentPage < totalPages) {
-                currentPage++;
-                updateReader();
-            }
+            if (currentPage < totalPages) { currentPage++; updateReader(); }
         }
 
         function prevPage() {
-            if (currentPage > 1) {
-                currentPage--;
-                updateReader();
-            }
+            if (currentPage > 1) { currentPage--; updateReader(); }
         }
 
         function goToPage(pageNum) {
@@ -1347,205 +1366,145 @@
         }
 
         function openAuthModal() {
-            document.getElementById('auth-modal').classList.remove('hidden');
+            if (currentUser) {
+                if (confirm(`Logged in as ${currentUser.email}. Do you want to log out?`)) {
+                    supabase.auth.signOut().then(() => { window.location.reload(); });
+                }
+            } else {
+                const modal = document.getElementById('auth-modal');
+                if (modal) modal.classList.remove('hidden');
+            }
         }
 
         function closeAuthModal() {
-            document.getElementById('auth-modal').classList.add('hidden');
+            const modal = document.getElementById('auth-modal');
+            if (modal) modal.classList.add('hidden');
         }
 
-        function handleAuthSubmit(event) {
-            event.preventDefault();
-            alert("Auth framework ready! Next step: connecting Supabase for real user sign-ins.");
-            closeAuthModal();
-        }
-
-        // Initialize thumbnails on load
-        window.addEventListener('DOMContentLoaded', () => {
+        // Supabase Login/Signup Form Handling
+        document.addEventListener("DOMContentLoaded", () => {
             initThumbnails();
-            updateReader();
+            checkUserAccess();
+
+            const authForm = document.getElementById('auth-form');
+            if (authForm) {
+                authForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('auth-email').value;
+                    const password = document.getElementById('auth-password').value;
+
+                    let { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+                    if (error) {
+                        let signUpRes = await supabase.auth.signUp({ email, password });
+                        if (signUpRes.error) {
+                            alert("Auth Error: " + signUpRes.error.message);
+                            return;
+                        } else {
+                            alert("Account created and successfully logged in!");
+                        }
+                    } else {
+                        alert("Successfully logged in!");
+                    }
+
+                    closeAuthModal();
+                    checkUserAccess();
+                });
+            }
+
+            // Carousel functionality
+            const carousel = document.getElementById("cast-carousel");
+            const prevButton = document.getElementById("cast-prev");
+            const nextButton = document.getElementById("cast-next");
+            const dotsContainer = document.getElementById("cast-dots");
+
+            if (carousel && prevButton && nextButton && dotsContainer) {
+                const slides = Array.from(carousel.querySelectorAll(".cast-slide, article.character-card"));
+                let activeIndex = 0;
+                const dots = [];
+
+                slides.forEach((slide, index) => {
+                    const dot = document.createElement("button");
+                    dot.type = "button";
+                    dot.className = "w-2.5 h-2.5 rounded-full border border-amber-400 transition-all duration-300 hover:scale-125";
+                    dot.setAttribute("aria-label", `Go to character ${index + 1}`);
+                    dot.addEventListener("click", () => scrollToSlide(index));
+                    dotsContainer.appendChild(dot);
+                    dots.push(dot);
+                });
+
+                function scrollToSlide(index) {
+                    const slide = slides[index];
+                    if (!slide) return;
+                    carousel.scrollTo({
+                        left: slide.offsetLeft - slides[0].offsetLeft,
+                        behavior: "smooth"
+                    });
+                }
+
+                function updateCarousel() {
+                    let closestIndex = 0;
+                    let closestDistance = Infinity;
+
+                    slides.forEach((slide, index) => {
+                        const distance = Math.abs(slide.getBoundingClientRect().left - carousel.getBoundingClientRect().left);
+                        if (distance < closestDistance) {
+                            closestDistance = distance;
+                            closestIndex = index;
+                        }
+                    });
+
+                    activeIndex = closestIndex;
+
+                    dots.forEach((dot, index) => {
+                        const isActive = index === activeIndex;
+                        dot.classList.toggle("bg-amber-400", isActive);
+                        dot.classList.toggle("scale-125", isActive);
+                        dot.classList.toggle("bg-transparent", !isActive);
+                        if (isActive) dot.setAttribute("aria-current", "true");
+                        else dot.removeAttribute("aria-current");
+                    });
+
+                    const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+                    prevButton.disabled = carousel.scrollLeft <= 2;
+                    nextButton.disabled = carousel.scrollLeft >= maxScroll - 2;
+                }
+
+                prevButton.addEventListener("click", () => scrollToSlide(Math.max(0, activeIndex - 1)));
+                nextButton.addEventListener("click", () => scrollToSlide(Math.min(slides.length - 1, activeIndex + 1)));
+                carousel.addEventListener("scroll", updateCarousel, { passive: true });
+                window.addEventListener("resize", updateCarousel);
+                updateCarousel();
+            }
+
+            // Expand/collapse accordion functionality
+            const toggles = document.querySelectorAll(".story-toggle");
+            toggles.forEach((button) => {
+                const contentId = button.getAttribute("aria-controls");
+                const content = document.getElementById(contentId);
+                const arrow = button.querySelector(".story-arrow");
+
+                if (!content || !arrow) return;
+
+                button.addEventListener("click", () => {
+                    const isExpanded = button.getAttribute("aria-expanded") === "true";
+                    button.setAttribute("aria-expanded", String(!isExpanded));
+                    content.setAttribute("aria-hidden", String(isExpanded));
+
+                    if (isExpanded) {
+                        content.classList.remove("grid-rows-[1fr]");
+                        content.classList.add("grid-rows-[0fr]", "opacity-0");
+                        arrow.classList.remove("rotate-180");
+                    } else {
+                        content.classList.remove("grid-rows-[0fr]", "opacity-0");
+                        content.classList.add("grid-rows-[1fr]");
+                        arrow.classList.add("rotate-180");
+                    }
+                });
+            });
         });
     </script>
-
-    <!-- Carousel functionality -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const carousel = document.getElementById("cast-carousel");
-    const prevButton = document.getElementById("cast-prev");
-    const nextButton = document.getElementById("cast-next");
-    const dotsContainer = document.getElementById("cast-dots");
-
-    if (!carousel || !prevButton || !nextButton || !dotsContainer) {
-        return;
-    }
-
-    const slides = Array.from(
-        carousel.querySelectorAll(".cast-slide, article.character-card")
-    );
-
-    let activeIndex = 0;
-    const dots = [];
-
-    // Create one navigation dot per character
-    slides.forEach((slide, index) => {
-        const dot = document.createElement("button");
-
-        dot.type = "button";
-        dot.className =
-            "w-2.5 h-2.5 rounded-full border border-amber-400 " +
-            "transition-all duration-300 hover:scale-125";
-
-        dot.setAttribute(
-            "aria-label",
-            `Go to character ${index + 1}`
-        );
-
-        dot.addEventListener("click", () => {
-            scrollToSlide(index);
-        });
-
-        dotsContainer.appendChild(dot);
-        dots.push(dot);
-    });
-
-    function scrollToSlide(index) {
-        const slide = slides[index];
-
-        if (!slide) return;
-
-        carousel.scrollTo({
-            left: slide.offsetLeft - slides[0].offsetLeft,
-            behavior: "smooth"
-        });
-    }
-
-    function updateCarousel() {
-        let closestIndex = 0;
-        let closestDistance = Infinity;
-
-        slides.forEach((slide, index) => {
-            const distance = Math.abs(
-                slide.getBoundingClientRect().left -
-                carousel.getBoundingClientRect().left
-            );
-
-            if (distance < closestDistance) {
-                closestDistance = distance;
-                closestIndex = index;
-            }
-        });
-
-        activeIndex = closestIndex;
-
-        dots.forEach((dot, index) => {
-            const isActive = index === activeIndex;
-
-            dot.classList.toggle("bg-amber-400", isActive);
-            dot.classList.toggle("scale-125", isActive);
-            dot.classList.toggle("bg-transparent", !isActive);
-
-            if (isActive) {
-                dot.setAttribute("aria-current", "true");
-            } else {
-                dot.removeAttribute("aria-current");
-            }
-        });
-
-        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-        prevButton.disabled = carousel.scrollLeft <= 2;
-        nextButton.disabled = carousel.scrollLeft >= maxScroll - 2;
-    }
-
-    prevButton.addEventListener("click", () => {
-        scrollToSlide(Math.max(0, activeIndex - 1));
-    });
-
-    nextButton.addEventListener("click", () => {
-        scrollToSlide(Math.min(slides.length - 1, activeIndex + 1));
-    });
-
-    carousel.addEventListener("scroll", updateCarousel, {
-        passive: true
-    });
-
-    window.addEventListener("resize", updateCarousel);
-
-    updateCarousel();
-});
-</script>
-
-<!-- Expand/collapse functionality -->
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const toggles = document.querySelectorAll(".story-toggle");
-
-    toggles.forEach((button) => {
-        const contentId = button.getAttribute("aria-controls");
-        const content = document.getElementById(contentId);
-        const arrow = button.querySelector(".story-arrow");
-
-        if (!content || !arrow) return;
-
-        button.addEventListener("click", () => {
-            const isExpanded =
-                button.getAttribute("aria-expanded") === "true";
-
-            button.setAttribute("aria-expanded", String(!isExpanded));
-            content.setAttribute("aria-hidden", String(isExpanded));
-
-            if (isExpanded) {
-                content.classList.remove("grid-rows-[1fr]");
-                content.classList.add("grid-rows-[0fr]", "opacity-0");
-                arrow.classList.remove("rotate-180");
-            } else {
-                content.classList.remove("grid-rows-[0fr]", "opacity-0");
-                content.classList.add("grid-rows-[1fr]");
-                arrow.classList.add("rotate-180");
-            }
-        });
-    });
-});
-</script>
-    // Initialize Supabase
-    const SUPABASE_URL = 'https://gueljqfdhxwateykund.supabase.co';
-    const SUPABASE_ANON_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-    // Hook into your existing login/register form submission
-    document.addEventListener("DOMContentLoaded", () => {
-        const form = document.querySelector("#auth-modal form") || document.querySelector("form");
-        if (!form) return;
-
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            const emailInput = form.querySelector('input[type="email"]');
-            const passwordInput = form.querySelector('input[type="password"]');
-
-            if (!emailInput || !passwordInput) return;
-
-            const email = emailInput.value;
-            const password = passwordInput.value;
-
-            // Try logging in first
-            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
-            if (error) {
-                // If account doesn't exist, sign them up automatically
-                let signUpRes = await supabase.auth.signUp({ email, password });
-                if (signUpRes.error) {
-                    alert("Auth Error: " + signUpRes.error.message);
-                } else {
-                    alert("Account created and logged in successfully!");
-                    location.reload();
-                }
-            } else {
-                alert("Successfully logged in!");
-                location.reload();
-            }
-        });
-    });
-</script>
-    
 </body>
 </html>
+
+```
