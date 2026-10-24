@@ -1174,13 +1174,13 @@
 
             <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] flex items-center justify-center p-4 sm:p-8">
                 
-                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 5) -->
-                <div id="unlocked-view" class="w-full h-full flex items-center justify-center">
+                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 33 IMAGE CONTAINER) -->
+                <div id="unlocked-view" class="w-full flex items-center justify-center">
                     <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
                 </div>
 
                 <!-- LOCKED PAYWALL OVERLAY (PAGES 6+) -->
-                <div id="locked-paywall" class="hidden absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-30 flex-col items-center justify-center p-8 text-center space-y-6">
+                <div id="locked-paywall" style="display: none;" class="absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-30 flex-col items-center justify-center p-8 text-center space-y-6">
                     <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
@@ -1202,6 +1202,7 @@
                         </a>
                     </div>
                 </div>
+            </div>
                 
             <!-- Dynamic Thumbnail Navigation Bar -->
             <div id="thumbnail-bar" class="bg-[#0b0c10] border-t border-slate-800 p-4 flex items-center justify-start sm:justify-center space-x-2 overflow-x-auto font-sans-custom text-xs">
@@ -1395,24 +1396,19 @@
                 pageCounter.innerText = `Page ${currentPage} of ${totalPages}`;
             }
             
-            const unlockedView = document.getElementById('unlocked-view');
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
+
+            // Render page image so proportions remain steady
+            imgElement.src = getPageFilename(currentPage);
 
             const isFreePage = currentPage <= freeLimit;
             const isAuthorized = isFreePage || Boolean(currentUserSession);
 
             if (isAuthorized) {
-                // Show comic page full size
-                unlockedView.classList.remove('hidden');
-                lockedPaywall.classList.add('hidden');
-                lockedPaywall.classList.remove('flex');
-                imgElement.src = getPageFilename(currentPage);
+                lockedPaywall.style.display = 'none';
             } else {
-                // Show full screen paywall overlay inside viewport box
-                unlockedView.classList.add('hidden');
-                lockedPaywall.classList.remove('hidden');
-                lockedPaywall.classList.add('flex');
+                lockedPaywall.style.display = 'flex';
             }
 
             // Highlight thumbnail bar button
