@@ -7,6 +7,7 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1506,6 +1507,45 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 </script>
+    // Initialize Supabase
+    const SUPABASE_URL = 'https://gueljqfdhxwateykund.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
+    // Hook into your existing login/register form submission
+    document.addEventListener("DOMContentLoaded", () => {
+        const form = document.querySelector("#auth-modal form") || document.querySelector("form");
+        if (!form) return;
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const emailInput = form.querySelector('input[type="email"]');
+            const passwordInput = form.querySelector('input[type="password"]');
+
+            if (!emailInput || !passwordInput) return;
+
+            const email = emailInput.value;
+            const password = passwordInput.value;
+
+            // Try logging in first
+            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+            if (error) {
+                // If account doesn't exist, sign them up automatically
+                let signUpRes = await supabase.auth.signUp({ email, password });
+                if (signUpRes.error) {
+                    alert("Auth Error: " + signUpRes.error.message);
+                } else {
+                    alert("Account created and logged in successfully!");
+                    location.reload();
+                }
+            } else {
+                alert("Successfully logged in!");
+                location.reload();
+            }
+        });
+    });
+</script>
+    
 </body>
 </html>
