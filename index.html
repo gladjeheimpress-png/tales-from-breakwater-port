@@ -7,7 +7,8 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Supabase JS Client -->
+    
+    <!-- Supabase JS Client v2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Google Fonts -->
@@ -123,8 +124,8 @@
                 <a href="#reader-section" class="hover:text-slate-100 transition">Read Book 1</a>
                 <a href="#collect" class="hover:text-slate-100 transition">Read & buy</a>
                 
-                <button type="button" onclick="openAuthModal()" class="px-4 py-1.5 border border-amber-500/50 hover:border-amber-400 text-amber-200 hover:text-white transition rounded">
-                    <span id="auth-btn-text">Log In</span>
+                <button id="auth-nav-btn" onclick="handleAuthNavClick()" class="px-4 py-1.5 border border-amber-500/50 hover:border-amber-400 text-amber-200 hover:text-white transition rounded">
+                    Log In
                 </button>
             </nav>
         </header>
@@ -445,7 +446,7 @@
         </section>
 
         <!-- SECTION: PRISON ISLAND -->
-        <section class="space-y-8 pt-4">
+        <section id="stories-cross" class="space-y-8 pt-4">
             <div class="grid lg:grid-cols-12 gap-12 items-start">
 
                 <!-- PRISON ISLAND INTRODUCTION -->
@@ -1145,7 +1146,7 @@
         </div>
     </section>
 
-    <!-- GRAND RECTANGULAR COMIC READER -->
+    <!-- GRAND RECTANGULAR COMIC READER (DYNAMIC 33-PAGE LOADER) -->
     <section id="reader-section" class="py-20 px-4 sm:px-8 w-full max-w-7xl mx-auto">
         <div class="space-y-6 text-center max-w-3xl mx-auto mb-8">
             <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">DIGITAL COMIC READER</span>
@@ -1154,7 +1155,6 @@
         </div>
 
         <div class="card-dark rounded-xl overflow-hidden shadow-2xl relative w-full border border-amber-500/30">
-            <!-- Reader Header Controls -->
             <div class="bg-[#0b0c10] border-b border-slate-800 px-6 py-4 flex flex-wrap items-center justify-between gap-4 font-sans-custom text-xs">
                 <div class="flex items-center space-x-4">
                     <span class="font-cinzel font-bold text-amber-200 tracking-wider">BOOK 1</span>
@@ -1163,32 +1163,23 @@
                 </div>
 
                 <div class="flex items-center space-x-3">
-                    <button type="button" id="reader-prev-btn" onclick="prevPage()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 rounded border border-slate-700 transition">
+                    <button onclick="prevPage()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 rounded border border-slate-700 transition">
                         &larr; Previous
                     </button>
-                    <button type="button" id="reader-next-btn" onclick="nextPage()" class="px-4 py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 rounded border border-amber-500/40 transition">
+                    <button onclick="nextPage()" class="px-4 py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 rounded border border-amber-500/40 transition">
                         Next &rarr;
                     </button>
                 </div>
             </div>
 
-            <!-- Viewport Area -->
             <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] flex items-center justify-center p-4 sm:p-8">
                 
-                <!-- Page Display Container -->
+                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 5) -->
                 <div id="unlocked-view" class="w-full h-full flex items-center justify-center">
-                    <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" onerror="handleImageError(this)" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
+                    <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
                 </div>
 
-                <!-- Fallback Warning Box if image fails to load -->
-                <div id="image-error-msg" class="hidden absolute inset-0 bg-[#08090c]/95 z-10 flex flex-col items-center justify-center p-8 text-center space-y-4">
-                    <div class="text-amber-400 font-cinzel text-xl">Image File Not Found</div>
-                    <p class="text-slate-300 text-sm max-w-md font-sans-custom">
-                        The browser couldn't find <code id="missing-filename" class="text-amber-200 bg-slate-900 px-2 py-1 rounded"></code> in your folder. Make sure your image files are in the same folder as this HTML file!
-                    </p>
-                </div>
-
-                <!-- Paywall Overlay -->
+                <!-- LOCKED PAYWALL OVERLAY (PAGES 6+) -->
                 <div id="locked-paywall" class="hidden absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-8 text-center space-y-6">
                     <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1203,7 +1194,7 @@
                     </p>
 
                     <div class="pt-4 flex flex-col sm:flex-row gap-4 font-sans-custom text-xs">
-                        <button type="button" onclick="openAuthModal()" class="px-8 py-3.5 text-slate-950 font-bold uppercase tracking-widest shadow-lg transition hover:opacity-90" style="background-color: var(--gold);">
+                        <button onclick="openAuthModal()" class="px-8 py-3.5 text-slate-950 font-bold uppercase tracking-widest shadow-lg transition hover:opacity-90" style="background-color: var(--gold);">
                             LOG IN / REGISTER
                         </button>
                         <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" class="px-8 py-3.5 border border-amber-500/60 text-amber-200 hover:bg-amber-900/30 uppercase tracking-widest font-bold transition">
@@ -1213,8 +1204,9 @@
                 </div>
             </div>
 
-            <!-- Thumbnail Bar Container -->
-            <div id="thumbnail-bar" class="bg-[#0b0c10] border-t border-slate-800 p-4 flex items-center justify-start sm:justify-center gap-2 overflow-x-auto font-sans-custom text-xs">
+            <!-- Dynamic Thumbnail Navigation Bar -->
+            <div id="thumbnail-bar" class="bg-[#0b0c10] border-t border-slate-800 p-4 flex items-center justify-start sm:justify-center space-x-2 overflow-x-auto font-sans-custom text-xs">
+                <!-- Dynamically generated buttons -->
             </div>
         </div>
     </section>
@@ -1222,23 +1214,26 @@
     <!-- AUTHENTICATION MODAL -->
     <div id="auth-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
         <div class="card-dark max-w-md w-full p-8 rounded-xl shadow-2xl space-y-6 relative border border-amber-500/40">
-            <button type="button" onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-xl font-bold">&times;</button>
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-xl font-bold">&times;</button>
             
             <div class="text-center space-y-2">
                 <span class="font-sans-custom text-[10px] tracking-[0.25em] uppercase text-amber-400">READER ACCESS</span>
                 <h3 class="text-3xl font-cormorant text-slate-100">Welcome Reader</h3>
             </div>
 
-            <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4 font-sans-custom text-xs">
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-4 font-sans-custom text-xs">
                 <div>
                     <label class="block text-slate-400 mb-1">EMAIL ADDRESS</label>
-                    <input type="email" id="auth-email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
+                    <input id="auth-email" type="email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
                     <label class="block text-slate-400 mb-1">PASSWORD</label>
-                    <input type="password" id="auth-password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
+                    <input id="auth-password" type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
-                <button type="submit" id="auth-submit-btn" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
+                
+                <p id="auth-status-msg" class="text-xs text-amber-400 hidden text-center"></p>
+
+                <button id="auth-submit-btn" type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
                     LOG IN / REGISTER
                 </button>
             </form>
@@ -1274,72 +1269,120 @@
         </div>
     </footer>
 
-    <!-- GLOBAL AUTH MODAL SCRIPT -->
+    <!-- SUPABASE AUTHENTICATION INTEGRATION SCRIPT -->
     <script>
-        function openAuthModal() {
-            if (window.currentUser) {
-                if (confirm(`Logged in as ${window.currentUser.email}. Do you want to log out?`)) {
-                    window.supabaseClient.auth.signOut().then(() => { window.location.reload(); });
-                }
+        // Initialize Supabase Client securely with Publishable Public Key
+        const SUPABASE_URL = 'https://gueljqfdhxewateykund.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUserSession = null;
+
+        // Check for existing session when page loads
+        async function checkCurrentSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            handleSessionChange(session);
+        }
+
+        // Handle session state updates (Logged in vs Logged out UI)
+        function handleSessionChange(session) {
+            currentUserSession = session;
+            const navBtn = document.getElementById('auth-nav-btn');
+
+            if (session) {
+                if (navBtn) navBtn.innerText = 'Log Out';
+                console.log('User logged in as:', session.user.email);
             } else {
-                const modal = document.getElementById('auth-modal');
-                if (modal) modal.classList.remove('hidden');
+                if (navBtn) navBtn.innerText = 'Log In';
+                console.log('No user session active.');
+            }
+            updateReader();
+        }
+
+        // Listen for authentication changes globally
+        supabase.auth.onAuthStateChange((_event, session) => {
+            handleSessionChange(session);
+        });
+
+        function handleAuthNavClick() {
+            if (currentUserSession) {
+                supabase.auth.signOut().then(() => {
+                    alert("You have logged out.");
+                });
+            } else {
+                openAuthModal();
             }
         }
 
-        function closeAuthModal() {
-            const modal = document.getElementById('auth-modal');
-            if (modal) modal.classList.add('hidden');
+        // Sign In / Register Handler
+        async function handleAuthSubmit(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+            const submitBtn = document.getElementById('auth-submit-btn');
+            const statusMsg = document.getElementById('auth-status-msg');
+
+            statusMsg.classList.remove('hidden');
+            statusMsg.innerText = 'Processing request...';
+            submitBtn.disabled = true;
+
+            // Step 1: Attempt Login
+            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+            // Step 2: If login fails because user doesn't exist, create an account automatically
+            if (error && error.message.includes('Invalid login credentials')) {
+                statusMsg.innerText = 'Account not found. Creating account...';
+                const signUpRes = await supabase.auth.signUp({ email, password });
+                
+                if (signUpRes.error) {
+                    statusMsg.innerText = 'Error: ' + signUpRes.error.message;
+                    submitBtn.disabled = false;
+                    return;
+                } else {
+                    alert('Registration successful! Please check your email to confirm your account.');
+                    closeAuthModal();
+                    submitBtn.disabled = false;
+                    return;
+                }
+            }
+
+            if (error) {
+                statusMsg.innerText = 'Error: ' + error.message;
+                submitBtn.disabled = false;
+            } else {
+                statusMsg.innerText = 'Success!';
+                closeAuthModal();
+                submitBtn.disabled = false;
+            }
         }
     </script>
 
-    <!-- CORE COMIC READER & SUPABASE SCRIPT -->
+    <!-- DYNAMIC 33-PAGE READER SCRIPT -->
     <script>
-        // Supabase Initialization (Cleaned up to avoid duplicate declarations)
-        const SUPABASE_URL = 'https://gueljqfdhxwateykund.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
-        
-        if (!window.supabaseClient) {
-            window.supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        }
-        const supabase = window.supabaseClient;
-
         const totalPages = 33;
-        const freeLimit = 5;
+        const freeLimit = 5; // Pages 1–5 are free
         let currentPage = 1;
-        let currentUser = null;
-        let hasUserPaid = false;
 
         function getPageFilename(pageNumber) {
             const padded = String(pageNumber).padStart(4, '0');
             return `ComicBook-Final_page-${padded}.jpg`;
         }
 
-        function handleImageError(imgElement) {
-            const errorMsg = document.getElementById('image-error-msg');
-            const missingText = document.getElementById('missing-filename');
-            if (errorMsg && missingText) {
-                missingText.innerText = imgElement.src.split('/').pop();
-                errorMsg.classList.remove('hidden');
-            }
-        }
-
         function initThumbnails() {
             const bar = document.getElementById('thumbnail-bar');
-            if (!bar) return;
             bar.innerHTML = '';
 
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.createElement('button');
-                btn.type = 'button';
                 btn.id = `thumb-btn-${i}`;
                 btn.onclick = () => goToPage(i);
                 
                 if (i <= freeLimit) {
-                    btn.className = "px-3 py-1.5 rounded bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200 shrink-0 transition font-sans-custom text-xs";
+                    btn.className = "px-3 py-1.5 rounded bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200 flex-shrink-0 transition";
                     btn.innerText = `Page ${i}`;
                 } else {
-                    btn.className = "px-3 py-1.5 rounded bg-amber-950/40 text-amber-400/70 border border-amber-900/50 hover:text-amber-300 shrink-0 transition font-sans-custom text-xs";
+                    btn.className = "px-3 py-1.5 rounded bg-amber-950/40 text-amber-400/70 border border-amber-900/50 hover:text-amber-300 flex-shrink-0 transition";
                     btn.innerText = `🔒 Page ${i}`;
                 }
                 
@@ -1348,28 +1391,29 @@
         }
 
         function updateReader() {
-            const counter = document.getElementById('page-counter');
-            if (counter) counter.innerText = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById('page-counter').innerText = `Page ${currentPage} of ${totalPages}`;
             
             const unlockedView = document.getElementById('unlocked-view');
             const lockedPaywall = document.getElementById('locked-paywall');
-            const errorMsg = document.getElementById('image-error-msg');
             const imgElement = document.getElementById('comic-page-img');
 
-            if (errorMsg) errorMsg.classList.add('hidden');
-
-            if (currentPage <= freeLimit || hasUserPaid) {
-                if (unlockedView) unlockedView.classList.remove('hidden');
-                if (lockedPaywall) lockedPaywall.classList.add('hidden');
-                if (imgElement) {
-                    imgElement.src = getPageFilename(currentPage);
-                }
+            // Free preview logic or authenticated access check
+            if (currentPage <= freeLimit) {
+                unlockedView.classList.remove('hidden');
+                lockedPaywall.classList.add('hidden');
+                imgElement.src = getPageFilename(currentPage);
             } else {
-                if (unlockedView) unlockedView.classList.add('hidden');
-                if (lockedPaywall) lockedPaywall.classList.remove('hidden');
+                // If user is logged in (Step 4 will add subscription checking here via Cloudflare Worker)
+                if (currentUserSession) {
+                    unlockedView.classList.remove('hidden');
+                    lockedPaywall.classList.add('hidden');
+                    imgElement.src = getPageFilename(currentPage);
+                } else {
+                    unlockedView.classList.add('hidden');
+                    lockedPaywall.classList.remove('hidden');
+                }
             }
 
-            // Thumbnail Highlight States
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.getElementById(`thumb-btn-${i}`);
                 if (!btn) continue;
@@ -1401,64 +1445,21 @@
             updateReader();
         }
 
-        async function checkUserAccess() {
-            try {
-                const { data: { session } } = await supabase.auth.getSession();
-                currentUser = session ? session.user : null;
-                window.currentUser = currentUser;
-                const authBtnText = document.getElementById('auth-btn-text');
-
-                if (currentUser) {
-                    hasUserPaid = true; 
-                    if (authBtnText) authBtnText.innerText = "Account / Log Out";
-                } else {
-                    hasUserPaid = false;
-                    if (authBtnText) authBtnText.innerText = "Log In";
-                }
-            } catch (err) {
-                console.log("Auth session check skipped or failed:", err);
-            }
-            updateReader();
+        function openAuthModal() {
+            document.getElementById('auth-modal').classList.remove('hidden');
         }
 
-        async function handleAuthSubmit(event) {
-            event.preventDefault();
-            const email = document.getElementById('auth-email').value;
-            const password = document.getElementById('auth-password').value;
-            const submitBtn = document.getElementById('auth-submit-btn');
-            
-            submitBtn.innerText = "PROCESSING...";
-            submitBtn.disabled = true;
-
-            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
-            if (error) {
-                let signUpRes = await supabase.auth.signUp({ email, password });
-                if (signUpRes.error) {
-                    alert("Auth error: " + signUpRes.error.message);
-                    submitBtn.innerText = "LOG IN / REGISTER";
-                    submitBtn.disabled = false;
-                    return;
-                } else {
-                    alert("Account registered & logged in!");
-                }
-            } else {
-                alert("Logged in!");
-            }
-
-            submitBtn.innerText = "LOG IN / REGISTER";
-            submitBtn.disabled = false;
-            closeAuthModal();
-            checkUserAccess();
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener('DOMContentLoaded', () => {
             initThumbnails();
-            checkUserAccess();
+            checkCurrentSession();
         });
     </script>
 
-    <!-- CAROUSEL SCRIPT -->
+    <!-- Carousel functionality -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {
         const carousel = document.getElementById("cast-carousel");
@@ -1466,25 +1467,43 @@
         const nextButton = document.getElementById("cast-next");
         const dotsContainer = document.getElementById("cast-dots");
 
-        if (!carousel || !prevButton || !nextButton || !dotsContainer) return;
+        if (!carousel || !prevButton || !nextButton || !dotsContainer) {
+            return;
+        }
 
-        const slides = Array.from(carousel.querySelectorAll("article.character-card"));
+        const slides = Array.from(
+            carousel.querySelectorAll(".cast-slide, article.character-card")
+        );
+
         let activeIndex = 0;
         const dots = [];
 
         slides.forEach((slide, index) => {
             const dot = document.createElement("button");
+
             dot.type = "button";
-            dot.className = "w-2.5 h-2.5 rounded-full border border-amber-400 transition-all duration-300 hover:scale-125";
-            dot.setAttribute("aria-label", `Go to character ${index + 1}`);
-            dot.addEventListener("click", () => { scrollToSlide(index); });
+            dot.className =
+                "w-2.5 h-2.5 rounded-full border border-amber-400 " +
+                "transition-all duration-300 hover:scale-125";
+
+            dot.setAttribute(
+                "aria-label",
+                `Go to character ${index + 1}`
+            );
+
+            dot.addEventListener("click", () => {
+                scrollToSlide(index);
+            });
+
             dotsContainer.appendChild(dot);
             dots.push(dot);
         });
 
         function scrollToSlide(index) {
             const slide = slides[index];
+
             if (!slide) return;
+
             carousel.scrollTo({
                 left: slide.offsetLeft - slides[0].offsetLeft,
                 behavior: "smooth"
@@ -1496,7 +1515,11 @@
             let closestDistance = Infinity;
 
             slides.forEach((slide, index) => {
-                const distance = Math.abs(slide.getBoundingClientRect().left - carousel.getBoundingClientRect().left);
+                const distance = Math.abs(
+                    slide.getBoundingClientRect().left -
+                    carousel.getBoundingClientRect().left
+                );
+
                 if (distance < closestDistance) {
                     closestDistance = distance;
                     closestIndex = index;
@@ -1504,27 +1527,46 @@
             });
 
             activeIndex = closestIndex;
+
             dots.forEach((dot, index) => {
                 const isActive = index === activeIndex;
+
                 dot.classList.toggle("bg-amber-400", isActive);
                 dot.classList.toggle("scale-125", isActive);
                 dot.classList.toggle("bg-transparent", !isActive);
+
+                if (isActive) {
+                    dot.setAttribute("aria-current", "true");
+                } else {
+                    dot.removeAttribute("aria-current");
+                }
             });
 
             const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
             prevButton.disabled = carousel.scrollLeft <= 2;
             nextButton.disabled = carousel.scrollLeft >= maxScroll - 2;
         }
 
-        prevButton.addEventListener("click", () => { scrollToSlide(Math.max(0, activeIndex - 1)); });
-        nextButton.addEventListener("click", () => { scrollToSlide(Math.min(slides.length - 1, activeIndex + 1)); });
-        carousel.addEventListener("scroll", updateCarousel, { passive: true });
+        prevButton.addEventListener("click", () => {
+            scrollToSlide(Math.max(0, activeIndex - 1));
+        });
+
+        nextButton.addEventListener("click", () => {
+            scrollToSlide(Math.min(slides.length - 1, activeIndex + 1));
+        });
+
+        carousel.addEventListener("scroll", updateCarousel, {
+            passive: true
+        });
+
         window.addEventListener("resize", updateCarousel);
+
         updateCarousel();
     });
     </script>
 
-    <!-- ACCORDION SCRIPT -->
+    <!-- Expand/collapse functionality -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {
         const toggles = document.querySelectorAll(".story-toggle");
@@ -1537,7 +1579,9 @@
             if (!content || !arrow) return;
 
             button.addEventListener("click", () => {
-                const isExpanded = button.getAttribute("aria-expanded") === "true";
+                const isExpanded =
+                    button.getAttribute("aria-expanded") === "true";
+
                 button.setAttribute("aria-expanded", String(!isExpanded));
                 content.setAttribute("aria-hidden", String(isExpanded));
 
