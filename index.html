@@ -1177,7 +1177,15 @@
                 
                 <!-- Page Display Container -->
                 <div id="unlocked-view" class="w-full h-full flex items-center justify-center">
-                    <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
+                    <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" onerror="handleImageError(this)" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
+                </div>
+
+                <!-- Fallback Warning Box if image fails to load -->
+                <div id="image-error-msg" class="hidden absolute inset-0 bg-[#08090c]/95 z-10 flex flex-col items-center justify-center p-8 text-center space-y-4">
+                    <div class="text-amber-400 font-cinzel text-xl">Image File Not Found</div>
+                    <p class="text-slate-300 text-sm max-w-md font-sans-custom">
+                        The browser couldn't find <code id="missing-filename" class="text-amber-200 bg-slate-900 px-2 py-1 rounded"></code> in your folder. Make sure your image filenames match your code!
+                    </p>
                 </div>
 
                 <!-- Paywall Overlay -->
@@ -1299,9 +1307,20 @@
         let currentUser = null;
         let hasUserPaid = false;
 
+        // NOTE: If your image files in your folder are named differently (e.g. without 000 prefix, like page-1.jpg), 
+        // you can change this function to return whatever your exact naming convention is.
         function getPageFilename(pageNumber) {
             const padded = String(pageNumber).padStart(4, '0');
             return `ComicBook-Final_page-${padded}.jpg`;
+        }
+
+        function handleImageError(imgElement) {
+            const errorMsg = document.getElementById('image-error-msg');
+            const missingText = document.getElementById('missing-filename');
+            if (errorMsg && missingText) {
+                missingText.innerText = imgElement.src.split('/').pop();
+                errorMsg.classList.remove('hidden');
+            }
         }
 
         function initThumbnails() {
@@ -1333,7 +1352,10 @@
             
             const unlockedView = document.getElementById('unlocked-view');
             const lockedPaywall = document.getElementById('locked-paywall');
+            const errorMsg = document.getElementById('image-error-msg');
             const imgElement = document.getElementById('comic-page-img');
+
+            if (errorMsg) errorMsg.classList.add('hidden');
 
             if (currentPage <= freeLimit || hasUserPaid) {
                 if (unlockedView) unlockedView.classList.remove('hidden');
@@ -1534,5 +1556,3 @@
 
 </body>
 </html>
-
-```
