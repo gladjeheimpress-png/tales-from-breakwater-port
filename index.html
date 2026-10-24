@@ -7,6 +7,8 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Client v2 CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1265,6 +1267,63 @@
 
     <!-- DYNAMIC 33-PAGE READER SCRIPT -->
     <script>
+        // Initialize Supabase Client
+        const SUPABASE_URL = 'https://gueljqfdhxewateykund.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        let currentUserSession = null;
+
+        // Check for existing user session on load
+        async function checkCurrentSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            handleSessionChange(session);
+        }
+
+        // Global session state change handler
+        function handleSessionChange(session) {
+            currentUserSession = session;
+            updateReader();
+        }
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            handleSessionChange(session);
+        });
+
+        // Sign In & Sign Up submit handler
+        async function handleAuthSubmit(event) {
+            event.preventDefault();
+            
+            const emailInputs = event.target.querySelectorAll('input[type="email"]');
+            const passwordInputs = event.target.querySelectorAll('input[type="password"]');
+            
+            const email = emailInputs[0] ? emailInputs[0].value : '';
+            const password = passwordInputs[0] ? passwordInputs[0].value : '';
+
+            // Attempt Login
+            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+            // If user doesn't exist, create account
+            if (error && error.message.toLowerCase().includes('invalid login credentials')) {
+                const signUpRes = await supabase.auth.signUp({ email, password });
+                
+                if (signUpRes.error) {
+                    alert('Error: ' + signUpRes.error.message);
+                    return;
+                } else {
+                    alert('Registration successful! Please check your email to confirm your account.');
+                    closeAuthModal();
+                    return;
+                }
+            }
+
+            if (error) {
+                alert('Error: ' + error.message);
+            } else {
+                alert('Logged in successfully!');
+                closeAuthModal();
+            }
+        }
         const totalPages = 33;
         const freeLimit = 5; // Pages 1–5 are free
         let currentPage = 1;
@@ -1304,13 +1363,16 @@
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            if (currentPage <= freeLimit) {
-                unlockedView.classList.remove('hidden');
-                lockedPaywall.classList.add('hidden');
+            const isFreePage = currentPage <= freeLimit;
+            const isAuthorized = isFreePage || Boolean(currentUserSession);
+
+            if (isAuthorized) {
+                unlockedView.style.display = 'flex';
+                lockedPaywall.style.display = 'none';
                 imgElement.src = getPageFilename(currentPage);
             } else {
-                unlockedView.classList.add('hidden');
-                lockedPaywall.classList.remove('hidden');
+                unlockedView.style.display = 'none';
+                lockedPaywall.style.display = 'flex';
             }
 
             // Update active thumbnail state
@@ -1362,7 +1424,7 @@
         // Initialize thumbnails on load
         window.addEventListener('DOMContentLoaded', () => {
             initThumbnails();
-            updateReader();
+            checkCurrentSession();
         });
     </script>
 
