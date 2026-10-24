@@ -1172,6 +1172,46 @@
                 </div>
             </div>
 
+            <!-- FIXED READER VIEWPORT CONTAINER -->
+            <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] p-4 sm:p-8">
+                
+                <!-- UNLOCKED PAGES VIEW (FULL SIZE IMAGE) -->
+                <div id="unlocked-view" class="w-full h-full min-h-[600px] flex items-center justify-center">
+                    <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
+                </div>
+
+                <!-- LOCKED PAYWALL OVERLAY (PAGES 6+) -->
+                <div id="locked-paywall" style="display: none;" class="absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-30 flex flex-col items-center justify-center p-8 text-center space-y-6">
+                    <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+
+                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase text-amber-400">PREVIEW LIMIT REACHED</span>
+                    <h3 class="text-3xl sm:text-5xl font-cormorant text-slate-100">Unlock the Full Tale</h3>
+                    <p class="text-slate-300 text-base max-w-md font-light">
+                        You've reached page 6. Log in or subscribe to get full access to all 33 pages of Book 1 and support future releases!
+                    </p>
+
+                    <div class="pt-4 flex flex-col sm:flex-row gap-4 font-sans-custom text-xs">
+                        <button onclick="openAuthModal()" class="px-8 py-3.5 text-slate-950 font-bold uppercase tracking-widest shadow-lg transition hover:opacity-90" style="background-color: var(--gold);">
+                            LOG IN / REGISTER
+                        </button>
+                        <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" class="px-8 py-3.5 border border-amber-500/60 text-amber-200 hover:bg-amber-900/30 uppercase tracking-widest font-bold transition">
+                            SUBSCRIBE NOW
+                        </a>
+                    </div>
+                </div>
+            </div>
+                
+            <!-- Dynamic Thumbnail Navigation Bar -->
+            <div id="thumbnail-bar" class="bg-[#0b0c10] border-t border-slate-800 p-4 flex items-center justify-start sm:justify-center space-x-2 overflow-x-auto font-sans-custom text-xs">
+                <!-- Dynamically generated buttons -->
+            </div>
+        </div>
+    </section>
+
             <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] flex items-center justify-center p-4 sm:p-8">
                 
                 <!-- UNLOCKED PAGES VIEW (PAGES 1 - 33 IMAGE CONTAINER) -->
