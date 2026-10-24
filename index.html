@@ -1423,16 +1423,9 @@
             document.getElementById('auth-modal').classList.add('hidden');
         }
 
-        function handleAuthSubmit(event) {
-            event.preventDefault();
-            alert("Auth framework ready! Next step: connecting Supabase for real user sign-ins.");
-            closeAuthModal();
-        }
-
         // Initialize thumbnails on load
         window.addEventListener('DOMContentLoaded', () => {
             initThumbnails();
-            updateReader();
             checkCurrentSession();
         });
     </script>
