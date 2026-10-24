@@ -1399,29 +1399,26 @@
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            // Free preview (Pages 1-5)
             if (currentPage <= freeLimit) {
-                unlockedView.classList.remove('hidden');
-                lockedPaywall.classList.add('hidden');
-                lockedPaywall.classList.remove('flex');
+                // Free Preview Pages (1-5)
+                unlockedView.style.display = 'flex';
+                lockedPaywall.style.display = 'none';
                 imgElement.src = getPageFilename(currentPage);
             } else {
-                // Locked Pages (Page 6+)
+                // Pages 6+
                 if (currentUserSession) {
-                    // User is signed in -> Show page content
-                    unlockedView.classList.remove('hidden');
-                    lockedPaywall.classList.add('hidden');
-                    lockedPaywall.classList.remove('flex');
+                    // Logged in user -> Show image
+                    unlockedView.style.display = 'flex';
+                    lockedPaywall.style.display = 'none';
                     imgElement.src = getPageFilename(currentPage);
                 } else {
-                    // User NOT signed in -> Show Lock Overlay with buttons
-                    unlockedView.classList.add('hidden');
-                    lockedPaywall.classList.remove('hidden');
-                    lockedPaywall.classList.add('flex');
+                    // Non-logged in user -> Hide image & Show paywall modal overlay
+                    unlockedView.style.display = 'none';
+                    lockedPaywall.style.display = 'flex';
                 }
             }
 
-            // Update active thumbnail highlighting
+            // Highlight thumbnail bar button
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.getElementById(`thumb-btn-${i}`);
                 if (!btn) continue;
@@ -1433,7 +1430,6 @@
                 }
             }
         }
-
         function nextPage() {
             if (currentPage < totalPages) {
                 currentPage++;
