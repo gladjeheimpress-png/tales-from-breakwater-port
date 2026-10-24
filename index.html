@@ -8,9 +8,6 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Supabase JS Client v2 CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -124,7 +121,7 @@
                 <a href="#reader-section" class="hover:text-slate-100 transition">Read Book 1</a>
                 <a href="#collect" class="hover:text-slate-100 transition">Read & buy</a>
                 
-                <button id="auth-nav-btn" onclick="handleAuthNavClick()" class="px-4 py-1.5 border border-amber-500/50 hover:border-amber-400 text-amber-200 hover:text-white transition rounded">
+                <button onclick="openAuthModal()" class="px-4 py-1.5 border border-amber-500/50 hover:border-amber-400 text-amber-200 hover:text-white transition rounded">
                     Log In
                 </button>
             </nav>
@@ -883,7 +880,7 @@
 
         </section>
 
-        <!-- SECTION: JOURNAL -->
+                <!-- SECTION: JOURNAL -->
         <section id="journal" class="space-y-8 pt-4">
 
             <div class="space-y-2 border-b border-slate-800/80 pb-6">
@@ -1172,16 +1169,15 @@
                 </div>
             </div>
 
-            <!-- READER VIEWPORT CONTAINER -->
-            <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] p-4 sm:p-8">
+            <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] flex items-center justify-center p-4 sm:p-8">
                 
-                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 33 IMAGE CONTAINER) -->
-                <div id="unlocked-view" class="w-full h-full min-h-[600px] flex items-center justify-center">
+                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 5) -->
+                <div id="unlocked-view" class="w-full h-full flex items-center justify-center">
                     <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
                 </div>
 
                 <!-- LOCKED PAYWALL OVERLAY (PAGES 6+) -->
-                <div id="locked-paywall" style="display: none;" class="absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-30 flex-col items-center justify-center p-8 text-center space-y-6">
+                <div id="locked-paywall" class="hidden absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-8 text-center space-y-6">
                     <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
@@ -1204,7 +1200,7 @@
                     </div>
                 </div>
             </div>
-                
+
             <!-- Dynamic Thumbnail Navigation Bar -->
             <div id="thumbnail-bar" class="bg-[#0b0c10] border-t border-slate-800 p-4 flex items-center justify-start sm:justify-center space-x-2 overflow-x-auto font-sans-custom text-xs">
                 <!-- Dynamically generated buttons -->
@@ -1225,16 +1221,13 @@
             <form onsubmit="handleAuthSubmit(event)" class="space-y-4 font-sans-custom text-xs">
                 <div>
                     <label class="block text-slate-400 mb-1">EMAIL ADDRESS</label>
-                    <input id="auth-email" type="email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
+                    <input type="email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
                     <label class="block text-slate-400 mb-1">PASSWORD</label>
-                    <input id="auth-password" type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
+                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
-                
-                <p id="auth-status-msg" class="text-xs text-amber-400 hidden text-center"></p>
-
-                <button id="auth-submit-btn" type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
+                <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
                     LOG IN / REGISTER
                 </button>
             </form>
@@ -1270,106 +1263,19 @@
         </div>
     </footer>
 
-    <!-- SUPABASE AUTHENTICATION INTEGRATION SCRIPT -->
-    <script>
-        // Initialize Supabase Client securely with Publishable Public Key
-        const SUPABASE_URL = 'https://gueljqfdhxewateykund.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-        let currentUserSession = null;
-
-        // Check for existing session when page loads
-        async function checkCurrentSession() {
-            const { data: { session } } = await supabase.auth.getSession();
-            handleSessionChange(session);
-        }
-
-        // Handle session state updates (Logged in vs Logged out UI)
-        function handleSessionChange(session) {
-            currentUserSession = session;
-            const navBtn = document.getElementById('auth-nav-btn');
-
-            if (session) {
-                if (navBtn) navBtn.innerText = 'Log Out';
-                console.log('User logged in as:', session.user.email);
-            } else {
-                if (navBtn) navBtn.innerText = 'Log In';
-                console.log('No user session active.');
-            }
-            updateReader();
-        }
-
-        // Listen for authentication changes globally
-        supabase.auth.onAuthStateChange((_event, session) => {
-            handleSessionChange(session);
-        });
-
-        function handleAuthNavClick() {
-            if (currentUserSession) {
-                supabase.auth.signOut().then(() => {
-                    alert("You have logged out.");
-                });
-            } else {
-                openAuthModal();
-            }
-        }
-
-        // Sign In / Register Handler
-        async function handleAuthSubmit(event) {
-            event.preventDefault();
-            
-            const email = document.getElementById('auth-email').value;
-            const password = document.getElementById('auth-password').value;
-            const submitBtn = document.getElementById('auth-submit-btn');
-            const statusMsg = document.getElementById('auth-status-msg');
-
-            statusMsg.classList.remove('hidden');
-            statusMsg.innerText = 'Processing request...';
-            submitBtn.disabled = true;
-
-            // Step 1: Attempt Login
-            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
-
-            // Step 2: If login fails because user doesn't exist, create an account automatically
-            if (error && error.message.includes('Invalid login credentials')) {
-                statusMsg.innerText = 'Account not found. Creating account...';
-                const signUpRes = await supabase.auth.signUp({ email, password });
-                
-                if (signUpRes.error) {
-                    statusMsg.innerText = 'Error: ' + signUpRes.error.message;
-                    submitBtn.disabled = false;
-                    return;
-                } else {
-                    alert('Registration successful! Please check your email to confirm your account.');
-                    closeAuthModal();
-                    submitBtn.disabled = false;
-                    return;
-                }
-            }
-
-            if (error) {
-                statusMsg.innerText = 'Error: ' + error.message;
-                submitBtn.disabled = false;
-            } else {
-                statusMsg.innerText = 'Success!';
-                closeAuthModal();
-                submitBtn.disabled = false;
-            }
-        }
-    </script>
-
     <!-- DYNAMIC 33-PAGE READER SCRIPT -->
     <script>
         const totalPages = 33;
         const freeLimit = 5; // Pages 1–5 are free
         let currentPage = 1;
 
+        // Automatically generates filenames: ComicBook-Final_page-0001.jpg ... ComicBook-Final_page-0033.jpg
         function getPageFilename(pageNumber) {
             const padded = String(pageNumber).padStart(4, '0');
             return `ComicBook-Final_page-${padded}.jpg`;
         }
 
+        // Build thumbnail buttons dynamically
         function initThumbnails() {
             const bar = document.getElementById('thumbnail-bar');
             bar.innerHTML = '';
@@ -1392,30 +1298,22 @@
         }
 
         function updateReader() {
-            const pageCounter = document.getElementById('page-counter');
-            if (pageCounter) {
-                pageCounter.innerText = `Page ${currentPage} of ${totalPages}`;
-            }
+            document.getElementById('page-counter').innerText = `Page ${currentPage} of ${totalPages}`;
             
             const unlockedView = document.getElementById('unlocked-view');
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            const isFreePage = currentPage <= freeLimit;
-            const isAuthorized = isFreePage || Boolean(currentUserSession);
-
-            if (isAuthorized) {
-                // Show comic image, hide paywall overlay
-                unlockedView.style.display = 'flex';
-                lockedPaywall.style.display = 'none';
+            if (currentPage <= freeLimit) {
+                unlockedView.classList.remove('hidden');
+                lockedPaywall.classList.add('hidden');
                 imgElement.src = getPageFilename(currentPage);
             } else {
-                // Hide image container & show paywall modal overlay
-                unlockedView.style.display = 'none';
-                lockedPaywall.style.display = 'flex';
+                unlockedView.classList.add('hidden');
+                lockedPaywall.classList.remove('hidden');
             }
 
-            // Highlight thumbnail bar button
+            // Update active thumbnail state
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.getElementById(`thumb-btn-${i}`);
                 if (!btn) continue;
@@ -1427,7 +1325,7 @@
                 }
             }
         }
-        
+
         function nextPage() {
             if (currentPage < totalPages) {
                 currentPage++;
@@ -1455,151 +1353,159 @@
             document.getElementById('auth-modal').classList.add('hidden');
         }
 
+        function handleAuthSubmit(event) {
+            event.preventDefault();
+            alert("Auth framework ready! Next step: connecting Supabase for real user sign-ins.");
+            closeAuthModal();
+        }
+
+        // Initialize thumbnails on load
         window.addEventListener('DOMContentLoaded', () => {
             initThumbnails();
-            checkCurrentSession();
+            updateReader();
         });
     </script>
 
     <!-- Carousel functionality -->
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const carousel = document.getElementById("cast-carousel");
-        const prevButton = document.getElementById("cast-prev");
-        const nextButton = document.getElementById("cast-next");
-        const dotsContainer = document.getElementById("cast-dots");
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.getElementById("cast-carousel");
+    const prevButton = document.getElementById("cast-prev");
+    const nextButton = document.getElementById("cast-next");
+    const dotsContainer = document.getElementById("cast-dots");
 
-        if (!carousel || !prevButton || !nextButton || !dotsContainer) {
-            return;
-        }
+    if (!carousel || !prevButton || !nextButton || !dotsContainer) {
+        return;
+    }
 
-        const slides = Array.from(
-            carousel.querySelectorAll(".cast-slide, article.character-card")
+    const slides = Array.from(
+        carousel.querySelectorAll(".cast-slide, article.character-card")
+    );
+
+    let activeIndex = 0;
+    const dots = [];
+
+    // Create one navigation dot per character
+    slides.forEach((slide, index) => {
+        const dot = document.createElement("button");
+
+        dot.type = "button";
+        dot.className =
+            "w-2.5 h-2.5 rounded-full border border-amber-400 " +
+            "transition-all duration-300 hover:scale-125";
+
+        dot.setAttribute(
+            "aria-label",
+            `Go to character ${index + 1}`
         );
 
-        let activeIndex = 0;
-        const dots = [];
+        dot.addEventListener("click", () => {
+            scrollToSlide(index);
+        });
+
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+    });
+
+    function scrollToSlide(index) {
+        const slide = slides[index];
+
+        if (!slide) return;
+
+        carousel.scrollTo({
+            left: slide.offsetLeft - slides[0].offsetLeft,
+            behavior: "smooth"
+        });
+    }
+
+    function updateCarousel() {
+        let closestIndex = 0;
+        let closestDistance = Infinity;
 
         slides.forEach((slide, index) => {
-            const dot = document.createElement("button");
-
-            dot.type = "button";
-            dot.className =
-                "w-2.5 h-2.5 rounded-full border border-amber-400 " +
-                "transition-all duration-300 hover:scale-125";
-
-            dot.setAttribute(
-                "aria-label",
-                `Go to character ${index + 1}`
+            const distance = Math.abs(
+                slide.getBoundingClientRect().left -
+                carousel.getBoundingClientRect().left
             );
 
-            dot.addEventListener("click", () => {
-                scrollToSlide(index);
-            });
-
-            dotsContainer.appendChild(dot);
-            dots.push(dot);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
         });
 
-        function scrollToSlide(index) {
-            const slide = slides[index];
+        activeIndex = closestIndex;
 
-            if (!slide) return;
+        dots.forEach((dot, index) => {
+            const isActive = index === activeIndex;
 
-            carousel.scrollTo({
-                left: slide.offsetLeft - slides[0].offsetLeft,
-                behavior: "smooth"
-            });
-        }
+            dot.classList.toggle("bg-amber-400", isActive);
+            dot.classList.toggle("scale-125", isActive);
+            dot.classList.toggle("bg-transparent", !isActive);
 
-        function updateCarousel() {
-            let closestIndex = 0;
-            let closestDistance = Infinity;
-
-            slides.forEach((slide, index) => {
-                const distance = Math.abs(
-                    slide.getBoundingClientRect().left -
-                    carousel.getBoundingClientRect().left
-                );
-
-                if (distance < closestDistance) {
-                    closestDistance = distance;
-                    closestIndex = index;
-                }
-            });
-
-            activeIndex = closestIndex;
-
-            dots.forEach((dot, index) => {
-                const isActive = index === activeIndex;
-
-                dot.classList.toggle("bg-amber-400", isActive);
-                dot.classList.toggle("scale-125", isActive);
-                dot.classList.toggle("bg-transparent", !isActive);
-
-                if (isActive) {
-                    dot.setAttribute("aria-current", "true");
-                } else {
-                    dot.removeAttribute("aria-current");
-                }
-            });
-
-            const maxScroll = carousel.scrollWidth - carousel.clientWidth;
-
-            prevButton.disabled = carousel.scrollLeft <= 2;
-            nextButton.disabled = carousel.scrollLeft >= maxScroll - 2;
-        }
-
-        prevButton.addEventListener("click", () => {
-            scrollToSlide(Math.max(0, activeIndex - 1));
+            if (isActive) {
+                dot.setAttribute("aria-current", "true");
+            } else {
+                dot.removeAttribute("aria-current");
+            }
         });
 
-        nextButton.addEventListener("click", () => {
-            scrollToSlide(Math.min(slides.length - 1, activeIndex + 1));
-        });
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
 
-        carousel.addEventListener("scroll", updateCarousel, {
-            passive: true
-        });
+        prevButton.disabled = carousel.scrollLeft <= 2;
+        nextButton.disabled = carousel.scrollLeft >= maxScroll - 2;
+    }
 
-        window.addEventListener("resize", updateCarousel);
-
-        updateCarousel();
+    prevButton.addEventListener("click", () => {
+        scrollToSlide(Math.max(0, activeIndex - 1));
     });
-    </script>
 
-    <!-- Expand/collapse functionality -->
-    <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const toggles = document.querySelectorAll(".story-toggle");
+    nextButton.addEventListener("click", () => {
+        scrollToSlide(Math.min(slides.length - 1, activeIndex + 1));
+    });
 
-        toggles.forEach((button) => {
-            const contentId = button.getAttribute("aria-controls");
-            const content = document.getElementById(contentId);
-            const arrow = button.querySelector(".story-arrow");
+    carousel.addEventListener("scroll", updateCarousel, {
+        passive: true
+    });
 
-            if (!content || !arrow) return;
+    window.addEventListener("resize", updateCarousel);
 
-            button.addEventListener("click", () => {
-                const isExpanded =
-                    button.getAttribute("aria-expanded") === "true";
+    updateCarousel();
+});
+</script>
 
-                button.setAttribute("aria-expanded", String(!isExpanded));
-                content.setAttribute("aria-hidden", String(isExpanded));
+<!-- Expand/collapse functionality -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const toggles = document.querySelectorAll(".story-toggle");
 
-                if (isExpanded) {
-                    content.classList.remove("grid-rows-[1fr]");
-                    content.classList.add("grid-rows-[0fr]", "opacity-0");
-                    arrow.classList.remove("rotate-180");
-                } else {
-                    content.classList.remove("grid-rows-[0fr]", "opacity-0");
-                    content.classList.add("grid-rows-[1fr]");
-                    arrow.classList.add("rotate-180");
-                }
-            });
+    toggles.forEach((button) => {
+        const contentId = button.getAttribute("aria-controls");
+        const content = document.getElementById(contentId);
+        const arrow = button.querySelector(".story-arrow");
+
+        if (!content || !arrow) return;
+
+        button.addEventListener("click", () => {
+            const isExpanded =
+                button.getAttribute("aria-expanded") === "true";
+
+            button.setAttribute("aria-expanded", String(!isExpanded));
+            content.setAttribute("aria-hidden", String(isExpanded));
+
+            if (isExpanded) {
+                content.classList.remove("grid-rows-[1fr]");
+                content.classList.add("grid-rows-[0fr]", "opacity-0");
+                arrow.classList.remove("rotate-180");
+            } else {
+                content.classList.remove("grid-rows-[0fr]", "opacity-0");
+                content.classList.add("grid-rows-[1fr]");
+                arrow.classList.add("rotate-180");
+            }
         });
     });
-    </script>
+});
+</script>
 
 </body>
 </html>
