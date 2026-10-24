@@ -7,6 +7,8 @@
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -122,7 +124,7 @@
                 <a href="#collect" class="hover:text-slate-100 transition">Read & buy</a>
                 
                 <button onclick="openAuthModal()" class="px-4 py-1.5 border border-amber-500/50 hover:border-amber-400 text-amber-200 hover:text-white transition rounded">
-                    Log In
+                    <span id="auth-btn-text">Log In</span>
                 </button>
             </nav>
         </header>
@@ -1218,14 +1220,14 @@
                 <h3 class="text-3xl font-cormorant text-slate-100">Welcome Reader</h3>
             </div>
 
-            <form onsubmit="handleAuthSubmit(event)" class="space-y-4 font-sans-custom text-xs">
+            <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-4 font-sans-custom text-xs">
                 <div>
                     <label class="block text-slate-400 mb-1">EMAIL ADDRESS</label>
-                    <input type="email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
+                    <input type="email" id="auth-email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
                     <label class="block text-slate-400 mb-1">PASSWORD</label>
-                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
+                    <input type="password" id="auth-password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
                 <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
                     LOG IN / REGISTER
@@ -1263,11 +1265,18 @@
         </div>
     </footer>
 
-    <!-- DYNAMIC 33-PAGE READER SCRIPT -->
+    <!-- SUPABASE & DYNAMIC 33-PAGE READER SCRIPT -->
     <script>
+        // Initialize Supabase Client
+        const SUPABASE_URL = 'https://gueljqfdhxwateykund.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
         const totalPages = 33;
         const freeLimit = 5; // Pages 1–5 are free
         let currentPage = 1;
+        let currentUser = null;
+        let hasUserPaid = false;
 
         // Automatically generates filenames: ComicBook-Final_page-0001.jpg ... ComicBook-Final_page-0033.jpg
         function getPageFilename(pageNumber) {
@@ -1278,6 +1287,7 @@
         // Build thumbnail buttons dynamically
         function initThumbnails() {
             const bar = document.getElementById('thumbnail-bar');
+            if (!bar) return;
             bar.innerHTML = '';
 
             for (let i = 1; i <= totalPages; i++) {
@@ -1286,10 +1296,10 @@
                 btn.onclick = () => goToPage(i);
                 
                 if (i <= freeLimit) {
-                    btn.className = "px-3 py-1.5 rounded bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200 flex-shrink-0 transition";
+                    btn.className = "px-3 py-1.5 rounded bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200 flex-shrink-0 transition font-sans-custom text-xs";
                     btn.innerText = `Page ${i}`;
                 } else {
-                    btn.className = "px-3 py-1.5 rounded bg-amber-950/40 text-amber-400/70 border border-amber-900/50 hover:text-amber-300 flex-shrink-0 transition";
+                    btn.className = "px-3 py-1.5 rounded bg-amber-950/40 text-amber-400/70 border border-amber-900/50 hover:text-amber-300 flex-shrink-0 transition font-sans-custom text-xs";
                     btn.innerText = `🔒 Page ${i}`;
                 }
                 
@@ -1297,20 +1307,42 @@
             }
         }
 
+        async function checkUserAccess() {
+            const { data: { session } } = await supabase.auth.getSession();
+            currentUser = session ? session.user : null;
+            const authBtn = document.querySelector("nav button[onclick='openAuthModal()']");
+
+            if (currentUser) {
+                const { data } = await supabase
+                    .from('profiles')
+                    .select('has_access')
+                    .eq('id', currentUser.id)
+                    .single();
+
+                hasUserPaid = (data && data.has_access) ? true : false;
+                if (authBtn) authBtn.innerText = "Account / Log Out";
+            } else {
+                hasUserPaid = false;
+                if (authBtn) authBtn.innerText = "Log In";
+            }
+            updateReader();
+        }
+
         function updateReader() {
-            document.getElementById('page-counter').innerText = `Page ${currentPage} of ${totalPages}`;
+            const counter = document.getElementById('page-counter');
+            if (counter) counter.innerText = `Page ${currentPage} of ${totalPages}`;
             
             const unlockedView = document.getElementById('unlocked-view');
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            if (currentPage <= freeLimit) {
-                unlockedView.classList.remove('hidden');
-                lockedPaywall.classList.add('hidden');
-                imgElement.src = getPageFilename(currentPage);
+            if (currentPage <= freeLimit || hasUserPaid) {
+                if (unlockedView) unlockedView.classList.remove('hidden');
+                if (lockedPaywall) lockedPaywall.classList.add('hidden');
+                if (imgElement) imgElement.src = getPageFilename(currentPage);
             } else {
-                unlockedView.classList.add('hidden');
-                lockedPaywall.classList.remove('hidden');
+                if (unlockedView) unlockedView.classList.add('hidden');
+                if (lockedPaywall) lockedPaywall.classList.remove('hidden');
             }
 
             // Update active thumbnail state
@@ -1346,23 +1378,48 @@
         }
 
         function openAuthModal() {
-            document.getElementById('auth-modal').classList.remove('hidden');
+            if (currentUser) {
+                if (confirm(`Logged in as ${currentUser.email}. Do you want to log out?`)) {
+                    supabase.auth.signOut().then(() => { window.location.reload(); });
+                }
+            } else {
+                const modal = document.getElementById('auth-modal');
+                if (modal) modal.classList.remove('hidden');
+            }
         }
 
         function closeAuthModal() {
-            document.getElementById('auth-modal').classList.add('hidden');
+            const modal = document.getElementById('auth-modal');
+            if (modal) modal.classList.add('hidden');
         }
 
-        function handleAuthSubmit(event) {
+        async function handleAuthSubmit(event) {
             event.preventDefault();
-            alert("Auth framework ready! Next step: connecting Supabase for real user sign-ins.");
+            const email = document.getElementById('auth-email').value;
+            const password = document.getElementById('auth-password').value;
+
+            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
+
+            if (error) {
+                let signUpRes = await supabase.auth.signUp({ email, password });
+                if (signUpRes.error) {
+                    alert("Auth Error: " + signUpRes.error.message);
+                    return;
+                } else {
+                    alert("Account created and successfully logged in!");
+                }
+            } else {
+                alert("Successfully logged in!");
+            }
+
             closeAuthModal();
+            checkUserAccess();
         }
 
-        // Initialize thumbnails on load
+        // Initialize on load
         window.addEventListener('DOMContentLoaded', () => {
             initThumbnails();
-            updateReader();
+            checkUserAccess();
         });
     </script>
 
