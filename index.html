@@ -8,9 +8,6 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Supabase JS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,6 +49,23 @@
             border: 1px solid var(--border-subtle);
         }
 
+        .character-card {
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            border: 1px solid rgba(208, 174, 107, 0.25);
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .character-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(13, 14, 18, 0.84);
+            z-index: 1;
+        }
+
         .hero-vignette {
             background: linear-gradient(to right, 
                 rgba(13, 14, 18, 0.95) 0%, 
@@ -62,12 +76,28 @@
                 rgba(13, 14, 18, 0.95) 0%, 
                 transparent 25%);
         }
+
+        .faded-hero-bg {
+            background-image: url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .faded-hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(13, 14, 18, 0.88);
+            z-index: 1;
+        }
     </style>
 </head>
 <body class="antialiased">
 
     <!-- GRAND HERO CONTAINER -->
     <div class="relative min-h-[92vh] lg:min-h-screen w-full flex flex-col justify-between bg-cover bg-center" style="background-image: url('hero-bg.jpg');">
+        
         <div class="absolute inset-0 hero-vignette pointer-events-none"></div>
 
         <!-- Header Navigation -->
@@ -86,10 +116,13 @@
             <nav class="hidden md:flex items-center space-x-8 font-sans-custom text-xs tracking-wider text-slate-300">
                 <a href="#one-port" class="hover:text-slate-100 transition">The series</a>
                 <a href="#stories-cross" class="hover:text-slate-100 transition">The world</a>
+                <a href="#where-stories-cross" class="hover:text-slate-100 transition">First character</a>
+                <a href="#journal" class="hover:text-slate-100 transition">News</a>
                 <a href="#reader-section" class="hover:text-slate-100 transition">Read Book 1</a>
+                <a href="#collect" class="hover:text-slate-100 transition">Read & buy</a>
                 
                 <button onclick="openAuthModal()" class="px-4 py-1.5 border border-amber-500/50 hover:border-amber-400 text-amber-200 hover:text-white transition rounded">
-                    <span id="auth-btn-text">Log In</span>
+                    Log In
                 </button>
             </nav>
         </header>
@@ -111,107 +144,1140 @@
                 </p>
 
                 <div class="pt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-5 font-sans-custom">
-                    <a href="#reader-section" class="px-8 py-4 text-slate-950 font-bold text-xs tracking-widest uppercase transition text-center shadow-xl hover:opacity-90" style="background-color: var(--gold);">
-                        START READING BOOK 1
+                    <a href="#collect" class="px-8 py-4 text-slate-950 font-bold text-xs tracking-widest uppercase transition text-center shadow-xl hover:opacity-90" style="background-color: var(--gold);">
+                        NEWS AND UPDATES
+                    </a>
+                    <a href="#where-stories-cross" class="px-8 py-4 bg-slate-950/60 hover:bg-slate-900/80 text-slate-200 font-bold text-xs tracking-widest uppercase transition text-center" style="border: 1px solid var(--gold);">
+                        MEET THE CAST
+                    </a>
+                    <a href="#reader-section" class="px-8 py-4 bg-amber-950/40 hover:bg-amber-900/60 text-amber-200 font-bold text-xs tracking-widest uppercase transition text-center" style="border: 1px border-dashed var(--gold);">
+                        FREE PREVIEW OF BOOK 1
                     </a>
                 </div>
             </div>
         </div>
+
+        <div class="relative z-10 w-full px-8 sm:px-16 py-6 flex justify-end">
+            <span class="font-sans-custom text-[10px] tracking-[0.25em] text-slate-400 uppercase">
+                BREAKWATER PORT · THE SOUTHERN COAST
+            </span>
+        </div>
     </div>
 
-    <!-- COMIC READER SECTION -->
-    <main id="reader-section" class="max-w-5xl mx-auto px-6 py-24 space-y-12">
-        <div class="text-center space-y-4">
-            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">Book 1 · Season 1</span>
-            <h2 class="text-4xl sm:text-6xl font-cormorant font-normal text-slate-100">Interactive Reader</h2>
-            <p id="page-counter" class="font-sans-custom text-sm text-slate-400">Page 1 of 33</p>
-        </div>
+    <!-- MAIN CONTENT BELOW HERO -->
+    <main class="max-w-6xl mx-auto px-6 space-y-28 pt-24 pb-12">
 
-        <!-- Reader Box -->
-        <div class="card-dark rounded-xl p-4 sm:p-8 flex flex-col items-center relative min-h-[600px] justify-center">
-            
-            <!-- Unlocked View (Pages 1-5 or Paid) -->
-            <div id="unlocked-view" class="w-full flex flex-col items-center">
-                <img id="comic-page-img" src="" alt="Comic Page" class="max-h-[75vh] object-contain rounded shadow-2xl border border-slate-800">
+        <!-- SECTION 2: WELCOME TO THE UNIVERSE -->
+        <section id="one-port" class="space-y-8">
+            <div class="space-y-3">
+                <span class="font-sans-custom text-[11px] font-semibold tracking-[0.25em] uppercase" style="color: var(--gold);">
+                    WELCOME TO THE CITY OF BREAKWATER PORT
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-cormorant font-normal text-slate-100 tracking-tight">
+                    One Port. Many Lives.
+                </h2>
             </div>
 
-            <!-- Locked Paywall Overlay (Pages 6-33 if not paid) -->
-            <div id="locked-paywall" class="hidden absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md flex flex-col items-center justify-center p-8 text-center space-y-6 z-10">
-                <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-2xl">
-                    🔒
+            <div class="grid lg:grid-cols-12 gap-6 items-stretch">
+                <div class="lg:col-span-8 card-dark rounded-md p-8 sm:p-12 flex flex-col justify-between space-y-8">
+                    <div class="space-y-6">
+                        <div class="flex items-center space-x-3">
+                            <span class="text-2xl font-light text-amber-200/60 leading-none">∞</span>
+                            <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase text-slate-400">ONE CITY · MANY STORIES</span>
+                        </div>
+                        <h3 class="text-3xl sm:text-4xl font-cormorant text-slate-100 font-normal">Tales from Breakwater Port</h3>
+                        <div class="space-y-4 text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                            <p>Ships arrive bearing fortunes, strangers and secrets. Behind the bustling docks and crowded streets, noble families guard their influence, merchants compete for power, and the criminal underworld thrives in the shadows.</p>
+                            <p>Every life has a story. Every choice has consequences.</p>
+                            <p>Each comic will open a different door into Breakwater Port. Some characters may cross paths. Some choices may leave consequences that surface much later. No single person owns the city—and no story stands entirely alone.</p>
+                            <p>One Port. Many Lives. Countless Tales.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap gap-3 pt-4 font-sans-custom text-xs">
+                        <span class="px-3 py-1.5 rounded border border-slate-700/80 text-slate-300 bg-slate-900/40">Shared universe</span>
+                        <span class="px-3 py-1.5 rounded border border-slate-700/80 text-slate-300 bg-slate-900/40">Intertwined lives</span>
+                        <span class="px-3 py-1.5 rounded border border-slate-700/80 text-slate-300 bg-slate-900/40">Unfolding mysteries</span>
+                    </div>
                 </div>
-                <div class="space-y-2 max-w-md">
-                    <h3 class="text-3xl font-cormorant text-slate-100">Continue Reading Book 1</h3>
-                    <p class="font-sans-custom text-sm text-slate-300">
-                        You've reached the end of the free preview! Unlock full access to all 33 pages of the comic instantly.
+
+                <div class="lg:col-span-4 rounded-md p-8 sm:p-12 flex flex-col items-center justify-center text-center space-y-6 shadow-xl" style="background-color: #e8e3d5; color: #1a1c23;">
+                    <span class="font-sans-custom text-[10px] tracking-[0.25em] uppercase font-semibold text-slate-600">
+                        STORIES TRAVEL FARTHER THAN SHIPS
+                    </span>
+                    <h3 class="text-3xl sm:text-4xl font-cormorant italic font-normal leading-tight text-slate-900 px-2">
+                        In Breakwater Port, no life stands entirely alone.
+                    </h3>
+                    <div class="pt-4 flex items-center justify-center w-full">
+                        <div class="h-[1px] bg-slate-400/40 w-16"></div>
+                        <svg class="w-5 h-5 mx-3 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                            <path d="M3 17h18M5 17l2-7h10l2 7M12 4v6M12 4L9 7M12 4l3 7"/>
+                        </svg>
+                        <div class="h-[1px] bg-slate-400/40 w-16"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- SECTION: WHERE STORIES CROSS -->
+        <section id="stories-cross" class="space-y-8 pt-4">
+
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+
+                <!-- Introduction -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase"
+                        style="color: var(--gold);">
+                        ONE PORT. MANY LIVES.
+                    </span>
+
+                    <h2 class="text-4xl sm:text-6xl font-cormorant font-normal text-slate-100 leading-tight">
+                        Where Stories<br>Cross
+                    </h2>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light pt-2">
+                        Every story unfolds along a different path, yet each remains bound to the fate of Breakwater Port. From noble halls to forgotten streets, from ancient foundations to distant frontiers, their paths may cross, their consequences may linger, and their echoes may reach further than anyone imagined.
                     </p>
                 </div>
-                <button onclick="alert('Stripe checkout integration coming next!')" class="px-8 py-3.5 rounded font-sans-custom text-xs font-bold uppercase tracking-widest text-slate-950 transition shadow-lg hover:opacity-90" style="background-color: var(--gold);">
-                    Unlock Full Access ($5)
-                </button>
+
+                <!-- Expandable sections -->
+                <div class="lg:col-span-7 space-y-0">
+
+                    <!-- 01: Breakwater Port -->
+                    <div class="border-t border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle group flex w-full items-start gap-6 text-left"
+                            aria-expanded="false"
+                            aria-controls="story-content-01">
+
+                            <span class="font-cormorant text-base italic text-amber-200/70 pt-1 shrink-0">
+                                01
+                            </span>
+
+                            <span class="flex-1 flex items-center justify-between gap-4">
+                                <span class="text-2xl font-cormorant text-slate-100 font-normal">
+                                    Breakwater Port
+                                </span>
+
+                                <svg
+                                    class="story-arrow w-4 h-4 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </span>
+
+                        </button>
+
+                        <div id="story-content-01"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true">
+
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-400 text-sm font-light leading-relaxed pt-3">
+                                    A city of merchants, old stone and restless tides. Wealth arrives daily. So do secrets.<br>
+                                    Behind its prosperous harbors, the streets tell another story. From crowded marketplaces to impoverished slums, fortunes are made, lives are lost, and survival often comes at a price.<br>
+                                    The Church of the Everburning Flame stands among the city’s most influential institutions, its presence woven into the lives of those who call Breakwater Port home.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 02: The Family Houses -->
+                    <div class="border-t border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle group flex w-full items-start gap-6 text-left"
+                            aria-expanded="false"
+                            aria-controls="story-content-02">
+
+                            <span class="font-cormorant text-base italic text-amber-200/70 pt-1 shrink-0">
+                                02
+                            </span>
+
+                            <span class="flex-1 flex items-center justify-between gap-4">
+                                <span class="text-2xl font-cormorant text-slate-100 font-normal">
+                                    The Family Houses
+                                </span>
+
+                                <svg
+                                    class="story-arrow w-4 h-4 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </span>
+
+                        </button>
+
+                        <div id="story-content-02"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true">
+
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-400 text-sm font-light leading-relaxed pt-3">
+                                    Power is inherited, contested and defended.<br>
+                                    The great houses of Breakwater Port shape the city’s fortunes through alliances, rivalries and carefully guarded secrets. Their influence stretches far beyond their mansions, reaching into commerce, politics and the lives of ordinary citizens.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 03: The Ancient Ruins -->
+                    <div class="border-t border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle group flex w-full items-start gap-6 text-left"
+                            aria-expanded="false"
+                            aria-controls="story-content-03">
+
+                            <span class="font-cormorant text-base italic text-amber-200/70 pt-1 shrink-0">
+                                03
+                            </span>
+
+                            <span class="flex-1 flex items-center justify-between gap-4">
+                                <span class="text-2xl font-cormorant text-slate-100 font-normal">
+                                    The Ancient Ruins
+                                </span>
+
+                                <svg
+                                    class="story-arrow w-4 h-4 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </span>
+
+                        </button>
+
+                        <div id="story-content-03"
+                         class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true">
+
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-400 text-sm font-light leading-relaxed pt-3">
+                                    Breakwater Port stands upon the remains of its own forgotten past. Beneath its streets lie the foundations of cities that came before.<br>
+                                    Beyond the city, remnants of earlier ages lie scattered across the wilderness. Abandoned settlements, forgotten villages, ancient tombs and ruined temples stand as silent witnesses to histories long since lost.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- 04: The Frontiers -->
+                    <div class="border-t border-b border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle group flex w-full items-start gap-6 text-left"
+                            aria-expanded="false"
+                            aria-controls="story-content-04">
+
+                            <span class="font-cormorant text-base italic text-amber-200/70 pt-1 shrink-0">
+                                04
+                            </span>
+
+                            <span class="flex-1 flex items-center justify-between gap-4">
+                                <span class="text-2xl font-cormorant text-slate-100 font-normal">
+                                    The Frontiers
+                                </span>
+
+                                <svg
+                                    class="story-arrow w-4 h-4 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke-width="1.5"
+                                    stroke="currentColor"
+                                    aria-hidden="true">
+                                    <path stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
+                                </svg>
+                            </span>
+
+                        </button>
+
+                        <div id="story-content-04"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true">
+
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-400 text-sm font-light leading-relaxed pt-3">
+                                    Beyond the familiar streets and sheltered harbors lies a world less easily governed.<br>
+                                    Untamed wilderness, distant settlements and forgotten places await those willing to venture beyond the known.<br>
+                                    Some seek fortune. Others seek answers. Not all return with what they came to find.
+                                </p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: PRISON ISLAND -->
+        <section id="stories-cross" class="space-y-8 pt-4">
+            <div class="grid lg:grid-cols-12 gap-12 items-start">
+
+                <!-- PRISON ISLAND INTRODUCTION -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">
+                        A PORT WHERE EVERYTHING HAS A PRICE.
+                    </span>
+
+                    <h2 class="text-4xl sm:text-6xl font-cormorant font-normal text-slate-100 leading-tight">
+                        Prison Island
+                    </h2>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light pt-2">
+                        Some secrets are buried. Some are hidden behind thick walls. Others are surrounded by water.
+                        Beyond the familiar shores of Breakwater Port lies an island shrouded in secrecy.
+                        Its existence is known. Its purpose is not.
+                        Yet the lives of those who find themselves drawn toward it will never be the same.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-7 space-y-0">
+
+                    <!-- 01: SEASON 1 ORIGINS -->
+                    <div class="border-t border-b border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-6"
+                            aria-expanded="false"
+                            aria-controls="prison-season-content-01"
+                        >
+                            <div class="flex items-start space-x-6">
+                                <span class="font-cormorant text-base italic text-amber-200/70 pt-1">01</span>
+                                <div class="space-y-1">
+                                    <h3 class="text-2xl font-cormorant text-slate-100 font-normal">
+                                        Season 1 Origins
+                                    </h3>
+                                    <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                        Book 1 in Progress
+                                    </p>
+                                </div>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-2 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="prison-season-content-01"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-300 text-sm font-light leading-relaxed pt-4">
+                                    Four Lives. Four Stories. One Destination.<br>
+                                    Four individuals. Four different paths through the streets of Breakwater Port.<br>
+                                    Each has a past. Each has a choice. Each is heading toward an unforeseen destination.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 02: SEASON 2 -->
+                    <div class="border-b border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-6"
+                            aria-expanded="false"
+                            aria-controls="prison-season-content-02"
+                        >
+                            <div class="flex items-start space-x-6">
+                                <span class="font-cormorant text-base italic text-amber-200/70 pt-1">02</span>
+                                <div class="space-y-1">
+                                    <h3 class="text-2xl font-cormorant text-slate-100 font-normal">
+                                        Season 2
+                                    </h3>
+                                    <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                        To be announced.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-2 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="prison-season-content-02"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-300 text-sm font-light leading-relaxed pt-4">
+                                    Whats next?
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 03: SEASON 3 -->
+                    <div class="border-b border-slate-800/80 py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-6"
+                            aria-expanded="false"
+                            aria-controls="prison-season-content-03"
+                        >
+                            <div class="flex items-start space-x-6">
+                                <span class="font-cormorant text-base italic text-amber-200/70 pt-1">03</span>
+                                <div class="space-y-1">
+                                    <h3 class="text-2xl font-cormorant text-slate-100 font-normal">
+                                        Season 3
+                                    </h3>
+                                    <p class="text-slate-400 text-sm font-light leading-relaxed">
+                                        To be announced.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-2 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="prison-season-content-03"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden pl-12">
+                                <p class="text-slate-300 text-sm font-light leading-relaxed pt-4">
+                                    The future holds many secrets.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SECTION 3: Characters -->
+        <section id="where-stories-cross" class="space-y-12">
+
+            <!-- Section heading -->
+            <div class="text-center space-y-3 max-w-3xl mx-auto">
+                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase"
+                    style="color: var(--gold);">
+                    TALES FROM BREAKWATER PORT · PRISON ISLAND
+                </span>
+
+                <h2 class="text-3xl sm:text-5xl font-cormorant text-slate-100 font-normal">
+                    The Cast
+                </h2>
             </div>
 
-            <!-- Controls -->
-            <div class="flex items-center justify-between w-full mt-8 pt-6 border-t border-slate-800">
-                <button onclick="prevPage()" class="px-5 py-2.5 rounded bg-slate-900 border border-slate-800 font-sans-custom text-xs uppercase tracking-wider text-slate-300 hover:text-white transition">
-                    ← Previous
-                </button>
-                <button onclick="nextPage()" class="px-5 py-2.5 rounded bg-slate-900 border border-slate-800 font-sans-custom text-xs uppercase tracking-wider text-slate-300 hover:text-white transition">
-                    Next →
-                </button>
-            </div>
-        </div>
+            <!-- Carousel container -->
+            <div class="relative">
 
-        <!-- Thumbnail Bar -->
-        <div id="thumbnail-bar" class="flex items-center gap-3 overflow-x-auto pb-4 scrollbar-thin"></div>
+                <!-- Previous button -->
+                <button
+                    type="button"
+                    id="cast-prev"
+                    aria-label="Previous characters"
+                    class="absolute left-0 top-1/2 -translate-y-1/2 z-20
+                        flex items-center justify-center
+                        w-10 h-10 sm:w-12 sm:h-12
+                        rounded-full border border-amber-400
+                        bg-slate-950/90 text-amber-400
+                        hover:bg-amber-400 hover:text-slate-950
+                        transition-colors duration-300
+                        disabled:opacity-30 disabled:cursor-not-allowed">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-5 h-5"
+                        aria-hidden="true">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="M15.75 19.5 8.25 12l7.5-7.5"/>
+                    </svg>
+                </button>
+
+                <!-- Scrollable character cards -->
+                <div
+                    id="cast-carousel"
+                    class="flex gap-6 overflow-x-auto snap-x snap-mandatory
+                        scroll-smooth px-12 pb-6
+                        [scrollbar-width:none]
+                        [&::-webkit-scrollbar]:hidden"
+                    tabindex="0"
+                    role="region"
+                    aria-label="The Cast character gallery">
+
+                    <!-- Sebastian Valecourt -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase"
+                                style="color: var(--gold);">
+                                THE FIRST PROTAGONIST
+                            </span>
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Sebastian Valecourt
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                He has wealth, charm and the looks to go with it.
+                                Raised with privilege, family expectations and influence,
+                                is he simply a spoiled young man or is there more beneath the confidence?
+                            </p>
+
+                            <p class="text-slate-300/90 text-base sm:text-lg leading-relaxed font-light">
+                                Will his encounters change his fate? Or will he change that of other people?
+                            </p>
+
+                            <p class="text-breakwater-gold pt-4 text-base italic font-medium">
+                                What does his future hold?
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Brennus Valecourt -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Brennus Valecourt
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Sebastian’s younger brother, and another son of House Valecourt.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Aurelia Valecourt -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Aurelia Valecourt
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Mother of Sebastian and Brennus, and a central figure in the Valecourt family.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Gregor Valecourt -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Gregor Valecourt
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Father of Sebastian and Brennus, and head of House Valecourt.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Judge Hadrian Corvinus -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Judge Hadrian Corvinus
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Head of House Corvinus and a prominent judge.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Lavinia Corvinus -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('sebastian_.jpg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Lavinia Corvinus
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Daughter of Judge Hadrian Corvinus, whose life moves within the powerful circles of the city.
+                            </p>
+
+                        </div>
+                    </article>
+
+                    <!-- Other characters -->
+                    <article
+                        class="character-card relative shrink-0 snap-start
+                            w-full sm:w-[75%] md:w-[calc((100%-3rem)/3)]
+                            p-8 sm:p-10 flex flex-col justify-between
+                            text-center min-h-[500px]"
+                        style="background-image: url('ensemble.jpeg');">
+
+                        <div class="relative z-10 space-y-6 my-auto">
+
+                            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase"
+                                style="color: var(--gold);">
+                                INHABITANTS OF BREAKWATER PORT
+                            </span>
+
+                            <h3 class="text-2xl sm:text-3xl font-cormorant text-slate-100 font-normal">
+                                Other Characters
+                            </h3>
+
+                            <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                                Family, allies, rivals and strangers will all be revealed in the unfolding story.
+                                Who will matter most, and why? It is not for this page to reveal yet.
+                            </p>
+
+                            <p class="text-breakwater-gold pt-4 text-base italic font-medium">
+                                Some mysteries should remain mysteries.
+                            </p>
+
+                        </div>
+                    </article>
+
+                </div>
+
+                <!-- Next button -->
+                <button
+                    type="button"
+                    id="cast-next"
+                    aria-label="Next characters"
+                    class="absolute right-0 top-1/2 -translate-y-1/2 z-20
+                        flex items-center justify-center
+                        w-10 h-10 sm:w-12 sm:h-12
+                        rounded-full border border-amber-400
+                        bg-slate-950/90 text-amber-400
+                        hover:bg-amber-400 hover:text-slate-950
+                        transition-colors duration-300
+                        disabled:opacity-30 disabled:cursor-not-allowed">
+
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                        fill="none" viewBox="0 0 24 24"
+                        stroke-width="1.5" stroke="currentColor"
+                        class="w-5 h-5"
+                        aria-hidden="true">
+                        <path stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="m8.25 4.5 7.5 7.5-7.5 7.5"/>
+                    </svg>
+                </button>
+
+            </div>
+
+            <!-- Navigation indicators -->
+            <div id="cast-dots"
+                class="flex justify-center items-center gap-3 pt-2"
+                aria-label="Choose a character">
+            </div>
+
+        </section>
+
+                <!-- SECTION: JOURNAL -->
+        <section id="journal" class="space-y-8 pt-4">
+
+            <div class="space-y-2 border-b border-slate-800/80 pb-6">
+                <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">
+                    FROM THE CREATOR'S DESK
+                </span>
+                <h2 class="text-4xl sm:text-6xl font-cormorant text-slate-100 font-normal tracking-tight">
+                    Latest from the journal
+                </h2>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 pt-2">
+
+                <!-- FEATURED JOURNAL ENTRY -->
+                <div class="lg:col-span-7 space-y-6 pr-0 lg:pr-8">
+                    <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400">
+                        PRODUCTION NOTES · CURRENT
+                    </span>
+
+                    <h3 class="text-3xl sm:text-4xl font-cormorant text-slate-100 font-normal leading-tight">
+                        One city, a lifetime of stories
+                    </h3>
+
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light">
+                        The first tale follows Sebastian Valecourt, his story marks the beginning of a larger narrative. One that set the fate of unsuspecting souls in motion throughout the streets of Breakwater Port and beyond.
+                    </p>
+
+                    <a
+                        href="https://talesfrombreakwaterport.substack.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block font-sans-custom text-xs tracking-[0.2em] font-medium uppercase hover:underline pt-2"
+                        style="color: var(--gold);"
+                    >
+                        NEWSLETTER AND UPDATES &rarr;
+                    </a>
+                </div>
+
+                <!-- COLLAPSIBLE JOURNAL ENTRIES -->
+                <div class="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-slate-800/80 pt-8 lg:pt-0 lg:pl-8 space-y-0">
+
+                    <!-- 01: VISUAL DEVELOPMENT -->
+                    <div class="pb-6 border-b border-slate-800/80">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-4"
+                            aria-expanded="false"
+                            aria-controls="journal-content-01"
+                        >
+                            <div class="space-y-3">
+                                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400 block">
+                                    VISUAL DEVELOPMENT
+                                </span>
+                                <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">
+                                    Finding the look of Breakwater Port
+                                </h4>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-1 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="journal-content-01"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden">
+                                <p class="text-slate-400 text-sm leading-relaxed font-light pt-4">
+                                    From bustling harbors and ancient stonework to the heraldry of powerful houses, the visual identity of Breakwater Port reflects a world of contrasts.
+                                    Public grandeur conceals private tensions, while every street and forgotten corner offers another glimpse into the lives of its inhabitants.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 02: CHARACTER DESIGN -->
+                    <div class="py-6 border-b border-slate-800/80">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-4"
+                            aria-expanded="false"
+                            aria-controls="journal-content-02"
+                        >
+                            <div class="space-y-3">
+                                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400 block">
+                                    CHARACTER DESIGN
+                                </span>
+                                <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">
+                                    Drawing a man without giving him away
+                                </h4>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-1 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="journal-content-02"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden">
+                                <p class="text-slate-400 text-sm leading-relaxed font-light pt-4">
+                                    Sebastian Valecourt appearance reflects his upbringing: confidence, refinement and a certain ease in the world around him.
+                                    But a character is more than what the world sees. Every expression, gesture and detail offers a glimpse of the person beneath the surface.
+                                    Some things are better left for the story itself to reveal.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 03: WORLDBUILDING -->
+                    <div class="py-6">
+
+                        <button
+                            type="button"
+                            class="story-toggle w-full flex items-start justify-between text-left gap-4"
+                            aria-expanded="false"
+                            aria-controls="journal-content-03"
+                        >
+                            <div class="space-y-3">
+                                <span class="font-sans-custom text-xs tracking-[0.2em] uppercase text-slate-400 block">
+                                    WORLDBUILDING
+                                </span>
+                                <h4 class="text-xl sm:text-2xl font-cormorant text-slate-100 font-normal">
+                                    No two lives experience Breakwater Port the same way.
+                                </h4>
+                            </div>
+
+                            <svg
+                                class="story-arrow w-5 h-5 mt-1 shrink-0 text-amber-200/70 transition-transform duration-300"
+                                xmlns="http://www.w3.org/2000/svg"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                aria-hidden="true"
+                            >
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+                            </svg>
+                        </button>
+
+                        <div
+                            id="journal-content-03"
+                            class="story-content grid grid-rows-[0fr] opacity-0 transition-[grid-template-rows,opacity] duration-300 ease-in-out"
+                            aria-hidden="true"
+                        >
+                            <div class="overflow-hidden">
+                                <p class="text-slate-400 text-sm leading-relaxed font-light pt-4">
+                                    For some, it is a city of opportunity and influence. For others, a place of hardship, uncertainty and survival.
+                                    Though their journeys may lead far beyond its shores, the choices they make and the lives they touch remain connected to Breakwater Port.
+                                    Every perspective reveals another piece of a much larger story.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: JOURNEY CONTINUES -->
+        <section id="journey" class="space-y-8 pt-4 border-t border-slate-800/80">
+            <div class="grid lg:grid-cols-12 gap-12 pt-8">
+                <div class="lg:col-span-6 space-y-6">
+                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">THE LONG VIEW</span>
+                    <h2 class="text-4xl sm:text-6xl font-cormorant text-slate-100 font-normal leading-tight">
+                        The Journey<br>
+                        Continues
+                    </h2>
+                    <p class="text-slate-300 text-base sm:text-lg leading-relaxed font-light max-w-lg pt-2">
+                        Every story begins somewhere. Ours begins with Prison Island.<br> 
+                        The first season of the Prison Island saga follows the story of four individuals whose lives are destined to intertwine. Four different journies that are heading for one destination. 
+                    </p>
+                </div>
+
+                <div class="lg:col-span-6 space-y-6 my-auto">
+                    <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
+                        <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-amber-200/70 w-24 pt-1">NOW</span>
+                        <div class="flex-1 space-y-1">
+                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">In development</h4>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">Prison Island: Season 1, Book 1. </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
+                        <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-slate-500 w-24 pt-1">NEXT</span>
+                        <div class="flex-1 space-y-1">
+                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">More comics from the port</h4>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">More stories from Prison Island: season 1 will be revealed as their journeys begin.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start justify-between border-b border-slate-800/80 pb-6">
+                        <span class="font-sans-custom text-[11px] tracking-[0.2em] uppercase font-semibold text-slate-500 w-24 pt-1">FUTURE</span>
+                        <div class="flex-1 space-y-1">
+                            <h4 class="text-xl font-cormorant text-slate-100 font-normal">The universe expands</h4>
+                            <p class="text-slate-400 text-xs sm:text-sm font-light">More books exploring Breakwater Port?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- AUTH MODAL -->
-    <div id="auth-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-        <div class="card-dark w-full max-w-md rounded-xl p-8 relative space-y-6 shadow-2xl">
-            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">&times;</button>
-            <div class="text-center space-y-2">
-                <h3 class="text-3xl font-cormorant text-slate-100">Account Access</h3>
-                <p class="font-sans-custom text-xs text-slate-400">Log in or create your account to sync your subscription.</p>
+    <!-- SECTION 4: Substack Subscription -->
+    <section id="collect" class="faded-hero-bg py-24 px-6 w-full my-0 border-t border-b border-slate-800/80">
+        <div class="relative z-10 max-w-3xl mx-auto card-dark p-10 sm:p-16 rounded-lg text-center space-y-8" style="background-color: rgba(18, 20, 28, 0.92); border-color: rgba(208, 174, 107, 0.35);">
+            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase block" style="color: var(--gold);">READ & COLLECT THE COMICS</span>
+            
+            <h2 class="text-4xl sm:text-6xl font-cormorant text-slate-100 font-normal leading-[1.1]">
+                Be there when the first<br>tale leaves port.
+            </h2>
+            
+            <p class="text-slate-300 text-base sm:text-lg font-light max-w-xl mx-auto leading-relaxed">
+                Official comic-book release dates, formats and trusted stores will appear here as soon as they are confirmed.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-6 font-sans-custom text-[11px] font-medium tracking-[0.2em] uppercase" style="color: var(--gold);">
+                <span class="flex items-center space-x-2">
+                    <span class="text-amber-400">•</span>
+                    <span>PRINT COMIC · TO BE ANNOUNCED</span>
+                </span>
+                <span class="flex items-center space-x-2">
+                    <span class="text-amber-400">•</span>
+                    <span>DIGITAL COMIC · TO BE ANNOUNCED</span>
+                </span>
             </div>
-            <form onsubmit="handleAuthSubmit(event)" class="space-y-4 font-sans-custom">
+
+            <div class="pt-2">
+                <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" rel="noopener noreferrer" class="inline-block px-10 py-4 text-slate-950 font-sans-custom font-bold text-xs tracking-widest uppercase transition shadow-xl hover:opacity-90" style="background-color: var(--gold);">
+                    JOIN OUR NEWSLETTER
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GRAND RECTANGULAR COMIC READER (DYNAMIC 33-PAGE LOADER) -->
+    <section id="reader-section" class="py-20 px-4 sm:px-8 w-full max-w-7xl mx-auto">
+        <div class="space-y-6 text-center max-w-3xl mx-auto mb-8">
+            <span class="font-sans-custom text-xs tracking-[0.25em] uppercase" style="color: var(--gold);">DIGITAL COMIC READER</span>
+            <h2 class="text-4xl sm:text-5xl font-cormorant text-slate-100 font-normal">Comic Book 1: Free Preview</h2>
+            <p class="text-slate-400 text-base font-light">Turn the pages to read the first 5 pages for free. Page 6 onward is reserved for subscribers & supporters.</p>
+        </div>
+
+        <div class="card-dark rounded-xl overflow-hidden shadow-2xl relative w-full border border-amber-500/30">
+            <div class="bg-[#0b0c10] border-b border-slate-800 px-6 py-4 flex flex-wrap items-center justify-between gap-4 font-sans-custom text-xs">
+                <div class="flex items-center space-x-4">
+                    <span class="font-cinzel font-bold text-amber-200 tracking-wider">BOOK 1</span>
+                    <span class="text-slate-500">|</span>
+                    <span id="page-counter" class="text-slate-300 font-medium">Page 1 of 33</span>
+                </div>
+
+                <div class="flex items-center space-x-3">
+                    <button onclick="prevPage()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-slate-200 rounded border border-slate-700 transition">
+                        &larr; Previous
+                    </button>
+                    <button onclick="nextPage()" class="px-4 py-2 bg-amber-500/20 hover:bg-amber-500/30 text-amber-200 rounded border border-amber-500/40 transition">
+                        Next &rarr;
+                    </button>
+                </div>
+            </div>
+
+            <div id="reader-viewport" class="relative min-h-[600px] sm:min-h-[750px] lg:min-h-[850px] w-full bg-[#08090c] flex items-center justify-center p-4 sm:p-8">
+                
+                <!-- UNLOCKED PAGES VIEW (PAGES 1 - 5) -->
+                <div id="unlocked-view" class="w-full h-full flex items-center justify-center">
+                    <img id="comic-page-img" src="ComicBook-Final_page-0001.jpg" alt="Comic Page" class="max-h-[800px] w-auto max-w-full object-contain rounded shadow-2xl border border-slate-800 transition-all duration-300">
+                </div>
+
+                <!-- LOCKED PAYWALL OVERLAY (PAGES 6+) -->
+                <div id="locked-paywall" class="hidden absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-8 text-center space-y-6">
+                    <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                        </svg>
+                    </div>
+
+                    <span class="font-sans-custom text-xs tracking-[0.25em] uppercase text-amber-400">PREVIEW LIMIT REACHED</span>
+                    <h3 class="text-3xl sm:text-5xl font-cormorant text-slate-100">Unlock the Full Tale</h3>
+                    <p class="text-slate-300 text-base max-w-md font-light">
+                        You've reached page 6. Log in or subscribe to get full access to all 33 pages of Book 1 and support future releases!
+                    </p>
+
+                    <div class="pt-4 flex flex-col sm:flex-row gap-4 font-sans-custom text-xs">
+                        <button onclick="openAuthModal()" class="px-8 py-3.5 text-slate-950 font-bold uppercase tracking-widest shadow-lg transition hover:opacity-90" style="background-color: var(--gold);">
+                            LOG IN / REGISTER
+                        </button>
+                        <a href="https://talesfrombreakwaterport.substack.com/subscribe" target="_blank" class="px-8 py-3.5 border border-amber-500/60 text-amber-200 hover:bg-amber-900/30 uppercase tracking-widest font-bold transition">
+                            SUBSCRIBE NOW
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Thumbnail Navigation Bar -->
+            <div id="thumbnail-bar" class="bg-[#0b0c10] border-t border-slate-800 p-4 flex items-center justify-start sm:justify-center space-x-2 overflow-x-auto font-sans-custom text-xs">
+                <!-- Dynamically generated buttons -->
+            </div>
+        </div>
+    </section>
+
+    <!-- AUTHENTICATION MODAL -->
+    <div id="auth-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+        <div class="card-dark max-w-md w-full p-8 rounded-xl shadow-2xl space-y-6 relative border border-amber-500/40">
+            <button onclick="closeAuthModal()" class="absolute top-4 right-4 text-slate-400 hover:text-slate-100 text-xl font-bold">&times;</button>
+            
+            <div class="text-center space-y-2">
+                <span class="font-sans-custom text-[10px] tracking-[0.25em] uppercase text-amber-400">READER ACCESS</span>
+                <h3 class="text-3xl font-cormorant text-slate-100">Welcome Reader</h3>
+            </div>
+
+            <form onsubmit="handleAuthSubmit(event)" class="space-y-4 font-sans-custom text-xs">
                 <div>
-                    <label class="block text-xs uppercase tracking-wider text-slate-400 mb-2">Email</label>
-                    <input type="email" id="auth-email" required class="w-full bg-slate-900 border border-slate-800 rounded px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-amber-500/50">
+                    <label class="block text-slate-400 mb-1">EMAIL ADDRESS</label>
+                    <input type="email" required placeholder="your@email.com" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
                 <div>
-                    <label class="block text-xs uppercase tracking-wider text-slate-400 mb-2">Password</label>
-                    <input type="password" id="auth-password" required class="w-full bg-slate-900 border border-slate-800 rounded px-4 py-3 text-slate-200 text-sm focus:outline-none focus:border-amber-500/50">
+                    <label class="block text-slate-400 mb-1">PASSWORD</label>
+                    <input type="password" required placeholder="••••••••" class="w-full px-4 py-3 bg-slate-900/90 border border-slate-700 rounded text-slate-100 focus:outline-none focus:border-amber-400">
                 </div>
-                <button type="submit" class="w-full py-3.5 rounded font-bold text-xs uppercase tracking-widest text-slate-950 transition shadow-lg hover:opacity-90" style="background-color: var(--gold);">
-                    Continue
+                <button type="submit" class="w-full py-3.5 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold tracking-widest uppercase transition rounded shadow-lg mt-2">
+                    LOG IN / REGISTER
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- JAVASCRIPT LOGIC & SUPABASE SETUP -->
+    <!-- FOOTER SECTION -->
+    <footer class="bg-[#0a0b0e] border-t border-slate-900 py-10 px-8 sm:px-16 w-full">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <a href="#" class="flex items-center space-x-3">
+                <svg class="w-6 h-6" style="color: var(--gold);" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                    <path d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9L12 2Z" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <div class="flex flex-col text-left">
+                    <span class="font-cinzel text-[9px] tracking-[0.25em] text-slate-400 uppercase">TALES FROM</span>
+                    <span class="font-cinzel text-[11px] font-bold tracking-[0.2em] text-slate-200 uppercase">BREAKWATER PORT</span>
+                </div>
+            </a>
+
+            <div class="text-center font-sans-custom text-xs text-slate-500 leading-relaxed max-w-sm">
+                An original high-fantasy comic-book series.<br>
+                Story, art and world © 2026 Gladjeheim Press.
+            </div>
+
+            <nav class="flex items-center space-x-8 font-sans-custom text-xs tracking-wider text-slate-300">
+                <a href="#one-port" class="hover:text-amber-200 transition">The series</a>
+                <a href="#journal" class="hover:text-amber-200 transition">News</a>
+                <a href="#collect" class="hover:text-amber-200 transition">Read & buy</a>
+            </nav>
+
+        </div>
+    </footer>
+
+    <!-- DYNAMIC 33-PAGE READER SCRIPT -->
     <script>
-        // Supabase Initialization with your live project keys
-        const SUPABASE_URL = 'https://gueljqfdhxwateykund.supabase.co';
-        const SUPABASE_ANON_KEY = 'sb_publishable_MeciPOA9v9jHQ-1MkJfkNA_tnTpEAYM';
-
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
         const totalPages = 33;
-        const freeLimit = 5;
+        const freeLimit = 5; // Pages 1–5 are free
         let currentPage = 1;
-        let currentUser = null;
-        let hasUserPaid = false;
 
+        // Automatically generates filenames: ComicBook-Final_page-0001.jpg ... ComicBook-Final_page-0033.jpg
         function getPageFilename(pageNumber) {
             const padded = String(pageNumber).padStart(4, '0');
             return `ComicBook-Final_page-${padded}.jpg`;
         }
 
+        // Build thumbnail buttons dynamically
         function initThumbnails() {
             const bar = document.getElementById('thumbnail-bar');
-            if (!bar) return;
             bar.innerHTML = '';
 
             for (let i = 1; i <= totalPages; i++) {
@@ -220,58 +1286,38 @@
                 btn.onclick = () => goToPage(i);
                 
                 if (i <= freeLimit) {
-                    btn.className = "px-3 py-1.5 rounded bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200 flex-shrink-0 transition font-sans-custom text-xs";
+                    btn.className = "px-3 py-1.5 rounded bg-slate-900 text-slate-400 border border-slate-800 hover:text-slate-200 flex-shrink-0 transition";
                     btn.innerText = `Page ${i}`;
                 } else {
-                    btn.className = "px-3 py-1.5 rounded bg-amber-950/40 text-amber-400/70 border border-amber-900/50 hover:text-amber-300 flex-shrink-0 transition font-sans-custom text-xs";
+                    btn.className = "px-3 py-1.5 rounded bg-amber-950/40 text-amber-400/70 border border-amber-900/50 hover:text-amber-300 flex-shrink-0 transition";
                     btn.innerText = `🔒 Page ${i}`;
                 }
+                
                 bar.appendChild(btn);
             }
         }
 
-        async function checkUserAccess() {
-            const { data: { session } } = await supabase.auth.getSession();
-            currentUser = session ? session.user : null;
-
-            const authBtnText = document.getElementById('auth-btn-text');
-
-            if (currentUser) {
-                const { data, error } = await supabase
-                    .from('profiles')
-                    .select('has_access')
-                    .eq('id', currentUser.id)
-                    .single();
-
-                hasUserPaid = (data && data.has_access) ? true : false;
-                if (authBtnText) authBtnText.innerText = "Account / Log Out";
-            } else {
-                hasUserPaid = false;
-                if (authBtnText) authBtnText.innerText = "Log In";
-            }
-            updateReader();
-        }
-
         function updateReader() {
-            const counter = document.getElementById('page-counter');
-            if (counter) counter.innerText = `Page ${currentPage} of ${totalPages}`;
+            document.getElementById('page-counter').innerText = `Page ${currentPage} of ${totalPages}`;
             
             const unlockedView = document.getElementById('unlocked-view');
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            if (currentPage <= freeLimit || hasUserPaid) {
-                if (unlockedView) unlockedView.classList.remove('hidden');
-                if (lockedPaywall) lockedPaywall.classList.add('hidden');
-                if (imgElement) imgElement.src = getPageFilename(currentPage);
+            if (currentPage <= freeLimit) {
+                unlockedView.classList.remove('hidden');
+                lockedPaywall.classList.add('hidden');
+                imgElement.src = getPageFilename(currentPage);
             } else {
-                if (unlockedView) unlockedView.classList.add('hidden');
-                if (lockedPaywall) lockedPaywall.classList.remove('hidden');
+                unlockedView.classList.add('hidden');
+                lockedPaywall.classList.remove('hidden');
             }
 
+            // Update active thumbnail state
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.getElementById(`thumb-btn-${i}`);
                 if (!btn) continue;
+
                 if (i === currentPage) {
                     btn.classList.add('bg-amber-500/30', 'text-amber-200', 'border-amber-500/50');
                 } else {
@@ -300,54 +1346,166 @@
         }
 
         function openAuthModal() {
-            if (currentUser) {
-                if (confirm(`Logged in as ${currentUser.email}. Do you want to log out?`)) {
-                    supabase.auth.signOut().then(() => {
-                        window.location.reload();
-                    });
-                }
-            } else {
-                const modal = document.getElementById('auth-modal');
-                if (modal) modal.classList.remove('hidden');
-            }
+            document.getElementById('auth-modal').classList.remove('hidden');
         }
 
         function closeAuthModal() {
-            const modal = document.getElementById('auth-modal');
-            if (modal) modal.classList.add('hidden');
+            document.getElementById('auth-modal').classList.add('hidden');
         }
 
-        async function handleAuthSubmit(event) {
+        function handleAuthSubmit(event) {
             event.preventDefault();
-            const email = document.getElementById('auth-email').value;
-            const password = document.getElementById('auth-password').value;
-
-            let { data, error } = await supabase.auth.signInWithPassword({ email, password });
-            
-            if (error) {
-                let signUpRes = await supabase.auth.signUp({ email, password });
-                if (signUpRes.error) {
-                    alert("Auth Error: " + signUpRes.error.message);
-                    return;
-                } else {
-                    alert("Account created successfully! You are now logged in.");
-                }
-            } else {
-                alert("Successfully logged in!");
-            }
-
+            alert("Auth framework ready! Next step: connecting Supabase for real user sign-ins.");
             closeAuthModal();
-            checkUserAccess();
         }
 
-        supabase.auth.onAuthStateChange((event, session) => {
-            checkUserAccess();
-        });
-
+        // Initialize thumbnails on load
         window.addEventListener('DOMContentLoaded', () => {
             initThumbnails();
-            checkUserAccess();
+            updateReader();
         });
     </script>
+
+    <!-- Carousel functionality -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const carousel = document.getElementById("cast-carousel");
+    const prevButton = document.getElementById("cast-prev");
+    const nextButton = document.getElementById("cast-next");
+    const dotsContainer = document.getElementById("cast-dots");
+
+    if (!carousel || !prevButton || !nextButton || !dotsContainer) {
+        return;
+    }
+
+    const slides = Array.from(
+        carousel.querySelectorAll(".cast-slide, article.character-card")
+    );
+
+    let activeIndex = 0;
+    const dots = [];
+
+    // Create one navigation dot per character
+    slides.forEach((slide, index) => {
+        const dot = document.createElement("button");
+
+        dot.type = "button";
+        dot.className =
+            "w-2.5 h-2.5 rounded-full border border-amber-400 " +
+            "transition-all duration-300 hover:scale-125";
+
+        dot.setAttribute(
+            "aria-label",
+            `Go to character ${index + 1}`
+        );
+
+        dot.addEventListener("click", () => {
+            scrollToSlide(index);
+        });
+
+        dotsContainer.appendChild(dot);
+        dots.push(dot);
+    });
+
+    function scrollToSlide(index) {
+        const slide = slides[index];
+
+        if (!slide) return;
+
+        carousel.scrollTo({
+            left: slide.offsetLeft - slides[0].offsetLeft,
+            behavior: "smooth"
+        });
+    }
+
+    function updateCarousel() {
+        let closestIndex = 0;
+        let closestDistance = Infinity;
+
+        slides.forEach((slide, index) => {
+            const distance = Math.abs(
+                slide.getBoundingClientRect().left -
+                carousel.getBoundingClientRect().left
+            );
+
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        activeIndex = closestIndex;
+
+        dots.forEach((dot, index) => {
+            const isActive = index === activeIndex;
+
+            dot.classList.toggle("bg-amber-400", isActive);
+            dot.classList.toggle("scale-125", isActive);
+            dot.classList.toggle("bg-transparent", !isActive);
+
+            if (isActive) {
+                dot.setAttribute("aria-current", "true");
+            } else {
+                dot.removeAttribute("aria-current");
+            }
+        });
+
+        const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+
+        prevButton.disabled = carousel.scrollLeft <= 2;
+        nextButton.disabled = carousel.scrollLeft >= maxScroll - 2;
+    }
+
+    prevButton.addEventListener("click", () => {
+        scrollToSlide(Math.max(0, activeIndex - 1));
+    });
+
+    nextButton.addEventListener("click", () => {
+        scrollToSlide(Math.min(slides.length - 1, activeIndex + 1));
+    });
+
+    carousel.addEventListener("scroll", updateCarousel, {
+        passive: true
+    });
+
+    window.addEventListener("resize", updateCarousel);
+
+    updateCarousel();
+});
+</script>
+
+<!-- Expand/collapse functionality -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const toggles = document.querySelectorAll(".story-toggle");
+
+    toggles.forEach((button) => {
+        const contentId = button.getAttribute("aria-controls");
+        const content = document.getElementById(contentId);
+        const arrow = button.querySelector(".story-arrow");
+
+        if (!content || !arrow) return;
+
+        button.addEventListener("click", () => {
+            const isExpanded =
+                button.getAttribute("aria-expanded") === "true";
+
+            button.setAttribute("aria-expanded", String(!isExpanded));
+            content.setAttribute("aria-hidden", String(isExpanded));
+
+            if (isExpanded) {
+                content.classList.remove("grid-rows-[1fr]");
+                content.classList.add("grid-rows-[0fr]", "opacity-0");
+                arrow.classList.remove("rotate-180");
+            } else {
+                content.classList.remove("grid-rows-[0fr]", "opacity-0");
+                content.classList.add("grid-rows-[1fr]");
+                arrow.classList.add("rotate-180");
+            }
+        });
+    });
+});
+</script>
+
 </body>
 </html>
