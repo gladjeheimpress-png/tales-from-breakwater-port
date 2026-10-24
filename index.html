@@ -1391,29 +1391,38 @@
         }
 
         function updateReader() {
-            document.getElementById('page-counter').innerText = `Page ${currentPage} of ${totalPages}`;
+            const pageCounter = document.getElementById('page-counter');
+            if (pageCounter) {
+                pageCounter.innerText = `Page ${currentPage} of ${totalPages}`;
+            }
             
             const unlockedView = document.getElementById('unlocked-view');
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            // Free preview logic or authenticated access check
+            // Free preview (Pages 1-5)
             if (currentPage <= freeLimit) {
                 unlockedView.classList.remove('hidden');
                 lockedPaywall.classList.add('hidden');
+                lockedPaywall.classList.remove('flex');
                 imgElement.src = getPageFilename(currentPage);
             } else {
-                // If user is logged in (Step 4 will add subscription checking here via Cloudflare Worker)
+                // Locked Pages (Page 6+)
                 if (currentUserSession) {
+                    // User is signed in -> Show page content
                     unlockedView.classList.remove('hidden');
                     lockedPaywall.classList.add('hidden');
+                    lockedPaywall.classList.remove('flex');
                     imgElement.src = getPageFilename(currentPage);
                 } else {
+                    // User NOT signed in -> Show Lock Overlay with buttons
                     unlockedView.classList.add('hidden');
                     lockedPaywall.classList.remove('hidden');
+                    lockedPaywall.classList.add('flex');
                 }
             }
 
+            // Update active thumbnail highlighting
             for (let i = 1; i <= totalPages; i++) {
                 const btn = document.getElementById(`thumb-btn-${i}`);
                 if (!btn) continue;
