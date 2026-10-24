@@ -1180,7 +1180,7 @@
                 </div>
 
                 <!-- LOCKED PAYWALL OVERLAY (PAGES 6+) -->
-                <div id="locked-paywall" class="hidden absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-20 flex flex-col items-center justify-center p-8 text-center space-y-6">
+                <div id="locked-paywall" class="hidden absolute inset-0 bg-[#0d0e12]/95 backdrop-blur-md z-30 flex-col items-center justify-center p-8 text-center space-y-6">
                     <div class="w-16 h-16 rounded-full bg-amber-500/10 border border-amber-500/40 flex items-center justify-center text-amber-400 mb-2">
                         <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
@@ -1399,23 +1399,20 @@
             const lockedPaywall = document.getElementById('locked-paywall');
             const imgElement = document.getElementById('comic-page-img');
 
-            if (currentPage <= freeLimit) {
-                // Free Preview Pages (1-5)
-                unlockedView.style.display = 'flex';
-                lockedPaywall.style.display = 'none';
+            const isFreePage = currentPage <= freeLimit;
+            const isAuthorized = isFreePage || Boolean(currentUserSession);
+
+            if (isAuthorized) {
+                // Show comic page full size
+                unlockedView.classList.remove('hidden');
+                lockedPaywall.classList.add('hidden');
+                lockedPaywall.classList.remove('flex');
                 imgElement.src = getPageFilename(currentPage);
             } else {
-                // Pages 6+
-                if (currentUserSession) {
-                    // Logged in user -> Show image
-                    unlockedView.style.display = 'flex';
-                    lockedPaywall.style.display = 'none';
-                    imgElement.src = getPageFilename(currentPage);
-                } else {
-                    // Non-logged in user -> Hide image & Show paywall modal overlay
-                    unlockedView.style.display = 'none';
-                    lockedPaywall.style.display = 'flex';
-                }
+                // Show full screen paywall overlay inside viewport box
+                unlockedView.classList.add('hidden');
+                lockedPaywall.classList.remove('hidden');
+                lockedPaywall.classList.add('flex');
             }
 
             // Highlight thumbnail bar button
@@ -1430,6 +1427,7 @@
                 }
             }
         }
+        
         function nextPage() {
             if (currentPage < totalPages) {
                 currentPage++;
